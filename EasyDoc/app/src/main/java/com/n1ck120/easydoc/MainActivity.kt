@@ -41,14 +41,14 @@ class MainActivity : AppCompatActivity() {
 
             generateBtn.setOnClickListener {
                 // Define o caminho para salvar o PDF na pasta Downloads
-                val pdfPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "exemplo.pdf"
+                val pdfPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "/exemplo.pdf"
                 val file = File(pdfPath)
 
                 val writer = PdfWriter(file)
                 val pdfDoc = PdfDocument(writer)
                 val document = Document(pdfDoc)
 
-                document.add(Paragraph("Olá, este é um exemplo simples de PDF!"))
+                document.add(Paragraph("Olá, este é um exemplo simples de um PDF! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."))
 
                 document.close()
 
