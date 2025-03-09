@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.os.Environment
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,7 @@ import com.itextpdf.kernel.pdf.PdfWriter
 import com.itextpdf.kernel.pdf.*
 import java.io.File
 import com.itextpdf.layout.Document
+import com.itextpdf.layout.element.Image
 import com.itextpdf.layout.element.Paragraph
 
 class MainActivity : AppCompatActivity() {
@@ -27,28 +29,38 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         val createDoc = findViewById<FloatingActionButton>(R.id.floatingActionButton)
+
+        /*fun contentVer(){
+            if (){
+
+            }
+        }*/
         
         fun createDocDialog(){
             val dialogView = LayoutInflater.from(this).inflate(R.layout.create_doc, null)
             val dialog = AlertDialog.Builder(this)
                 .setView(dialogView)
                 .create()
-            val titleDoc = findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.title)
-            val contentDoc = findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.content)
+            val titleDoc = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.title)
+            val contentDoc = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.content)
             val workerDoc = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.worker)
             val outputDoc = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.outputname)
             val generateBtn = dialogView.findViewById<Button>(R.id.generatedoc)
 
             generateBtn.setOnClickListener {
                 // Define o caminho para salvar o PDF na pasta Downloads
-                val pdfPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "/exemplo.pdf"
+                val pdfPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "/"+outputDoc.text.toString()+".pdf"
                 val file = File(pdfPath)
 
                 val writer = PdfWriter(file)
                 val pdfDoc = PdfDocument(writer)
                 val document = Document(pdfDoc)
 
-                document.add(Paragraph("Olá, este é um exemplo simples de um PDF! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."))
+                document.setFontSize(20F)
+                document.add(Paragraph(titleDoc.text.toString()))
+
+                document.setFontSize(12F)
+                document.add(Paragraph(contentDoc.text.toString()))
 
                 document.close()
 
