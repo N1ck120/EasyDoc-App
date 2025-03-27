@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.view.LayoutInflater
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -57,7 +58,9 @@ class MainActivity : AppCompatActivity() {
         generateBtn.setOnClickListener {
             // Define o caminho para salvar o PDF na pasta Downloads
             val pdfPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "/"+contentVer(outputDoc, true)+".pdf"
+            Toast.makeText(this, "Salvo em: $pdfPath", Toast.LENGTH_LONG).show()
             val file = File(pdfPath)
+
 
             val writer = PdfWriter(file)
             val pdfDoc = PdfDocument(writer)
