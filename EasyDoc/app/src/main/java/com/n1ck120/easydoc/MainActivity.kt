@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.os.Environment
 import android.view.LayoutInflater
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -29,8 +31,14 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         val createDoc = findViewById<FloatingActionButton>(R.id.floatingActionButton)
+        val logout = findViewById<ImageButton>(R.id.logout)
+
         createDoc.setOnClickListener {
             createDocDialog()
+        }
+
+        logout.setOnClickListener {
+            finish()
         }
     }
 
