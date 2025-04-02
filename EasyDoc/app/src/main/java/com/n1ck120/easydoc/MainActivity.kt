@@ -9,16 +9,16 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
+import com.itextpdf.kernel.pdf.PdfDocument
 import com.itextpdf.kernel.pdf.PdfWriter
-import com.itextpdf.kernel.pdf.*
-import java.io.File
 import com.itextpdf.layout.Document
+import androidx.fragment.app.commit
 import com.itextpdf.layout.element.Paragraph
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,14 +31,41 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         val createDoc = findViewById<FloatingActionButton>(R.id.floatingActionButton)
-        val logout = findViewById<ImageButton>(R.id.logout)
+        val account = findViewById<ImageButton>(R.id.btnAccount)
+        val docs = findViewById<ImageButton>(R.id.btnDocs)
+        val settings = findViewById<ImageButton>(R.id.btnSettings)
+        val home = findViewById<ImageButton>(R.id.btnHome)
 
         createDoc.setOnClickListener {
             createDocDialog()
         }
 
-        logout.setOnClickListener {
-            finish()
+        home.setOnClickListener {
+            supportFragmentManager.commit {
+                setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                replace(R.id.fragmentContainerView, HomeFragment())
+            }
+        }
+
+        docs.setOnClickListener {
+            supportFragmentManager.commit {
+                setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                replace(R.id.fragmentContainerView, DocsFragment())
+            }
+        }
+
+        account.setOnClickListener {
+            supportFragmentManager.commit {
+                setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                replace(R.id.fragmentContainerView, AccountFragment())
+            }
+        }
+
+        settings.setOnClickListener {
+            supportFragmentManager.commit {
+                setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                replace(R.id.fragmentContainerView, SettingsFragment())
+            }
         }
     }
 

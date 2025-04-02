@@ -48,4 +48,6 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation (libs.kernel)
     implementation(libs.layout)
+    implementation(libs.androidx.fragment.ktx)
+    implementation("androidx.appcompat:appcompat:1.7.0")
 }
