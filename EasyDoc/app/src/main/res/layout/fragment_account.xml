@@ -35,6 +35,7 @@
             app:layout_constraintVertical_bias="0.206" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="25dp"
@@ -50,6 +51,16 @@
                 android:backgroundTint="#00000000"
                 android:src="@drawable/baseline_logout_24" />
         </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btnLoginRedirect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fzer Login"
+            app:layout_constraintBottom_toTopOf="@+id/cardView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
