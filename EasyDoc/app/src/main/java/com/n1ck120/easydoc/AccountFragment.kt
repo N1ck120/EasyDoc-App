@@ -9,8 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
-import android.widget.Toast
-import androidx.fragment.app.DialogFragment
 
 class AccountFragment : Fragment() {
 

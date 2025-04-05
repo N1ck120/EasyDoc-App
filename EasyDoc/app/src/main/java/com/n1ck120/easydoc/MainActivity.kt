@@ -1,29 +1,23 @@
 package com.n1ck120.easydoc
 
 import android.app.AlertDialog
-import android.content.ClipData.Item
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.Icon
 import android.os.Bundle
 import android.os.Environment
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.component1
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import com.itextpdf.kernel.pdf.PdfDocument
 import com.itextpdf.kernel.pdf.PdfWriter
 import com.itextpdf.layout.Document
-import androidx.fragment.app.commit
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.itextpdf.layout.element.Paragraph
 import java.io.File
 
@@ -39,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         }
         val createDoc = findViewById<FloatingActionButton>(R.id.floatingActionButton)
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val  fragmentos = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
 
         createDoc.setOnClickListener {
             createDocDialog()
@@ -55,47 +50,58 @@ class MainActivity : AppCompatActivity() {
             aettingsBtn.setIcon(R.drawable.round_settings_24)
 
             when(item.itemId) {
+
                 R.id.item_1 -> {
                     supportFragmentManager.commit {
                         setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                        replace(R.id.fragmentContainerView, HomeFragment())
+                        if (actualFragment(supportFragmentManager.findFragmentByTag("Home"))){
+                            replace(R.id.fragmentContainerView, HomeFragment(), "Home")
+                        }
                     }
-
                     item.setIcon(R.drawable.outline_home_24)
-                    // Respond to navigation item 1 click
                     true
-
                 }
                 R.id.item_2 -> {
                     supportFragmentManager.commit {
                         setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                        replace(R.id.fragmentContainerView, DocsFragment())
+                        if (actualFragment(supportFragmentManager.findFragmentByTag("Docs"))){
+                            replace(R.id.fragmentContainerView, DocsFragment(), "Docs")
+                        }
                     }
-
                     item.setIcon(R.drawable.outline_insert_drive_file_24)
-                    // Respond to navigation item 2 click
                     true
                 }
                 R.id.item_3 -> {
                     supportFragmentManager.commit {
                         setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                        replace(R.id.fragmentContainerView, AccountFragment())
+                        setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                        if (actualFragment(supportFragmentManager.findFragmentByTag("Account"))){
+                            replace(R.id.fragmentContainerView, AccountFragment(), "Account")
+                        }
                     }
                     item.setIcon(R.drawable.outline_account_circle_24)
-                    // Respond to navigation item 2 click
                     true
                 }
                 R.id.item_4 -> {
                     supportFragmentManager.commit {
                         setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                        replace(R.id.fragmentContainerView, SettingsFragment())
+                        if (actualFragment(supportFragmentManager.findFragmentByTag("Settings"))){
+                            replace(R.id.fragmentContainerView, SettingsFragment(), "Settings")
+                        }
                     }
                     item.setIcon(R.drawable.outline_settings_24)
-                    // Respond to navigation item 2 click
                     true
                 }
                 else -> false
             }
+        }
+    }
+
+    private fun actualFragment(tag : Fragment?): Boolean {
+        if (tag != null && tag.isVisible){
+            return false
+        }else{
+            return true
         }
     }
 
