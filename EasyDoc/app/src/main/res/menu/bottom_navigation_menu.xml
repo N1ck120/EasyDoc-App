@@ -2,21 +2,21 @@
     <item
         android:id="@+id/item_1"
         android:enabled="true"
-        android:icon="@drawable/outline_home_24"
+        android:icon="@drawable/baseline_home_24"
         android:title="Início"/>
     <item
         android:id="@+id/item_2"
         android:enabled="true"
-        android:icon="@drawable/round_insert_drive_file_24"
+        android:icon="@drawable/outline_insert_drive_file_24"
         android:title="Documentos"/>
     <item
         android:id="@+id/item_3"
         android:enabled="true"
-        android:icon="@drawable/round_account_circle_24"
+        android:icon="@drawable/outline_account_circle_24"
         android:title="Conta"/>
     <item
         android:id="@+id/item_4"
         android:enabled="true"
-        android:icon="@drawable/round_settings_24"
+        android:icon="@drawable/outline_settings_24"
         android:title="Configurações"/>
 </menu>

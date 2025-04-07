@@ -43,11 +43,11 @@ class MainActivity : AppCompatActivity() {
             val homeBtn = bottomNavigation.menu.findItem(R.id.item_1)
             val docsBtn = bottomNavigation.menu.findItem(R.id.item_2)
             val accountBtn = bottomNavigation.menu.findItem(R.id.item_3)
-            val aettingsBtn = bottomNavigation.menu.findItem(R.id.item_4)
-            homeBtn.setIcon(R.drawable.round_home_24)
-            docsBtn.setIcon(R.drawable.round_insert_drive_file_24)
-            accountBtn.setIcon(R.drawable.round_account_circle_24)
-            aettingsBtn.setIcon(R.drawable.round_settings_24)
+            val settingsBtn = bottomNavigation.menu.findItem(R.id.item_4)
+            homeBtn.setIcon(R.drawable.outline_home_24)
+            docsBtn.setIcon(R.drawable.outline_insert_drive_file_24)
+            accountBtn.setIcon(R.drawable.outline_account_circle_24)
+            settingsBtn.setIcon(R.drawable.outline_settings_24)
 
             when(item.itemId) {
 
@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                             replace(R.id.fragmentContainerView, HomeFragment(), "Home")
                         }
                     }
-                    item.setIcon(R.drawable.outline_home_24)
+                    item.setIcon(R.drawable.baseline_home_24)
                     true
                 }
                 R.id.item_2 -> {
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                             replace(R.id.fragmentContainerView, DocsFragment(), "Docs")
                         }
                     }
-                    item.setIcon(R.drawable.outline_insert_drive_file_24)
+                    item.setIcon(R.drawable.baseline_insert_drive_file_24)
                     true
                 }
                 R.id.item_3 -> {
@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                             replace(R.id.fragmentContainerView, AccountFragment(), "Account")
                         }
                     }
-                    item.setIcon(R.drawable.outline_account_circle_24)
+                    item.setIcon(R.drawable.baseline_account_circle_24)
                     true
                 }
                 R.id.item_4 -> {
@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity() {
                             replace(R.id.fragmentContainerView, SettingsFragment(), "Settings")
                         }
                     }
-                    item.setIcon(R.drawable.outline_settings_24)
+                    item.setIcon(R.drawable.baseline_settings_24)
                     true
                 }
                 else -> false
@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun contentVer(a: TextInputEditText, b: Boolean = false) : String{
+    private fun contentVer(a: TextInputEditText, b: Boolean = false) : String {
         if (a.text.isNullOrBlank() && !b){
             return ""
         } else if (a.text.isNullOrBlank() && b){
@@ -131,8 +131,6 @@ class MainActivity : AppCompatActivity() {
             val pdfPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "/"+contentVer(outputDoc, true)+".pdf"
             Toast.makeText(this, "Salvo em: $pdfPath", Toast.LENGTH_LONG).show()
             val file = File(pdfPath)
-
-
             val writer = PdfWriter(file)
             val pdfDoc = PdfDocument(writer)
             val document = Document(pdfDoc)
