@@ -22,9 +22,10 @@
 
         <Button
             android:id="@+id/cancel"
+            style="?attr/materialButtonOutlinedStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cancel" />
+            android:text="Cancelar" />
 
         <Space
             android:layout_width="10dp"
