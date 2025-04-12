@@ -1,16 +1,21 @@
 package com.n1ck120.easydoc
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.os.Environment
 import android.view.LayoutInflater
+import android.view.ViewGroup
+import android.view.ViewGroup.MarginLayoutParams
+import android.view.ViewTreeObserver
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.ui.unit.dp
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.commit
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -34,7 +39,14 @@ class MainActivity : AppCompatActivity() {
         }
         val createDoc = findViewById<FloatingActionButton>(R.id.floatingActionButton)
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        val  fragmentos = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
+        val fragmentos = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
+        val fragContView = findViewById<FragmentContainerView>(R.id.fragmentContainerView)
+        val vtoNavigation = bottomNavigation.viewTreeObserver
+        
+        vtoNavigation.addOnGlobalLayoutListener {
+            val fragMargin = fragContView.layoutParams as MarginLayoutParams
+            fragMargin.bottomMargin = bottomNavigation.height
+        }
 
         createDoc.setOnClickListener {
             createDocDialog()
