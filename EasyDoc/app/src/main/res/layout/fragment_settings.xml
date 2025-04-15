@@ -6,25 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".SettingsFragment">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/settingsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Settings"
-            android:textSize="25sp" />
+            android:layout_marginTop="16dp"
+            android:text="Configurações"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
+            style="?attr/materialCardViewFilledStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:backgroundTint="#A4A4A4"
-            app:cardCornerRadius="20dp">
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="66dp"
+            android:layout_marginEnd="10sp"
+            android:layout_marginBottom="10dp"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/settingsText">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -33,75 +43,77 @@
                 <ScrollView
                     android:id="@+id/scrollView3"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:layout_editor_absoluteX="10dp"
-                    tools:layout_editor_absoluteY="43dp">
+                    android:layout_height="match_parent">
 
                     <LinearLayout
+                        android:id="@+id/linearLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="20dp">
+                        android:orientation="vertical">
 
-                        <LinearLayout
+                        <com.google.android.material.materialswitch.MaterialSwitch
+                            android:id="@+id/switch1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:layout_margin="10dp"
+                            android:checked="true"
+                            android:text="Seguir tema do sistema"
+                            android:textSize="16sp" />
 
-                            <TextView
-                                android:id="@+id/textView2"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Exemplo"
-                                android:textSize="20sp" />
+                        <View
+                            android:id="@+id/divider"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="?android:attr/listDivider" />
 
-                            <com.google.android.material.materialswitch.MaterialSwitch
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
+                        <com.google.android.material.materialswitch.MaterialSwitch
+                            android:id="@+id/switch2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:layout_margin="10dp"
+                            android:enabled="false"
+                            android:text="Tema escuro"
+                            android:textSize="16sp" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:clickable="true"
-                                android:text="Exemplo"
-                                android:textSize="20sp" />
+                        <View
+                            android:id="@+id/divider2"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="?android:attr/listDivider" />
 
-                            <com.google.android.material.materialswitch.MaterialSwitch
-                                android:id="@+id/teste"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
+                        <com.google.android.material.materialswitch.MaterialSwitch
+                            android:id="@+id/switch3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:checked="true"
+                            android:enabled="false"
+                            android:text="Sincronização automática"
+                            android:textSize="16sp" />
 
-                        </LinearLayout>
+                        <View
+                            android:id="@+id/divider3"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="?android:attr/listDivider" />
+
+                        <ImageButton
+                            android:id="@+id/github"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_marginTop="50dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_gravity="center"
+                            android:background="#00000000"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/github_black" />
 
                     </LinearLayout>
-
                 </ScrollView>
 
-                <ImageButton
-                    android:id="@+id/github"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center"
-                    android:backgroundTint="#00000000"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/github_black"
-                    android:layout_marginBottom="20dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

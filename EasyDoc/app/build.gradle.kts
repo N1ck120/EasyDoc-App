@@ -51,4 +51,5 @@ dependencies {
     implementation(libs.layout)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.datastore.preferences)
 }

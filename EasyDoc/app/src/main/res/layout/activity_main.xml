@@ -17,7 +17,7 @@
         android:clickable="true"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/round_add_24" />
+        app:srcCompat="@drawable/baseline_create_24" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

@@ -3,20 +3,20 @@ package com.n1ck120.easydoc
 import android.os.Bundle
 import android.os.Environment
 import android.view.LayoutInflater
-import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
-import android.view.ViewTreeObserver
 import android.widget.Button
-import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.ui.unit.dp
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.commit
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -25,6 +25,8 @@ import com.itextpdf.kernel.pdf.PdfDocument
 import com.itextpdf.kernel.pdf.PdfWriter
 import com.itextpdf.layout.Document
 import com.itextpdf.layout.element.Paragraph
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
@@ -42,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         val fragmentos = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
         val fragContView = findViewById<FragmentContainerView>(R.id.fragmentContainerView)
         val vtoNavigation = bottomNavigation.viewTreeObserver
-        
+
         vtoNavigation.addOnGlobalLayoutListener {
             val fragMargin = fragContView.layoutParams as MarginLayoutParams
             fragMargin.bottomMargin = bottomNavigation.height
@@ -107,6 +109,14 @@ class MainActivity : AppCompatActivity() {
                 }
                 else -> false
             }
+        }
+        
+        //Verifica o tema salvo no datastore e troca caso necessario
+        val dataStore = SettingsDataStore.getDataStorePrefs(this)
+        val key = intPreferencesKey("theme")
+        val key1 = intPreferencesKey("theme2")
+        lifecycleScope.launch {
+            AppCompatDelegate.setDefaultNightMode(dataStore.data.first()[key] ?: (dataStore.data.first()[key1] ?: MODE_NIGHT_NO))
         }
     }
 
