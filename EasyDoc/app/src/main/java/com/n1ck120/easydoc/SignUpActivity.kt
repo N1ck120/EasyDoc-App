@@ -6,7 +6,7 @@ import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.datastore.preferences.core.intPreferencesKey
@@ -35,9 +35,8 @@ class SignUpActivity : AppCompatActivity() {
         //Verifica o tema salvo no datastore e troca caso necessario
         val dataStore = SettingsDataStore.getDataStorePrefs(this)
         val key = intPreferencesKey("theme")
-        val key1 = intPreferencesKey("theme2")
         lifecycleScope.launch {
-            AppCompatDelegate.setDefaultNightMode(dataStore.data.first()[key] ?: (dataStore.data.first()[key1] ?: MODE_NIGHT_NO))
+            AppCompatDelegate.setDefaultNightMode(dataStore.data.first()[key] ?: MODE_NIGHT_FOLLOW_SYSTEM)
         }
     }
 }
