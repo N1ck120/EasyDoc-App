@@ -14,11 +14,13 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
+import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
 import androidx.core.net.toUri
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
 
@@ -32,6 +34,13 @@ class SettingsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
         val github = view.findViewById<ImageButton>(R.id.github)
         val theme = view.findViewById<Button>(R.id.btnTheme)
+
+        val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val homeBtn = bottomNav.menu.findItem(R.id.item_1)
+        val settingBtn = bottomNav.menu.findItem(R.id.item_4)
+
+        homeBtn.setIcon(R.drawable.outline_home_24)
+        settingBtn.setIcon(R.drawable.baseline_settings_24)
 
         github.setOnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW, "https://github.com/N1ck120/EasyDoc-App".toUri())
@@ -86,7 +95,6 @@ class SettingsFragment : Fragment() {
                         val a = lifecycleScope.launch {
                             dataStore.edit { settings ->
                                 settings[key] = MODE_NIGHT_FOLLOW_SYSTEM
-                                Toast.makeText(context, "Salvo Sistema", Toast.LENGTH_SHORT).show()
                             }
                         }
                         a.invokeOnCompletion {
@@ -98,7 +106,6 @@ class SettingsFragment : Fragment() {
                         val a = lifecycleScope.launch {
                             dataStore.edit { settings ->
                                 settings[key] = MODE_NIGHT_NO
-                                Toast.makeText(context, "Salvo claro", Toast.LENGTH_SHORT).show()
                             }
                         }
                         a.invokeOnCompletion {
@@ -110,7 +117,6 @@ class SettingsFragment : Fragment() {
                         val a = lifecycleScope.launch {
                             dataStore.edit { settings ->
                                 settings[key] = MODE_NIGHT_YES
-                                Toast.makeText(context, "Salvo Dark", Toast.LENGTH_SHORT).show()
                             }
                         }
                         a.invokeOnCompletion {
