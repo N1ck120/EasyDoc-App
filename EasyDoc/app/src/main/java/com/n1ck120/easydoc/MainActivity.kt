@@ -1,11 +1,9 @@
 package com.n1ck120.easydoc
 
 import android.os.Bundle
-import android.os.Environment
 import android.view.LayoutInflater
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Button
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,14 +14,11 @@ import androidx.fragment.app.commit
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.textfield.TextInputEditText
-import com.itextpdf.kernel.pdf.PdfDocument
-import com.itextpdf.kernel.pdf.PdfWriter
-import com.itextpdf.layout.Document
-import com.itextpdf.layout.element.Paragraph
-import java.io.File
 
 class MainActivity : AppCompatActivity() {
+
+    private val doc = DocumentGen
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -39,13 +34,28 @@ class MainActivity : AppCompatActivity() {
         val fragContView = findViewById<FragmentContainerView>(R.id.fragmentContainerView)
         val vtoNavigation = bottomNavigation.viewTreeObserver
 
+
         vtoNavigation.addOnGlobalLayoutListener {
             val fragMargin = fragContView.layoutParams as MarginLayoutParams
             fragMargin.bottomMargin = bottomNavigation.height
         }
 
         createDoc.setOnClickListener {
-            createDocDialog()
+            val dialogView = LayoutInflater.from(this).inflate(R.layout.create_doc, null)
+            val dialog = MaterialAlertDialogBuilder(this)
+                .setView(dialogView)
+                .create()
+            val titleDoc = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.title)
+            val contentDoc = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.content)
+            val workerDoc = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.worker)
+            val outputDoc = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.outputname)
+            val generateBtn = dialogView.findViewById<Button>(R.id.generatedoc)
+
+            generateBtn.setOnClickListener {
+                doc.generateDoc(titleDoc.text.toString(), contentDoc.text.toString(), workerDoc.text.toString(), outputDoc.text.toString(), this)
+                dialog.dismiss()
+            }
+            dialog.show()
         }
 
         bottomNavigation.setOnItemSelectedListener { item ->
@@ -112,50 +122,5 @@ class MainActivity : AppCompatActivity() {
         }else{
             return true
         }
-    }
-
-    private fun contentVer(a: TextInputEditText, b: Boolean = false) : String {
-        if (a.text.isNullOrBlank() && !b){
-            return ""
-        } else if (a.text.isNullOrBlank() && b){
-            return "Exemplo"
-        } else{
-            return  a.text.toString()
-        }
-    }
-
-    private fun createDocDialog(){
-        val dialogView = LayoutInflater.from(this).inflate(R.layout.create_doc, null)
-        val dialog = MaterialAlertDialogBuilder(this)
-            .setView(dialogView)
-            .create()
-        val titleDoc = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.title)
-        val contentDoc = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.content)
-        val workerDoc = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.worker)
-        val outputDoc = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.outputname)
-        val generateBtn = dialogView.findViewById<Button>(R.id.generatedoc)
-
-        generateBtn.setOnClickListener {
-            // Define o caminho para salvar o PDF na pasta Downloads
-            val pdfPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "/"+contentVer(outputDoc, true)+".pdf"
-            Toast.makeText(this, "Salvo em: $pdfPath", Toast.LENGTH_LONG).show()
-            val file = File(pdfPath)
-            val writer = PdfWriter(file)
-            val pdfDoc = PdfDocument(writer)
-            val document = Document(pdfDoc)
-
-            document.setFontSize(20F)
-            document.add(Paragraph(contentVer(titleDoc)))
-
-            document.setFontSize(12F)
-            document.add(Paragraph(contentVer(contentDoc)))
-
-            document.setFontSize(12F)
-            document.add(Paragraph(contentVer(workerDoc)))
-
-            document.close()
-            dialog.dismiss()
-        }
-        dialog.show()
     }
 }
