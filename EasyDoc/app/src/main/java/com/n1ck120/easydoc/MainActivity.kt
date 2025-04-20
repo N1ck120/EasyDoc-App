@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Button
+import android.widget.RadioGroup
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -49,10 +50,15 @@ class MainActivity : AppCompatActivity() {
             val contentDoc = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.content)
             val workerDoc = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.worker)
             val outputDoc = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.outputname)
+            val typeDoc = dialogView.findViewById<RadioGroup>(R.id.groupType)
             val generateBtn = dialogView.findViewById<Button>(R.id.generatedoc)
 
             generateBtn.setOnClickListener {
-                doc.generateDoc(titleDoc.text.toString(), contentDoc.text.toString(), workerDoc.text.toString(), outputDoc.text.toString(), this)
+                doc.generateDoc(
+                    titleDoc.text.toString(),
+                    contentDoc.text.toString(),
+                    workerDoc.text.toString(),
+                    outputDoc.text.toString(), typeDoc.checkedRadioButtonId, this)
                 dialog.dismiss()
             }
             dialog.show()

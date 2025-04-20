@@ -84,26 +84,21 @@
                 android:text="Formato" />
 
             <RadioGroup
+                android:id="@+id/groupType"
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" >
 
                 <RadioButton
-                    android:id="@+id/radioButton"
+                    android:id="@+id/radioPdf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:text="PDF" />
 
                 <RadioButton
-                    android:id="@+id/radioButton2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ODF" />
-
-                <RadioButton
-                    android:id="@+id/radioButton3"
+                    android:id="@+id/radioDocx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="DOCX" />
