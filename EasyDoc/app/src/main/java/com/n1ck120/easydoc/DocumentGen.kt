@@ -63,40 +63,50 @@ object DocumentGen {
         val overwriteBtn = dialogView.findViewById<Button>(R.id.overwrite)
         val renameBtn = dialogView.findViewById<Button>(R.id.rename)
         val dialogText = dialogView.findViewById<TextView>(R.id.dialogTitle)
-        var docName2 : String
         if (docType == R.id.radioPdf){
-            dialogText.text = "⚠ Esse pdf já existe ⚠"
-            docName2 = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString() + "/"+veryEntry(docName)+".pdf"
-            generatePDF(docTitle, docContent, docWorker, docName2, context)
-            nameText.setText(veryEntry(docName))
-        }else{
-            dialogText.text = "⚠ Esse docx já existe ⚠"
-            docName2 = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString() + "/"+veryEntry(docName)+".docx"
-            generateDocx(docTitle, docContent, docWorker, docName2, context)
-            nameText.setText(veryEntry(docName))
-        }
-        if(File(docName2).exists()){
-            overwriteBtn.setOnClickListener {
-                dialog.dismiss()
-                Toast.makeText(context, "Salvo em: $docName2", Toast.LENGTH_LONG).show()
-            }
-            renameBtn.setOnClickListener {
-                if (nameText.text.isNullOrBlank()){
-                    nameText.error = "O nome não pode ser vazio"
-                }else{
-                    if (docType == R.id.radioPdf){
-                        val a = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString() + "/"+nameText.text+".pdf"
-                        generatePDF(docTitle, docContent, docWorker, a, context)
-                    }else{
-                        val a = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString() + "/"+nameText.text+".docx"
-                        generateDocx(docTitle, docContent, docWorker, a, context)
-                    }
-                    Toast.makeText(context, "Salvo em: $docName2", Toast.LENGTH_LONG).show()
+            var filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString() + "/"+veryEntry(docName)+".pdf"
+            if (File(filePath).exists()){
+                dialogText.text = "⚠ Esse pdf já existe ⚠"
+                nameText.setText(veryEntry(docName))
+                overwriteBtn.setOnClickListener {
+                    dialog.dismiss()
+                    generatePDF(docTitle, docContent, docWorker, filePath, context)
                 }
+                renameBtn.setOnClickListener {
+                    if (nameText.text.isNullOrBlank()){
+                        nameText.error = "O nome não pode ser vazio"
+                    }else{
+                        filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString() + "/"+veryEntry(nameText.text.toString())+".pdf"
+                        generatePDF(docTitle, docContent, docWorker, filePath, context)
+                        dialog.dismiss()
+                    }
+                }
+                dialog.show()
+            }else{
+                generatePDF(docTitle, docContent, docWorker, filePath, context)
             }
-            dialog.show()
         }else{
-            Toast.makeText(context, "Salvo em: $docName2", Toast.LENGTH_LONG).show()
+            var filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString() + "/"+veryEntry(docName)+".docx"
+            if (File(filePath).exists()){
+                dialogText.text = "⚠ Esse docx já existe ⚠"
+                nameText.setText(veryEntry(docName))
+                overwriteBtn.setOnClickListener {
+                    dialog.dismiss()
+                    generateDocx(docTitle, docContent, docWorker, filePath, context)
+                }
+                renameBtn.setOnClickListener {
+                    if (nameText.text.isNullOrBlank()){
+                        nameText.error = "O nome não pode ser vazio"
+                    }else{
+                        filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString() + "/"+veryEntry(nameText.text.toString())+".docx"
+                        generateDocx(docTitle, docContent, docWorker, filePath, context)
+                        dialog.dismiss()
+                    }
+                }
+                dialog.show()
+            }else{
+                generatePDF(docTitle, docContent, docWorker, filePath, context)
+            }
         }
     }
 }
