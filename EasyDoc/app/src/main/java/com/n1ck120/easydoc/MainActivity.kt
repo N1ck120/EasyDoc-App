@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Button
 import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -16,13 +17,20 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
+import androidx.room.Room
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import java.util.UUID
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
+
+
 
     private val doc = DocumentGen
 
@@ -42,6 +50,12 @@ class MainActivity : AppCompatActivity() {
         val vtoNavigation = bottomNavigation.viewTreeObserver
 
 
+        val db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "database.db"
+        ).build()
+
+
         vtoNavigation.addOnGlobalLayoutListener {
             val fragMargin = fragContView.layoutParams as MarginLayoutParams
             fragMargin.bottomMargin = bottomNavigation.height
@@ -52,12 +66,29 @@ class MainActivity : AppCompatActivity() {
             val dialog = MaterialAlertDialogBuilder(this)
                 .setView(dialogView)
                 .create()
-            val titleDoc = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.title)
-            val contentDoc = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.content)
-            val workerDoc = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.worker)
-            val outputDoc = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.outputname)
+            val titleDoc = dialogView.findViewById<TextInputEditText>(R.id.title)
+            val contentDoc = dialogView.findViewById<TextInputEditText>(R.id.content)
+            val workerDoc = dialogView.findViewById<TextInputEditText>(R.id.worker)
+            val outputDoc = dialogView.findViewById<TextInputEditText>(R.id.outputname)
             val typeDoc = dialogView.findViewById<RadioGroup>(R.id.groupType)
             val generateBtn = dialogView.findViewById<Button>(R.id.generatedoc)
+            val save = dialogView.findViewById<Button>(R.id.save)
+
+            val doc = DocumentGen
+
+
+            save.setOnClickListener {
+                val dox = Doc(
+                    uid = 432,
+                    doc_name = outputDoc.text.toString(),
+                    title = titleDoc.text.toString(),
+                    content = contentDoc.text.toString()
+                )
+
+                lifecycleScope.launch {
+                    db.userDao().insertAll(dox)
+                }
+            }
 
             generateBtn.setOnClickListener {
                 doc.generateDoc(

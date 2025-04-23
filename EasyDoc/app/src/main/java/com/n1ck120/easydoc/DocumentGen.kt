@@ -17,6 +17,7 @@ import java.io.File
 import java.io.FileOutputStream
 
 object DocumentGen {
+
     fun veryEntry(entry : String) : String{
         if (entry == ""){
             return "Example"
