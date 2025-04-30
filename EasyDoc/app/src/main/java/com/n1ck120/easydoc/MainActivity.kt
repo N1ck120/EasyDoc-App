@@ -30,8 +30,7 @@ import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
-
-
+    lateinit var db : AppDatabase
     private val doc = DocumentGen
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         val vtoNavigation = bottomNavigation.viewTreeObserver
 
 
-        val db = Room.databaseBuilder(
+        db = Room.databaseBuilder(
             applicationContext,
             AppDatabase::class.java, "database.db"
         ).build()
@@ -79,14 +78,16 @@ class MainActivity : AppCompatActivity() {
 
             save.setOnClickListener {
                 val dox = Doc(
-                    uid = 432,
                     doc_name = outputDoc.text.toString(),
                     title = titleDoc.text.toString(),
                     content = contentDoc.text.toString()
                 )
 
-                lifecycleScope.launch {
+                val a = lifecycleScope.launch {
                     db.userDao().insertAll(dox)
+                }
+                a.invokeOnCompletion {
+                    Toast.makeText(this, "Salvo", Toast.LENGTH_SHORT).show()
                 }
             }
 
