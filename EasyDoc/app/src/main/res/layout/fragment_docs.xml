@@ -147,6 +147,7 @@
 
                             <com.google.android.material.card.MaterialCardView
                                 style="?attr/materialCardViewFilledStyle"
+                                android:visibility="gone"
                                 android:layout_width="0dp"
                                 android:layout_height="140dp"
                                 android:layout_weight="1"
@@ -159,10 +160,33 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent">
 
+                                    <ImageView
+                                        android:id="@+id/imageSDView5"
+                                        android:layout_width="95dp"
+                                        android:layout_height="80dp"
+                                        android:src="@drawable/round_compare_arrows_24"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        app:layout_constraintVertical_bias="0.266" />
+
+                                    <TextView
+                                        android:id="@+id/textsAView8"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Converter arquivo"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintHorizontal_bias="0.493"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        app:layout_constraintVertical_bias="0.867" />
                                 </androidx.constraintlayout.widget.ConstraintLayout>
                             </com.google.android.material.card.MaterialCardView>
 
                             <Space
+                                android:visibility="gone"
                                 android:layout_width="10dp"
                                 android:layout_height="0dp" />
 
@@ -179,6 +203,29 @@
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent">
+
+                                    <ImageView
+                                        android:id="@+id/imageView5hj"
+                                        android:layout_width="95dp"
+                                        android:layout_height="80dp"
+                                        android:src="@drawable/round_edit_note_24"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        app:layout_constraintVertical_bias="0.266" />
+
+                                    <TextView
+                                        android:id="@+id/textVsiew8"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Editar metadados"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintHorizontal_bias="0.493"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        app:layout_constraintVertical_bias="0.867" />
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
                             </com.google.android.material.card.MaterialCardView>
