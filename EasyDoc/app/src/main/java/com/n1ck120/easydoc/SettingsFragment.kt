@@ -1,12 +1,14 @@
 package com.n1ck120.easydoc
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
@@ -21,6 +23,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
 
@@ -32,7 +35,8 @@ class SettingsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
-        val github = view.findViewById<ImageButton>(R.id.github)
+        val github = view.findViewById<ImageView>(R.id.github)
+        val gitCard = view.findViewById<MaterialCardView>(R.id.githubCard)
         val theme = view.findViewById<Button>(R.id.btnTheme)
 
         val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
@@ -42,7 +46,13 @@ class SettingsFragment : Fragment() {
         homeBtn.setIcon(R.drawable.outline_home_24)
         settingBtn.setIcon(R.drawable.baseline_settings_24)
 
-        github.setOnClickListener {
+        if ((resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES){
+            github.setImageResource(R.drawable.github_white)
+        }else{
+            github.setImageResource(R.drawable.github_black)
+        }
+
+        gitCard.setOnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW, "https://github.com/N1ck120/EasyDoc-App".toUri())
             startActivity(browserIntent)
         }

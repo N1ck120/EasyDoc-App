@@ -35,9 +35,9 @@ class DocsFragment : Fragment() {
                 //tex2.text = docs.size.toString()
             }
         }
-        a.invokeOnCompletion {
-            Toast.makeText(requireActivity(), "Recuperado", Toast.LENGTH_SHORT).show()
-        }
+        //a.invokeOnCompletion {
+        //    Toast.makeText(requireActivity(), "Recuperado", Toast.LENGTH_SHORT).show()
+        //}
 
 
         return view
