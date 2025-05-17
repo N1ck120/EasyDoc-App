@@ -2,7 +2,6 @@ package com.n1ck120.easydoc
 
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
@@ -10,11 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class CustomAdapter(private val dataSet: Array<String>) :
+class CustomAdapter(private val dataSet: MutableList<Doc>) :
     RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView = view.findViewById(R.id.title)
+        val title: TextView = view.findViewById(R.id.title)
+        val content: TextView = view.findViewById(R.id.content)
+        val date: TextView = view.findViewById(R.id.modDate)
         val card: MaterialCardView = view.findViewById(R.id.recyclerCard)
         val delete: Button = view.findViewById(R.id.deleteButton)
 
@@ -25,10 +26,9 @@ class CustomAdapter(private val dataSet: Array<String>) :
                 val dialog = MaterialAlertDialogBuilder(dialogView.context)
                     .setView(dialogView)
                     .create()
-                val exit = dialogView.findViewById<Button>(R.id.confirm)
+                val del = dialogView.findViewById<Button>(R.id.confirm)
                 val cancel = dialogView.findViewById<Button>(R.id.cancel)
-                exit.setOnClickListener{
-                    card.visibility = GONE
+                del.setOnClickListener{
                     dialog.dismiss()
                 }
                 cancel.setOnClickListener{
@@ -53,7 +53,9 @@ class CustomAdapter(private val dataSet: Array<String>) :
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.textView.text = dataSet[position]
+        viewHolder.title.text = dataSet[position].title
+        viewHolder.content.text = dataSet[position].content + "..."
+        viewHolder.date.text = "Ultima modificação: " + dataSet[position].date.toString()
     }
 
     // Return the size of your dataset (invoked by the layout manager)

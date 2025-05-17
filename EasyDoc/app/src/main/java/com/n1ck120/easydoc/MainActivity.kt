@@ -1,7 +1,10 @@
 package com.n1ck120.easydoc
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Button
 import android.widget.RadioGroup
@@ -22,11 +25,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import java.util.UUID
-import kotlin.random.Random
+import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {
 
@@ -77,10 +78,34 @@ class MainActivity : AppCompatActivity() {
 
 
             save.setOnClickListener {
+
+                var data : String
+                if (LocalDateTime.now().dayOfMonth < 10){
+                    data = "0" + LocalDateTime.now().dayOfMonth.toString()
+                }else{
+                    data = LocalDateTime.now().dayOfMonth.toString()
+                }
+                if (LocalDateTime.now().monthValue < 10){
+                    data = data + "/0" + LocalDateTime.now().monthValue.toString() + "/" + LocalDateTime.now().year.toString()
+                }else{
+                    data = data + "/" + LocalDateTime.now().monthValue.toString() + "/" + LocalDateTime.now().year.toString()
+                }
+                if (LocalDateTime.now().hour < 10){
+                    data = data + " 0" + LocalDateTime.now().hour.toString()
+                }else{
+                    data = data + " " + LocalDateTime.now().hour.toString()
+                }
+                if (LocalDateTime.now().minute < 10){
+                    data = data + ":0" + LocalDateTime.now().minute.toString()
+                }else{
+                    data = data + ":" + LocalDateTime.now().minute.toString()
+                }
+
                 val dox = Doc(
                     doc_name = outputDoc.text.toString(),
                     title = titleDoc.text.toString(),
-                    content = contentDoc.text.toString()
+                    content = contentDoc.text.toString(),
+                    date = data
                 )
 
                 val a = lifecycleScope.launch {
@@ -88,6 +113,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 a.invokeOnCompletion {
                     Toast.makeText(this, "Salvo", Toast.LENGTH_SHORT).show()
+                    dialog.dismiss()
                 }
             }
 

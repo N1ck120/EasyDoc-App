@@ -10,5 +10,6 @@ data class Doc(
     var uid: Long = 0,
     @ColumnInfo(name = "doc_name") var doc_name: String?,
     @ColumnInfo(name = "title") var title: String?,
-    @ColumnInfo(name = "content") var content: String?
+    @ColumnInfo(name = "content") var content: String?,
+    @ColumnInfo(name = "date") var date: String
 )
