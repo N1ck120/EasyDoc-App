@@ -1,9 +1,7 @@
 package com.n1ck120.easydoc
 
 import android.content.Intent
-import android.icu.lang.UCharacter
 import android.os.Bundle
-import android.text.InputType
 import android.text.InputType.TYPE_CLASS_TEXT
 import android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
 import android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
@@ -11,8 +9,6 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate

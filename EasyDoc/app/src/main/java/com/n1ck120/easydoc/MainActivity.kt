@@ -1,11 +1,7 @@
 package com.n1ck120.easydoc
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View.GONE
-import android.view.View.VISIBLE
-import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Button
 import android.widget.RadioGroup
 import android.widget.Toast
@@ -19,6 +15,7 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.commit
+import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -47,85 +44,29 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val fragmentos = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
         val fragContView = findViewById<FragmentContainerView>(R.id.fragmentContainerView)
-        val vtoNavigation = bottomNavigation.viewTreeObserver
-
+        //val vtoNavigation = bottomNavigation.viewTreeObserver
 
         db = Room.databaseBuilder(
             applicationContext,
             AppDatabase::class.java, "database.db"
         ).build()
 
-
-        vtoNavigation.addOnGlobalLayoutListener {
-            val fragMargin = fragContView.layoutParams as MarginLayoutParams
-            fragMargin.bottomMargin = bottomNavigation.height
+        val dialog = DialogBuilder(this){ doc ->
+            val a = lifecycleScope.launch {
+                db.userDao().insertAll(doc)
+            }
+            a.invokeOnCompletion {
+                Toast.makeText(this, "Salvo", Toast.LENGTH_SHORT).show()
+            }
         }
 
+        /*vtoNavigation.addOnGlobalLayoutListener {
+            val fragMargin = fragContView.layoutParams as MarginLayoutParams
+            fragMargin.bottomMargin = bottomNavigation.height
+        }*/
+
         createDoc.setOnClickListener {
-            val dialogView = LayoutInflater.from(this).inflate(R.layout.create_doc, null)
-            val dialog = MaterialAlertDialogBuilder(this)
-                .setView(dialogView)
-                .create()
-            val titleDoc = dialogView.findViewById<TextInputEditText>(R.id.title)
-            val contentDoc = dialogView.findViewById<TextInputEditText>(R.id.content)
-            val workerDoc = dialogView.findViewById<TextInputEditText>(R.id.worker)
-            val outputDoc = dialogView.findViewById<TextInputEditText>(R.id.outputname)
-            val typeDoc = dialogView.findViewById<RadioGroup>(R.id.groupType)
-            val generateBtn = dialogView.findViewById<Button>(R.id.generatedoc)
-            val save = dialogView.findViewById<Button>(R.id.save)
-
-            val doc = DocumentGen
-
-
-            save.setOnClickListener {
-
-                var data : String
-                if (LocalDateTime.now().dayOfMonth < 10){
-                    data = "0" + LocalDateTime.now().dayOfMonth.toString()
-                }else{
-                    data = LocalDateTime.now().dayOfMonth.toString()
-                }
-                if (LocalDateTime.now().monthValue < 10){
-                    data = data + "/0" + LocalDateTime.now().monthValue.toString() + "/" + LocalDateTime.now().year.toString()
-                }else{
-                    data = data + "/" + LocalDateTime.now().monthValue.toString() + "/" + LocalDateTime.now().year.toString()
-                }
-                if (LocalDateTime.now().hour < 10){
-                    data = data + " 0" + LocalDateTime.now().hour.toString()
-                }else{
-                    data = data + " " + LocalDateTime.now().hour.toString()
-                }
-                if (LocalDateTime.now().minute < 10){
-                    data = data + ":0" + LocalDateTime.now().minute.toString()
-                }else{
-                    data = data + ":" + LocalDateTime.now().minute.toString()
-                }
-
-                val dox = Doc(
-                    doc_name = outputDoc.text.toString(),
-                    title = titleDoc.text.toString(),
-                    content = contentDoc.text.toString(),
-                    date = data
-                )
-
-                val a = lifecycleScope.launch {
-                    db.userDao().insertAll(dox)
-                }
-                a.invokeOnCompletion {
-                    Toast.makeText(this, "Salvo", Toast.LENGTH_SHORT).show()
-                    dialog.dismiss()
-                }
-            }
-
-            generateBtn.setOnClickListener {
-                doc.generateDoc(
-                    titleDoc.text.toString(),
-                    contentDoc.text.toString(),
-                    workerDoc.text.toString(),
-                    outputDoc.text.toString(), typeDoc.checkedRadioButtonId, this)
-                dialog.dismiss()
-            }
-            dialog.show()
+            dialog.docDialog("Criar novo documento")
         }
 
         bottomNavigation.setOnItemSelectedListener { item ->

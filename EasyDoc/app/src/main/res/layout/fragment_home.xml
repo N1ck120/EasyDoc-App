@@ -27,7 +27,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="66dp"
             android:gravity="center"
-            android:text="Nada para mostrar ainda\n¯\\_(ツ)_/¯"
+            android:text="Nada para mostrar ainda,\n seus documentos aparecerão aqui\n¯\\_(ツ)_/¯"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

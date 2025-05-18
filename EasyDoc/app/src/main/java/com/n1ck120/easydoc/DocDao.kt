@@ -21,6 +21,9 @@ interface DocDao {
     @Insert
     suspend fun insertAll(vararg doc: Doc)
 
+    @Query("UPDATE doc SET title = :title , content = :content, date = :date WHERE uid = :uid")
+    suspend fun update(uid: Long, title: String, content: String, date: String)
+
     @Delete
     suspend fun delete(doc: Doc)
 }

@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class CustomAdapter(private val dataSet: MutableList<Doc>) :
+class CustomAdapter(private val dataSet: MutableList<Doc>, private val  callDel: (Doc) -> Unit, private val  callUpd: (Doc, Doc) -> Unit) :
     RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View, private val dataSet: MutableList<Doc> , private val  callbackDel: (Doc) -> Unit, private val  callbackUpd: (Doc, Doc) -> Unit) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.title)
         val content: TextView = view.findViewById(R.id.content)
         val date: TextView = view.findViewById(R.id.modDate)
@@ -20,7 +20,14 @@ class CustomAdapter(private val dataSet: MutableList<Doc>) :
         val delete: Button = view.findViewById(R.id.deleteButton)
 
         init {
+            val dialog = DialogBuilder(view.context){doc ->
+                callbackUpd(dataSet[adapterPosition],doc)
+            }
             // Define click listener for the ViewHolder's View
+            card.setOnClickListener {
+                dialog.docDialog("Editar documento",title.text.toString(),content.text.toString(),"","")
+            }
+
             delete.setOnClickListener {
                 val dialogView = LayoutInflater.from(view.context).inflate(R.layout.delete_dialog, null)
                 val dialog = MaterialAlertDialogBuilder(dialogView.context)
@@ -29,6 +36,7 @@ class CustomAdapter(private val dataSet: MutableList<Doc>) :
                 val del = dialogView.findViewById<Button>(R.id.confirm)
                 val cancel = dialogView.findViewById<Button>(R.id.cancel)
                 del.setOnClickListener{
+                    callbackDel(dataSet[adapterPosition])
                     dialog.dismiss()
                 }
                 cancel.setOnClickListener{
@@ -45,7 +53,11 @@ class CustomAdapter(private val dataSet: MutableList<Doc>) :
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.recycler_layout, viewGroup, false)
 
-        return ViewHolder(view)
+        return ViewHolder(view, dataSet, callbackDel = {doc1 ->
+            callDel(doc1)
+        }, callbackUpd = {doc1, doc2 ->
+            callUpd(doc1,doc2)
+        })
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -54,8 +66,8 @@ class CustomAdapter(private val dataSet: MutableList<Doc>) :
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.title.text = dataSet[position].title
-        viewHolder.content.text = dataSet[position].content + "..."
-        viewHolder.date.text = "Ultima modificação: " + dataSet[position].date.toString()
+        viewHolder.content.text = dataSet[position].content
+        viewHolder.date.text = "Última modificação: " + dataSet[position].date.toString()
     }
 
     // Return the size of your dataset (invoked by the layout manager)
