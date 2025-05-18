@@ -25,7 +25,7 @@ class CustomAdapter(private val dataSet: MutableList<Doc>, private val  callDel:
             }
             // Define click listener for the ViewHolder's View
             card.setOnClickListener {
-                dialog.docDialog("Editar documento",title.text.toString(),content.text.toString(),"","")
+                dialog.docDialog("Editar documento",dataSet[adapterPosition].title.toString(),dataSet[adapterPosition].content.toString().toString(),"","")
             }
 
             delete.setOnClickListener {
