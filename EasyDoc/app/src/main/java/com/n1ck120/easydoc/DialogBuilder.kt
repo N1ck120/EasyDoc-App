@@ -9,7 +9,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import java.time.LocalDateTime
 
-class DialogBuilder(private val context: Context, private val chama: (Doc) -> Unit){
+class DialogBuilder(private val context: Context, private val callback1: (Doc) -> Unit, private val callback2: (Boolean) -> Unit){
     fun docDialog(
         title: String,
         docTitle: String = "",
@@ -74,7 +74,7 @@ class DialogBuilder(private val context: Context, private val chama: (Doc) -> Un
                         content = contentDoc.text.toString(),
                         date = data
                     )
-                    chama(dox)
+                    callback1(dox)
                     dialog.dismiss()
                 }
             }
@@ -92,7 +92,27 @@ class DialogBuilder(private val context: Context, private val chama: (Doc) -> Un
         dialog.show()
     }
 
-    fun genericDialog(title: String, context: Context){
+    fun genericDialog(title: String, context: Context, confirm: String = "Confirmar", cancel: String = "Cancelar") {
+        val dialogView = LayoutInflater.from(this.context).inflate(R.layout.generic_dialog, null)
+        val dialog = MaterialAlertDialogBuilder(dialogView.context)
+            .setView(dialogView)
+            .create()
+        val message = dialogView.findViewById<TextView>(R.id.warning)
+        val confirmBtn = dialogView.findViewById<Button>(R.id.confirm)
+        val cancelBtn = dialogView.findViewById<Button>(R.id.cancel)
 
+        message.text = title
+        confirmBtn.text = confirm.toString()
+        cancelBtn.text = cancel.toString()
+
+        confirmBtn.setOnClickListener{
+            dialog.dismiss()
+            callback2(true)
+        }
+        cancelBtn.setOnClickListener{
+            dialog.dismiss()
+            callback2(false)
+        }
+        dialog.show()
     }
 }

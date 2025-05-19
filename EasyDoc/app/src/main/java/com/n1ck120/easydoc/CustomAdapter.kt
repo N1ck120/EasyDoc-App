@@ -7,7 +7,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class CustomAdapter(private val dataSet: MutableList<Doc>, private val  callDel: (Doc) -> Unit, private val  callUpd: (Doc, Doc) -> Unit) :
     RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
@@ -20,29 +19,21 @@ class CustomAdapter(private val dataSet: MutableList<Doc>, private val  callDel:
         val delete: Button = view.findViewById(R.id.deleteButton)
 
         init {
-            val dialog = DialogBuilder(view.context){doc ->
+            val dialog = DialogBuilder(view.context, {doc ->
                 callbackUpd(dataSet[adapterPosition],doc)
-            }
+            },{a ->
+                if (a ==true){
+                    callbackDel(dataSet[adapterPosition])
+                }
+            })
+
             // Define click listener for the ViewHolder's View
             card.setOnClickListener {
                 dialog.docDialog("Editar documento",dataSet[adapterPosition].title.toString(),dataSet[adapterPosition].content.toString().toString(),"","")
             }
 
             delete.setOnClickListener {
-                val dialogView = LayoutInflater.from(view.context).inflate(R.layout.delete_dialog, null)
-                val dialog = MaterialAlertDialogBuilder(dialogView.context)
-                    .setView(dialogView)
-                    .create()
-                val del = dialogView.findViewById<Button>(R.id.confirm)
-                val cancel = dialogView.findViewById<Button>(R.id.cancel)
-                del.setOnClickListener{
-                    callbackDel(dataSet[adapterPosition])
-                    dialog.dismiss()
-                }
-                cancel.setOnClickListener{
-                    dialog.dismiss()
-                }
-                dialog.show()
+                dialog.genericDialog("Apagar?", view.context,"Apagar")
             }
         }
     }
@@ -65,8 +56,8 @@ class CustomAdapter(private val dataSet: MutableList<Doc>, private val  callDel:
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.title.text = dataSet[position].title
-        viewHolder.content.text = dataSet[position].content
+        viewHolder.title.text = "Título: " + dataSet[position].title
+        viewHolder.content.text = "Conteúdo: " + dataSet[position].content
         viewHolder.date.text = "Última modificação: " + dataSet[position].date.toString()
     }
 

@@ -9,7 +9,7 @@
         android:id="@+id/warning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Quer mesmo apagar?"
+        android:text="Title"
         android:layout_gravity="center"
         android:layout_marginBottom="10dp"
         android:textSize="20sp" />
@@ -35,7 +35,7 @@
             android:id="@+id/confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Apagar" />
+            android:text="Confirmar" />
 
     </LinearLayout>
 

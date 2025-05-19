@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class AccountFragment : Fragment() {
 
@@ -20,20 +19,14 @@ class AccountFragment : Fragment() {
         val logout = view.findViewById<Button>(R.id.btnLogout)
         val login = view.findViewById<Button>(R.id.btnLoginRedirect)
 
-        logout.setOnClickListener {
-            val dialogView = LayoutInflater.from(this.context).inflate(R.layout.exit_dialog, null)
-            val dialog = MaterialAlertDialogBuilder(dialogView.context)
-                .setView(dialogView)
-                .create()
-            val exit = dialogView.findViewById<Button>(R.id.exit)
-            val cancel = dialogView.findViewById<Button>(R.id.cancel)
-            exit.setOnClickListener{
+        val dialog = DialogBuilder(view.context, {}, { a->
+            if (a == true){
                 activity?.finish()
             }
-            cancel.setOnClickListener{
-                dialog.dismiss()
-            }
-                dialog.show()
+        })
+
+        logout.setOnClickListener {
+            dialog.genericDialog("Sair?", requireActivity(), "Sair")
         }
 
         login.setOnClickListener{

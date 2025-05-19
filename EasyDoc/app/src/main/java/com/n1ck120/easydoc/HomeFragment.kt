@@ -89,16 +89,4 @@ class HomeFragment : Fragment() {
         }
         return view
     }
-
-    fun deleteItem(docitem: Doc){
-        try {
-            db = (requireActivity() as MainActivity).db
-        }catch (e : Exception){
-            Toast.makeText(requireActivity(), "Erro: $e", Toast.LENGTH_SHORT).show()
-        }
-
-        lifecycleScope.launch{
-            db.userDao().delete(docitem)
-        }
-    }
 }

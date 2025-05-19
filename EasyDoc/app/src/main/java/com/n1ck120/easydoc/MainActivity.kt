@@ -51,14 +51,14 @@ class MainActivity : AppCompatActivity() {
             AppDatabase::class.java, "database.db"
         ).build()
 
-        val dialog = DialogBuilder(this){ doc ->
+        val dialog = DialogBuilder(this, { doc ->
             val a = lifecycleScope.launch {
                 db.userDao().insertAll(doc)
             }
             a.invokeOnCompletion {
                 Toast.makeText(this, "Salvo", Toast.LENGTH_SHORT).show()
             }
-        }
+        }, {})
 
         /*vtoNavigation.addOnGlobalLayoutListener {
             val fragMargin = fragContView.layoutParams as MarginLayoutParams
