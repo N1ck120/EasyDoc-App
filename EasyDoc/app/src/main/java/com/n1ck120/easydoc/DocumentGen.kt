@@ -26,7 +26,7 @@ object DocumentGen {
         }
     }
 
-    fun generateDocx(docTitle : String, docContent : String, docWorker : String, docName : String, context: Context){
+    fun generateDocx(docTitle : String, docContent : String, docWorker : String, docName : String, context: Context?){
         System.setProperty("org.apache.poi.javax.xml.stream.XMLInputFactory", "com.fasterxml.aalto.stax.InputFactoryImpl")
         System.setProperty("org.apache.poi.javax.xml.stream.XMLOutputFactory", "com.fasterxml.aalto.stax.OutputFactoryImpl")
         System.setProperty("org.apache.poi.javax.xml.stream.XMLEventFactory", "com.fasterxml.aalto.stax.EventFactoryImpl")
@@ -39,10 +39,12 @@ object DocumentGen {
         //tmpRun.setFontSize(18)
         document.write(FileOutputStream(File(docName)))
         document.close()
-        Toast.makeText(context, "Salvo em: $docName", Toast.LENGTH_LONG).show()
+        if (context != null){
+            Toast.makeText(context, "Salvo em: $docName", Toast.LENGTH_LONG).show()
+        }
     }
 
-    fun generatePDF(docTitle : String, docContent : String, docWorker : String, docName : String, context: Context){
+    fun generatePDF(docTitle : String, docContent : String, docWorker : String, docName : String, context: Context?){
         val writer = PdfWriter(File(docName))
         val pdfDoc = PdfDocument(writer)
         val document = Document(pdfDoc)
@@ -52,7 +54,9 @@ object DocumentGen {
         //document.setFontSize(12F)
         //document.add(Paragraph(contentDoc))
         document.close()
-        Toast.makeText(context, "Salvo em: $docName", Toast.LENGTH_LONG).show()
+        if (context != null){
+            Toast.makeText(context, "Salvo em: $docName", Toast.LENGTH_LONG).show()
+        }
     }
 
     fun generateDoc(docTitle : String, docContent : String, docWorker : String, docName : String, docType : Int, context: Context){

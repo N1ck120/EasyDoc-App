@@ -72,7 +72,7 @@ class HomeFragment : Fragment() {
                         }else{
                             data = data + ":" + LocalDateTime.now().minute.toString()
                         }
-                        db.userDao().update(docUpd1.uid, docUpd2.title.toString(), docUpd2.content.toString(), data)
+                        db.userDao().update(docUpd1.uid, docUpd2.title.toString(), docUpd2.content.toString(), docUpd2.doc_name.toString(), data)
                     }
                     a.invokeOnCompletion {
                         Toast.makeText(view.context, "Atualizado", Toast.LENGTH_SHORT).show()

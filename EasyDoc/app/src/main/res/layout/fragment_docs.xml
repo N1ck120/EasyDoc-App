@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/accountText"
+            android:id="@+id/documentText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -27,7 +27,6 @@
             android:backgroundTint="#00000000"
             style="?attr/materialCardViewFilledStyle"
             android:layout_marginTop="66dp"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,6 +53,55 @@
                             android:paddingEnd="10dp">
 
                             <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/doc_models"
+                                style="?attr/materialCardViewFilledStyle"
+                                android:layout_width="0dp"
+                                android:layout_height="140dp"
+                                android:layout_weight="1"
+                                android:checkable="true"
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:cardCornerRadius="20dp">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <ImageView
+                                        android:id="@+id/imageView3"
+                                        android:layout_width="95dp"
+                                        android:layout_height="95dp"
+                                        android:layout_marginStart="20dp"
+                                        android:src="@drawable/baseline_insert_drive_file_24"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <TextView
+                                        android:id="@+id/textView7"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Modelos prontos"
+                                        android:textSize="24sp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toEndOf="@+id/imageView3"
+                                        app:layout_constraintTop_toTopOf="parent" />
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:layout_marginBottom="10dp">
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/doc_converter"
                                 style="?attr/materialCardViewFilledStyle"
                                 android:layout_width="0dp"
                                 android:layout_height="140dp"
@@ -70,34 +118,38 @@
                                     <ImageView
                                         android:id="@+id/imageView4"
                                         android:layout_width="95dp"
-                                        android:layout_height="80dp"
-                                        android:src="@drawable/baseline_insert_drive_file_24"
+                                        android:layout_height="95dp"
+                                        android:layout_marginStart="20dp"
+                                        android:src="@drawable/round_compare_arrows_24"
                                         app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintHorizontal_bias="0.494"
                                         app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"
-                                        app:layout_constraintVertical_bias="0.301" />
+                                        app:layout_constraintTop_toTopOf="parent" />
 
                                     <TextView
-                                        android:id="@+id/textView9"
+                                        android:id="@+id/textView8"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="Modelos prontos"
+                                        android:text="Converter arquivo"
+                                        android:textSize="24sp"
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintHorizontal_bias="0.494"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"
-                                        app:layout_constraintVertical_bias="0.867" />
+                                        app:layout_constraintStart_toEndOf="@+id/imageView4"
+                                        app:layout_constraintTop_toTopOf="parent" />
                                 </androidx.constraintlayout.widget.ConstraintLayout>
+
                             </com.google.android.material.card.MaterialCardView>
 
-                            <Space
-                                android:layout_width="10dp"
-                                android:layout_height="0dp" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:layout_marginBottom="10dp">
 
                             <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/doc_mdeditor"
                                 style="?attr/materialCardViewFilledStyle"
                                 android:layout_width="0dp"
                                 android:layout_height="140dp"
@@ -114,128 +166,37 @@
                                     <ImageView
                                         android:id="@+id/imageView5"
                                         android:layout_width="95dp"
-                                        android:layout_height="80dp"
-                                        android:src="@drawable/round_compare_arrows_24"
-                                        app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"
-                                        app:layout_constraintVertical_bias="0.266" />
-
-                                    <TextView
-                                        android:id="@+id/textView8"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Converter arquivo"
-                                        app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintHorizontal_bias="0.493"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"
-                                        app:layout_constraintVertical_bias="0.867" />
-                                </androidx.constraintlayout.widget.ConstraintLayout>
-                            </com.google.android.material.card.MaterialCardView>
-
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:paddingStart="10dp"
-                            android:paddingEnd="10dp"
-                            android:layout_marginBottom="10dp">
-
-                            <com.google.android.material.card.MaterialCardView
-                                style="?attr/materialCardViewFilledStyle"
-                                android:visibility="gone"
-                                android:layout_width="0dp"
-                                android:layout_height="140dp"
-                                android:layout_weight="1"
-                                android:checkable="true"
-                                android:clickable="true"
-                                android:focusable="true"
-                                app:cardCornerRadius="20dp">
-
-                                <androidx.constraintlayout.widget.ConstraintLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
-
-                                    <ImageView
-                                        android:id="@+id/imageSDView5"
-                                        android:layout_width="95dp"
-                                        android:layout_height="80dp"
-                                        android:src="@drawable/round_compare_arrows_24"
-                                        app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"
-                                        app:layout_constraintVertical_bias="0.266" />
-
-                                    <TextView
-                                        android:id="@+id/textsAView8"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Converter arquivo"
-                                        app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintHorizontal_bias="0.493"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"
-                                        app:layout_constraintVertical_bias="0.867" />
-                                </androidx.constraintlayout.widget.ConstraintLayout>
-                            </com.google.android.material.card.MaterialCardView>
-
-                            <Space
-                                android:visibility="gone"
-                                android:layout_width="10dp"
-                                android:layout_height="0dp" />
-
-                            <com.google.android.material.card.MaterialCardView
-                                style="?attr/materialCardViewFilledStyle"
-                                android:layout_width="0dp"
-                                android:layout_height="140dp"
-                                android:layout_weight="1"
-                                android:checkable="true"
-                                android:clickable="true"
-                                android:focusable="true"
-                                app:cardCornerRadius="20dp">
-
-                                <androidx.constraintlayout.widget.ConstraintLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
-
-                                    <ImageView
-                                        android:id="@+id/imageView5hj"
-                                        android:layout_width="95dp"
-                                        android:layout_height="80dp"
+                                        android:layout_height="95dp"
+                                        android:layout_marginStart="20dp"
                                         android:src="@drawable/round_edit_note_24"
                                         app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"
-                                        app:layout_constraintVertical_bias="0.266" />
+                                        app:layout_constraintTop_toTopOf="parent" />
 
                                     <TextView
-                                        android:id="@+id/textVsiew8"
+                                        android:id="@+id/textView9"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="Editar metadados"
+                                        android:textSize="24sp"
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintHorizontal_bias="0.493"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"
-                                        app:layout_constraintVertical_bias="0.867" />
+                                        app:layout_constraintStart_toEndOf="@+id/imageView5"
+                                        app:layout_constraintTop_toTopOf="parent" />
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
+
                             </com.google.android.material.card.MaterialCardView>
 
                         </TableRow>
-                    </TableLayout>
-                </LinearLayout>
-            </ScrollView>
-        </com.google.android.material.card.MaterialCardView>
 
+                    </TableLayout>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

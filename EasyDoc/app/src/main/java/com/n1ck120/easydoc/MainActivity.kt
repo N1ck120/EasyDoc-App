@@ -1,9 +1,6 @@
 package com.n1ck120.easydoc
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.widget.Button
-import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -13,23 +10,17 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.commit
-import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var db : AppDatabase
-    private val doc = DocumentGen
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +33,7 @@ class MainActivity : AppCompatActivity() {
         }
         val createDoc = findViewById<FloatingActionButton>(R.id.floatingActionButton)
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        val fragmentos = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
-        val fragContView = findViewById<FragmentContainerView>(R.id.fragmentContainerView)
+        //val fragContView = findViewById<FragmentContainerView>(R.id.fragmentContainerView)
         //val vtoNavigation = bottomNavigation.viewTreeObserver
 
         db = Room.databaseBuilder(

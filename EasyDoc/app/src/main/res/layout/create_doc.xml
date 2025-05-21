@@ -113,19 +113,35 @@
 
                 <Button
                     android:id="@+id/save"
-                    style="?attr/materialButtonOutlinedStyle"
+                    style="?attr/materialIconButtonFilledTonalStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="Salvar" />
+                    android:text=" Salvar"
+                    app:icon="@drawable/round_save_24"/>
 
                 <Button
                     android:id="@+id/generatedoc"
+                    style="?attr/materialIconButtonFilledStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="Exportar" />
+                    android:text=" Exportar"
+                    app:icon="@drawable/round_save_alt_24"/>
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/button"
+                    style="?attr/materialIconButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Compartilhar"
+                    app:icon="@drawable/round_share_24" />
             </LinearLayout>
 
         </LinearLayout>

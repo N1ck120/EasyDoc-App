@@ -78,7 +78,6 @@ class DialogBuilder(private val context: Context, private val callback1: (Doc) -
                     dialog.dismiss()
                 }
             }
-
         }
 
         generateBtn.setOnClickListener {
@@ -86,7 +85,9 @@ class DialogBuilder(private val context: Context, private val callback1: (Doc) -
                 titleDoc.text.toString(),
                 contentDoc.text.toString(),
                 workerDoc.text.toString(),
-                outputDoc.text.toString(), typeDoc.checkedRadioButtonId, context)
+                outputDoc.text.toString(),
+                typeDoc.checkedRadioButtonId,
+                context)
             dialog.dismiss()
         }
         dialog.show()
