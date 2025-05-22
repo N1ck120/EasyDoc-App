@@ -34,10 +34,6 @@ class SignUpActivity : AppCompatActivity() {
         }
         val btnLogin = findViewById<Button>(R.id.btnLogin)
         val btnSignup = findViewById<Button>(R.id.btnSignup)
-        val card1 = findViewById<MaterialCardView>(R.id.Eye1)
-        val eye1 = findViewById<ImageView>(R.id.imageViewEye1)
-        val card2 = findViewById<MaterialCardView>(R.id.Eye2)
-        val eye2 = findViewById<ImageView>(R.id.imageViewEye2)
         val pass1 = findViewById<EditText>(R.id.pass1)
         val pass2 = findViewById<EditText>(R.id.pass2)
 
@@ -45,42 +41,6 @@ class SignUpActivity : AppCompatActivity() {
             val intent = Intent(this,LoginActivity::class.java)
             startActivity(intent)
             finish()
-        }
-
-        fun setupCardCorners(cardView: MaterialCardView) {
-            val shapeAppearanceModel = ShapeAppearanceModel.builder()
-                .setTopLeftCorner(CornerFamily.ROUNDED, 10f)
-                .setTopRightCorner(CornerFamily.ROUNDED, 58f)
-                .setBottomLeftCorner(CornerFamily.ROUNDED, 10f)
-                .setBottomRightCorner(CornerFamily.ROUNDED, 58f)
-                .build()
-
-            cardView.shapeAppearanceModel = shapeAppearanceModel
-        }
-
-        setupCardCorners(card1)
-        setupCardCorners(card2)
-
-        card1.setOnClickListener {
-            card1.isChecked = !card1.isChecked
-            if (card1.isChecked){
-                eye1.setImageResource(R.drawable.baseline_visibility_24)
-                pass1.inputType = TYPE_CLASS_TEXT or TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-            }else{
-                eye1.setImageResource(R.drawable.baseline_visibility_off_24)
-                pass1.inputType = TYPE_CLASS_TEXT or TYPE_TEXT_VARIATION_PASSWORD
-            }
-        }
-
-        card2.setOnClickListener {
-            card2.isChecked = !card2.isChecked
-            if (card2.isChecked){
-                eye2.setImageResource(R.drawable.baseline_visibility_24)
-                pass2.inputType = TYPE_CLASS_TEXT or TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-            }else{
-                eye2.setImageResource(R.drawable.baseline_visibility_off_24)
-                pass2.inputType = TYPE_CLASS_TEXT or TYPE_TEXT_VARIATION_PASSWORD
-            }
         }
 
         //Verifica o tema salvo no datastore e troca caso necessario

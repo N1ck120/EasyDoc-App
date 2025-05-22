@@ -63,13 +63,14 @@
                     android:id="@+id/textInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="74dp"
-                    android:layout_weight="60"
-                    android:maxHeight="100dp"
+                    android:layout_marginEnd="20dp"
+                    app:boxCornerRadiusBottomEnd="20dp"
                     app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
                     app:boxCornerRadiusTopStart="20dp"
+                    app:endIconMode="password_toggle"
+                    app:endIconTint="@color/black"
                     app:layout_constraintBottom_toTopOf="@+id/checkBox"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -81,38 +82,9 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:hint="Senha"
-                        android:inputType="text|textPassword" />
+                        android:inputType="textPassword" />
 
                 </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/Eye"
-                    style="?attr/materialCardViewFilledStyle"
-                    android:layout_width="55dp"
-                    android:layout_height="56dp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="20dp"
-                    android:layout_weight="1"
-                    android:checkable="true"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:cardCornerRadius="20dp"
-                    app:checkedIconTint="#00000000"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.5569"
-                    app:strokeColor="#78737D"
-                    app:strokeWidth="1.5dp">
-
-                    <ImageView
-                        android:id="@+id/imageViewEye"
-                        android:layout_width="35dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/baseline_visibility_off_24" />
-                </com.google.android.material.card.MaterialCardView>
 
                 <CheckBox
                     android:id="@+id/checkBox"

@@ -86,9 +86,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="74dp"
+                    android:layout_marginEnd="20dp"
+                    app:boxCornerRadiusBottomEnd="20dp"
                     app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
                     app:boxCornerRadiusTopStart="20dp"
+                    app:endIconMode="password_toggle"
+                    app:endIconTint="@color/black"
                     app:layout_constraintBottom_toTopOf="@+id/textInputLayout6"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -103,43 +107,18 @@
                         android:inputType="textPassword" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/Eye1"
-                    style="?attr/materialCardViewFilledStyle"
-                    android:layout_width="55dp"
-                    android:layout_height="56dp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="20dp"
-                    android:layout_weight="1"
-                    android:checkable="true"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:cardCornerRadius="20dp"
-                    app:checkedIconTint="#00000000"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.605"
-                    app:strokeColor="#78737D"
-                    app:strokeWidth="1.5dp">
-
-                    <ImageView
-                        android:id="@+id/imageViewEye1"
-                        android:layout_width="35dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/baseline_visibility_off_24" />
-                </com.google.android.material.card.MaterialCardView>
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayout6"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="74dp"
+                    android:layout_marginEnd="20dp"
+                    app:boxCornerRadiusBottomEnd="20dp"
                     app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
                     app:boxCornerRadiusTopStart="20dp"
+                    app:endIconMode="password_toggle"
+                    app:endIconTint="@color/black"
                     app:layout_constraintBottom_toTopOf="@+id/btnSignup"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -153,35 +132,6 @@
                         android:hint="Repita a senha"
                         android:inputType="textPassword" />
                 </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/Eye2"
-                    style="?attr/materialCardViewFilledStyle"
-                    android:layout_width="55dp"
-                    android:layout_height="56dp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="20dp"
-                    android:layout_weight="1"
-                    android:checkable="true"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:cardCornerRadius="20dp"
-                    app:checkedIconTint="#00000000"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.706"
-                    app:strokeColor="#78737D"
-                    app:strokeWidth="1.5dp">
-
-                    <ImageView
-                        android:id="@+id/imageViewEye2"
-                        android:layout_width="35dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/baseline_visibility_off_24" />
-                </com.google.android.material.card.MaterialCardView>
 
                 <Button
                     android:id="@+id/btnSignup"

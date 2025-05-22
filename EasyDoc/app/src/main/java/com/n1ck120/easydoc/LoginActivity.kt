@@ -38,8 +38,6 @@ class LoginActivity : AppCompatActivity() {
         val btnSignup = findViewById<Button>(R.id.btnSignup)
         val btnOffline = findViewById<Button>(R.id.btnReturn)
         val checkKeep = findViewById<CheckBox>(R.id.checkBox)
-        val card = findViewById<MaterialCardView>(R.id.Eye)
-        val eye = findViewById<ImageView>(R.id.imageViewEye)
         val pass = findViewById<EditText>(R.id.textPass)
 
         btnSignup.setOnClickListener {
@@ -57,30 +55,6 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Checkbox não marcado", Toast.LENGTH_SHORT).show()
             }*/
             finish()
-        }
-
-        fun setupCardCorners(cardView: MaterialCardView) {
-            val shapeAppearanceModel = ShapeAppearanceModel.builder()
-                .setTopLeftCorner(CornerFamily.ROUNDED, 10f)
-                .setTopRightCorner(CornerFamily.ROUNDED, 58f)
-                .setBottomLeftCorner(CornerFamily.ROUNDED, 10f)
-                .setBottomRightCorner(CornerFamily.ROUNDED, 58f)
-                .build()
-
-            cardView.shapeAppearanceModel = shapeAppearanceModel
-        }
-
-        setupCardCorners(card)
-
-        card.setOnClickListener {
-            card.isChecked = !card.isChecked
-            if (card.isChecked){
-                eye.setImageResource(R.drawable.baseline_visibility_24)
-                pass.inputType = TYPE_CLASS_TEXT or TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-            }else{
-                eye.setImageResource(R.drawable.baseline_visibility_off_24)
-                pass.inputType = TYPE_CLASS_TEXT or TYPE_TEXT_VARIATION_PASSWORD
-            }
         }
 
         //Verifica o tema salvo no datastore e troca caso necessario
