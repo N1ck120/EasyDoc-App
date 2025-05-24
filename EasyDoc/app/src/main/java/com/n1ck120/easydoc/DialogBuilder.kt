@@ -93,27 +93,18 @@ class DialogBuilder(private val context: Context, private val callback1: (Doc) -
         dialog.show()
     }
 
-    fun genericDialog(title: String, context: Context, confirm: String = "Confirmar", cancel: String = "Cancelar") {
-        val dialogView = LayoutInflater.from(this.context).inflate(R.layout.generic_dialog, null)
-        val dialog = MaterialAlertDialogBuilder(dialogView.context)
-            .setView(dialogView)
-            .create()
-        val message = dialogView.findViewById<TextView>(R.id.warning)
-        val confirmBtn = dialogView.findViewById<Button>(R.id.confirm)
-        val cancelBtn = dialogView.findViewById<Button>(R.id.cancel)
-
-        message.text = title
-        confirmBtn.text = confirm.toString()
-        cancelBtn.text = cancel.toString()
-
-        confirmBtn.setOnClickListener{
-            dialog.dismiss()
-            callback2(true)
-        }
-        cancelBtn.setOnClickListener{
-            dialog.dismiss()
-            callback2(false)
-        }
-        dialog.show()
+    fun genericDialog(title: String, message: String, context: Context, confirm: String = "Confirmar", cancel: String = "Cancelar") {
+        MaterialAlertDialogBuilder(context)
+            .setTitle(title)
+            .setMessage(message)
+            .setNegativeButton(cancel) { dialog, which ->
+                dialog.dismiss()
+                callback2(false)
+            }
+            .setPositiveButton(confirm) { dialog, which ->
+                dialog.dismiss()
+                callback2(true)
+            }
+            .show()
     }
 }

@@ -2,13 +2,9 @@ package com.n1ck120.easydoc
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.InputType.TYPE_CLASS_TEXT
-import android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
-import android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
-import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -17,9 +13,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.lifecycle.lifecycleScope
-import com.google.android.material.card.MaterialCardView
-import com.google.android.material.shape.CornerFamily
-import com.google.android.material.shape.ShapeAppearanceModel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
