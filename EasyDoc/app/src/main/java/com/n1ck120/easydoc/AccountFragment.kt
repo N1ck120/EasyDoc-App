@@ -21,12 +21,24 @@ class AccountFragment : Fragment() {
 
         val dialog = DialogBuilder(view.context, {}, { a->
             if (a == true){
+                //TODO() Função apagar token
+                activity?.finish()
+            }
+        })
+
+        val dialog1 = DialogBuilder(view.context, {}, { a->
+            if (a == true){
                 activity?.finish()
             }
         })
 
         logout.setOnClickListener {
-            dialog.genericDialog("Sair da sua conta?", "Você terá que fazer login novamente para usar a sincronização de documentos",requireActivity(), "Sair")
+            if (false){
+                dialog.genericDialog("Sair da sua conta?", "Você terá que fazer login novamente para usar a sincronização de documentos",requireActivity(), "Sair")
+            }else{
+                dialog1.genericDialog("Sair do app?", null, requireActivity(), "Sair")
+            }
+
         }
 
         login.setOnClickListener{

@@ -5,16 +5,20 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+import androidx.compose.ui.text.toLowerCase
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.widget.doAfterTextChanged
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlin.text.Regex
 
 class LoginActivity : AppCompatActivity() {
 
@@ -31,12 +35,34 @@ class LoginActivity : AppCompatActivity() {
         val btnSignup = findViewById<Button>(R.id.btnSignup)
         val btnOffline = findViewById<Button>(R.id.btnReturn)
         val checkKeep = findViewById<CheckBox>(R.id.checkBox)
-        val pass = findViewById<EditText>(R.id.textPass)
+        val loginEmail = findViewById<EditText>(R.id.loginEmail)
+        val loginPass = findViewById<EditText>(R.id.loginPass)
 
         btnSignup.setOnClickListener {
             val intent = Intent(this,SignUpActivity::class.java)
             startActivity(intent)
             finish()
+        }
+
+        loginEmail.doAfterTextChanged {
+            if (!loginEmail.text.toString().contains(Regex("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"))){
+                loginEmail.error = "Email inválido!"
+            }
+        }
+
+        btnLogin.setOnClickListener {
+            if (!loginEmail.text.toString().contains(Regex("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"))){
+                Toast.makeText(this, "Email inválido!", Toast.LENGTH_SHORT).show()
+            }else{
+                if (loginPass.text.toString().isBlank() || loginPass.text.toString().length < 8 || loginPass.text.toString().contains(" ")){
+                    Toast.makeText(this, "Senha inválida!", Toast.LENGTH_SHORT).show()
+                }else{
+                    /*TODO() Função de login aqui
+                    loginEmail.text.toString().lowercase()
+
+                    */
+                }
+            }
         }
 
         btnOffline.setOnClickListener {
