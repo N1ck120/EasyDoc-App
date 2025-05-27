@@ -38,6 +38,8 @@ class LoginActivity : AppCompatActivity() {
         val loginEmail = findViewById<EditText>(R.id.loginEmail)
         val loginPass = findViewById<EditText>(R.id.loginPass)
 
+        val lzSodium = SodiumLazy().lazySodium
+
         btnSignup.setOnClickListener {
             val intent = Intent(this,SignUpActivity::class.java)
             startActivity(intent)
@@ -59,8 +61,8 @@ class LoginActivity : AppCompatActivity() {
                 }else{
                     /*TODO() Função de login aqui
                     loginEmail.text.toString().lowercase()
-
                     */
+                    
                 }
             }
         }
