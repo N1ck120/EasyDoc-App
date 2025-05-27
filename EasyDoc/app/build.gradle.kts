@@ -8,6 +8,10 @@ android {
     namespace = "com.n1ck120.easydoc"
     compileSdk = 35
 
+    packaging {
+        resources.excludes.add("META-INF/**")
+    }
+
     defaultConfig {
         applicationId = "com.n1ck120.easydoc"
         minSdk = 29
@@ -38,6 +42,12 @@ android {
     }
     //Libsodium
     sourceSets["main"].jniLibs.srcDirs("src/main/jniLibs")
+
+    defaultConfig {
+        ndk {
+            abiFilters += listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
+        }
+    }
 }
 
 dependencies {
@@ -57,8 +67,10 @@ dependencies {
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.datastore.preferences)
-    implementation(libs.lazysodium.android)
-    implementation(libs.jna)
+    //noinspection UseTomlInstead
+    implementation("net.java.dev.jna:jna:5.17.0@aar")
+    //noinspection UseTomlInstead
+    implementation("com.goterl:lazysodium-android:5.1.0@aar")
     //Room
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
