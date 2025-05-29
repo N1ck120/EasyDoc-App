@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val createDoc = findViewById<FloatingActionButton>(R.id.floatingActionButton)
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         //val fragContView = findViewById<FragmentContainerView>(R.id.fragmentContainerView)
         //val vtoNavigation = bottomNavigation.viewTreeObserver
@@ -41,23 +40,10 @@ class MainActivity : AppCompatActivity() {
             AppDatabase::class.java, "database.db"
         ).build()
 
-        val dialog = DialogBuilder(this, { doc ->
-            val a = lifecycleScope.launch {
-                db.userDao().insertAll(doc)
-            }
-            a.invokeOnCompletion {
-                Toast.makeText(this, "Salvo", Toast.LENGTH_SHORT).show()
-            }
-        }, {})
-
         /*vtoNavigation.addOnGlobalLayoutListener {
             val fragMargin = fragContView.layoutParams as MarginLayoutParams
             fragMargin.bottomMargin = bottomNavigation.height
         }*/
-
-        createDoc.setOnClickListener {
-            dialog.docDialog("Criar novo documento")
-        }
 
         bottomNavigation.setOnItemSelectedListener { item ->
             val homeBtn = bottomNavigation.menu.findItem(R.id.item_1)

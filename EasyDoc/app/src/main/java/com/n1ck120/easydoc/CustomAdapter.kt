@@ -33,7 +33,7 @@ class CustomAdapter(private val dataSet: MutableList<Doc>, private val  callDel:
             }
 
             delete.setOnClickListener {
-                dialog.genericDialog("Apagar documento?", "Esta ação não pode ser revertida", view.context,"Apagar")
+                dialog.genericDialog("Apagar documento?", "Atenção! A exclusão é permanente", view.context,"Apagar")
             }
         }
     }

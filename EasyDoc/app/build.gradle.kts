@@ -76,4 +76,10 @@ dependencies {
     ksp(libs.androidx.room.compiler)
     //annotationProcessor("androidx.room:room-compiler:$room_version")
     implementation(libs.androidx.room.ktx)
+    //Token JWT
+    api(libs.jjwt.api)
+    runtimeOnly(libs.jjwt.impl)
+    runtimeOnly("io.jsonwebtoken:jjwt-orgjson:0.12.6") {
+        exclude("org.json", "json") //provided by Android natively
+    }
 }

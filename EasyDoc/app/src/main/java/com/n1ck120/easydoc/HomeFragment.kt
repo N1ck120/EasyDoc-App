@@ -12,6 +12,8 @@ import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 
@@ -27,10 +29,25 @@ class HomeFragment : Fragment() {
         val nothingText = view.findViewById<TextView>(R.id.nothing_to_show)
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
 
+        val createDoc = view.findViewById<FloatingActionButton>(R.id.floatingActionButton)
+
         try {
             db = (requireActivity() as MainActivity).db
         }catch (e : Exception){
             Toast.makeText(requireActivity(), "Erro: $e", Toast.LENGTH_SHORT).show()
+        }
+
+        val dialog = DialogBuilder(requireContext(), { doc ->
+            val a = lifecycleScope.launch {
+                db.userDao().insertAll(doc)
+            }
+            a.invokeOnCompletion {
+                Toast.makeText(requireContext(), "Salvo", Toast.LENGTH_SHORT).show()
+            }
+        }, {})
+
+        createDoc.setOnClickListener {
+            dialog.docDialog("Criar novo documento")
         }
 
         lifecycleScope.launch {
@@ -46,8 +63,15 @@ class HomeFragment : Fragment() {
                         db.userDao().delete(docDel)
                     }
                     a.invokeOnCompletion {
-                        Toast.makeText(view.context, "Apagado", Toast.LENGTH_SHORT).show()
+                        Snackbar.make(view, "${docDel.title} apagado", Snackbar.LENGTH_LONG)
+                            .setAction("Desfazer") {
+                                lifecycleScope.launch {
+                                    db.userDao().insertAll(docDel)
+                                }
+                            }
+                            .show()
                     }
+
                 }, callUpd = {
                         docUpd1, docUpd2 ->
                     val a =lifecycleScope.launch {
