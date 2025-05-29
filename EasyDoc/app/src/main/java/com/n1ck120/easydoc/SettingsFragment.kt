@@ -32,7 +32,6 @@ class SettingsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
-        val github = view.findViewById<ImageView>(R.id.github)
         val gitCard = view.findViewById<MaterialCardView>(R.id.githubCard)
         val theme = view.findViewById<Button>(R.id.btnTheme)
 
@@ -42,12 +41,6 @@ class SettingsFragment : Fragment() {
 
         homeBtn.setIcon(R.drawable.outline_home_24)
         settingBtn.setIcon(R.drawable.baseline_settings_24)
-
-        if ((resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES){
-            github.setImageResource(R.drawable.github_white)
-        }else{
-            github.setImageResource(R.drawable.github_black)
-        }
 
         gitCard.setOnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW, "https://github.com/N1ck120/EasyDoc-App".toUri())

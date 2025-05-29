@@ -21,13 +21,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/planeIcon"
+            android:layout_width="151dp"
+            android:layout_height="145dp"
+            android:src="@drawable/plane"
+            app:layout_constraintBottom_toTopOf="@+id/nothing_to_show"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <TextView
             android:id="@+id/nothing_to_show"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="66dp"
             android:gravity="center"
-            android:text="Nada para mostrar ainda,\n seus documentos aparecerão aqui\n¯\\_(ツ)_/¯"
+            android:text="Nada para mostrar ainda,\n seus documentos aparecerão aqui"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
