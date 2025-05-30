@@ -7,8 +7,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.ScrollView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,8 +26,7 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
-        val nothingText = view.findViewById<TextView>(R.id.nothing_to_show)
-        val nothingImg = view.findViewById<ImageView>(R.id.planeIcon)
+        val nothing = view.findViewById<ScrollView>(R.id.nothing)
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
 
         val createDoc = view.findViewById<FloatingActionButton>(R.id.floatingActionButton)
@@ -107,11 +105,9 @@ class HomeFragment : Fragment() {
                 recyclerView.layoutManager = LinearLayoutManager(requireContext())
                 recyclerView.adapter = customAdapter
                 if (recyclerView.adapter?.itemCount.toString().toInt() > 0) {
-                    nothingText.visibility = GONE
-                    nothingImg.visibility = GONE
+                    nothing.visibility = GONE
                 }else{
-                    nothingText.visibility = VISIBLE
-                    nothingImg.visibility = VISIBLE
+                    nothing.visibility = VISIBLE
                 }
             }
         }

@@ -1,6 +1,7 @@
 package com.n1ck120.easydoc
 
 import android.os.Bundle
+import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
@@ -32,18 +34,11 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        //val fragContView = findViewById<FragmentContainerView>(R.id.fragmentContainerView)
-        //val vtoNavigation = bottomNavigation.viewTreeObserver
 
         db = Room.databaseBuilder(
             applicationContext,
             AppDatabase::class.java, "database.db"
         ).build()
-
-        /*vtoNavigation.addOnGlobalLayoutListener {
-            val fragMargin = fragContView.layoutParams as MarginLayoutParams
-            fragMargin.bottomMargin = bottomNavigation.height
-        }*/
 
         bottomNavigation.setOnItemSelectedListener { item ->
             val homeBtn = bottomNavigation.menu.findItem(R.id.item_1)
@@ -56,7 +51,6 @@ class MainActivity : AppCompatActivity() {
             settingsBtn.setIcon(R.drawable.outline_settings_24)
 
             when(item.itemId) {
-
                 R.id.item_1 -> {
                     supportFragmentManager.commit {
                         setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
