@@ -39,7 +39,7 @@ class SettingsFragment : Fragment() {
         val homeBtn = bottomNav.menu.findItem(R.id.item_1)
         val settingBtn = bottomNav.menu.findItem(R.id.item_4)
 
-        homeBtn.setIcon(R.drawable.outline_home_24)
+        homeBtn.setIcon(R.drawable.outline_insert_drive_file_24)
         settingBtn.setIcon(R.drawable.baseline_settings_24)
 
         gitCard.setOnClickListener {

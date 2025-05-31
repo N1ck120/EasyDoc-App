@@ -2,13 +2,13 @@
     <item
         android:id="@+id/item_1"
         android:enabled="true"
-        android:icon="@drawable/baseline_home_24"
-        android:title="Início"/>
+        android:icon="@drawable/baseline_insert_drive_file_24"
+        android:title="Documentos" />
     <item
         android:id="@+id/item_2"
         android:enabled="true"
-        android:icon="@drawable/outline_insert_drive_file_24"
-        android:title="Documentos"/>
+        android:icon="@drawable/outline_build_24"
+        android:title="Toolbox" />
     <item
         android:id="@+id/item_3"
         android:enabled="true"

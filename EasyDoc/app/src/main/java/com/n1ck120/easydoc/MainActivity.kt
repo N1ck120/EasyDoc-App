@@ -45,8 +45,8 @@ class MainActivity : AppCompatActivity() {
             val docsBtn = bottomNavigation.menu.findItem(R.id.item_2)
             val accountBtn = bottomNavigation.menu.findItem(R.id.item_3)
             val settingsBtn = bottomNavigation.menu.findItem(R.id.item_4)
-            homeBtn.setIcon(R.drawable.outline_home_24)
-            docsBtn.setIcon(R.drawable.outline_insert_drive_file_24)
+            homeBtn.setIcon(R.drawable.outline_insert_drive_file_24)
+            docsBtn.setIcon(R.drawable.outline_build_24)
             accountBtn.setIcon(R.drawable.outline_account_circle_24)
             settingsBtn.setIcon(R.drawable.outline_settings_24)
 
@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                             replace(R.id.fragmentContainerView, HomeFragment(), "Home")
                         }
                     }
-                    item.setIcon(R.drawable.baseline_home_24)
+                    item.setIcon(R.drawable.baseline_insert_drive_file_24)
                     true
                 }
                 R.id.item_2 -> {
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                             replace(R.id.fragmentContainerView, DocsFragment(), "Docs")
                         }
                     }
-                    item.setIcon(R.drawable.baseline_insert_drive_file_24)
+                    item.setIcon(R.drawable.baseline_build_24)
                     true
                 }
                 R.id.item_3 -> {
