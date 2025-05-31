@@ -57,7 +57,7 @@ class HomeFragment : Fragment() {
                 while (iterator.hasNext()){
                     dataset.add(iterator.next())
                 }
-                val customAdapter = CustomAdapter(dataset, callDel = {
+                val homeAdapter = HomeAdapter(dataset, callDel = {
                         docDel ->
                     val a =lifecycleScope.launch {
                         db.userDao().delete(docDel)
@@ -103,7 +103,7 @@ class HomeFragment : Fragment() {
                     }
                 })
                 recyclerView.layoutManager = LinearLayoutManager(requireContext())
-                recyclerView.adapter = customAdapter
+                recyclerView.adapter = homeAdapter
                 if (recyclerView.adapter?.itemCount.toString().toInt() > 0) {
                     nothing.visibility = GONE
                 }else{

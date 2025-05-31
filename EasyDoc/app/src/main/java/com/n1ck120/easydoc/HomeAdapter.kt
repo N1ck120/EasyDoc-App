@@ -8,8 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 
-class CustomAdapter(private val dataSet: MutableList<Doc>, private val  callDel: (Doc) -> Unit, private val  callUpd: (Doc, Doc) -> Unit) :
-    RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+class HomeAdapter(private val dataSet: MutableList<Doc>, private val  callDel: (Doc) -> Unit, private val  callUpd: (Doc, Doc) -> Unit) :
+    RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     class ViewHolder(view: View, private val dataSet: MutableList<Doc> , private val  callbackDel: (Doc) -> Unit, private val  callbackUpd: (Doc, Doc) -> Unit) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.title)
