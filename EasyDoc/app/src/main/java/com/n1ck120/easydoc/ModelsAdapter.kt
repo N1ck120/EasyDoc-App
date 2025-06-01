@@ -6,21 +6,19 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
-import kotlin.String
 
-class ModelsAdapter(private val dataSet1: Array<String>,private val dataSet2: Array<String>) :
+class ModelsAdapter(private val dataSet1: List<DocModel>, private val dataSet2: List<DocModel>) :
     RecyclerView.Adapter<ModelsAdapter.ViewHolder>() {
 
-    class ViewHolder(view: View, private val dataSet:Array<String>) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View, private val dataSet:List<DocModel>) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.title)
         val desc: TextView = view.findViewById(R.id.desc)
         val card: MaterialCardView = view.findViewById(R.id.recyclerCard)
 
         init {
             card.setOnClickListener {
-                //dialog.docDialog("Editar documento",dataSet[adapterPosition].title.toString(),dataSet[adapterPosition].content.toString().toString(),"",dataSet[adapterPosition].doc_name.toString().toString())
-            }
 
+            }
         }
     }
 
@@ -38,8 +36,8 @@ class ModelsAdapter(private val dataSet1: Array<String>,private val dataSet2: Ar
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.title.text = dataSet1[position]
-        viewHolder.desc.text = dataSet2[position]
+        viewHolder.title.text = dataSet1[position].title
+        viewHolder.desc.text = dataSet2[position].description
     }
 
     // Return the size of your dataset (invoked by the layout manager)
