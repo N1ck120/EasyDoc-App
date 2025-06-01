@@ -1,5 +1,6 @@
 package com.n1ck120.easydoc
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.GridLayout.VERTICAL
@@ -34,7 +35,12 @@ class ModelsActivity : AppCompatActivity() {
 
         val dataset1 = docModel
         val dataset2 = docModel
-        val modelsAdapter = ModelsAdapter(dataset1, dataset2)
+        val modelsAdapter = ModelsAdapter(dataset1, dataset2, {
+            docPosition ->
+            val intent = Intent(this, DocEditorActivity::class.java)
+            intent.putExtra("Data", docPosition)
+            startActivity(intent)
+        })
 
         val recyclerView: RecyclerView = findViewById(R.id.recycler_models)
         recyclerView.layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
