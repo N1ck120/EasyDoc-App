@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
@@ -22,7 +23,11 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.materialswitch.MaterialSwitch
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class SettingsFragment : Fragment() {
 
@@ -30,13 +35,15 @@ class SettingsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val bottomNav : BottomNavigationView = (requireActivity() as MainActivity).bottomNavigation
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
         val gitCard = view.findViewById<MaterialCardView>(R.id.githubCard)
         val theme = view.findViewById<Button>(R.id.btnTheme)
+        val offlineSwitch = view.findViewById<MaterialSwitch>(R.id.swwitch3)
 
-        val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val homeBtn = bottomNav.menu.findItem(R.id.item_1)
+        val accountBtn = bottomNav.menu.findItem(R.id.item_3)
         val settingBtn = bottomNav.menu.findItem(R.id.item_4)
 
         homeBtn.setIcon(R.drawable.outline_insert_drive_file_24)
@@ -49,6 +56,31 @@ class SettingsFragment : Fragment() {
 
         val dataStore = SettingsDataStore.getDataStorePrefs(requireContext())
         val key = intPreferencesKey("theme")
+        val offlineMode = intPreferencesKey("offlineMode")
+
+        lifecycleScope.launch {
+            if (runBlocking { dataStore.data.first()[offlineMode] ?: 0 } == 1){
+                offlineSwitch.isChecked = true
+            }
+        }
+
+        offlineSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked){
+                lifecycleScope.launch {
+                    dataStore.edit { settings ->
+                        settings[offlineMode] = 1
+                        accountBtn.isVisible = false
+                    }
+                }
+            }else{
+                lifecycleScope.launch {
+                    dataStore.edit { settings ->
+                        settings[offlineMode] = 0
+                        accountBtn.isVisible = true
+                    }
+                }
+            }
+        }
 
         when(AppCompatDelegate.getDefaultNightMode()){
             MODE_NIGHT_FOLLOW_SYSTEM ->{

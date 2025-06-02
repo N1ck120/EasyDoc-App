@@ -37,6 +37,7 @@ class LoginActivity : AppCompatActivity() {
         val checkKeep = findViewById<CheckBox>(R.id.checkBox)
         val loginEmail = findViewById<EditText>(R.id.loginEmail)
         val loginPass = findViewById<EditText>(R.id.loginPass)
+        val intent = Intent(this,MainActivity::class.java)
 
         val lzSodium = SodiumLazy().lazySodium.sodium
 
@@ -67,7 +68,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
         btnOffline.setOnClickListener {
-            val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
             /*if (checkKeep.isChecked){
                 Toast.makeText(this, "Checkbox marcado", Toast.LENGTH_SHORT).show()
@@ -80,8 +80,13 @@ class LoginActivity : AppCompatActivity() {
         //Verifica o tema salvo no datastore e troca caso necessario
         val dataStore = SettingsDataStore.getDataStorePrefs(this)
         val key = intPreferencesKey("theme")
+        val offlineMode = intPreferencesKey("offlineMode")
         lifecycleScope.launch {
             AppCompatDelegate.setDefaultNightMode(dataStore.data.first()[key] ?: MODE_NIGHT_FOLLOW_SYSTEM)
+            if ((dataStore.data.first()[offlineMode] ?: 0) == 1){
+                startActivity(intent)
+                finish()
+            }
         }
     }
 }
