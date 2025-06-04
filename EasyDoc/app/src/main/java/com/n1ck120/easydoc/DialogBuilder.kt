@@ -81,14 +81,18 @@ class DialogBuilder(private val context: Context, private val callback1: (Doc) -
         }
 
         generateBtn.setOnClickListener {
-            doc.generateDoc(
-                titleDoc.text.toString(),
-                contentDoc.text.toString(),
-                workerDoc.text.toString(),
-                outputDoc.text.toString(),
-                typeDoc.checkedRadioButtonId,
-                context)
-            dialog.dismiss()
+            if (outputDoc.text.toString().contains(Regex("^[A-Za-z0-9._%+-]"))){
+                doc.generateDoc(
+                    titleDoc.text.toString(),
+                    contentDoc.text.toString(),
+                    workerDoc.text.toString(),
+                    outputDoc.text.toString(),
+                    typeDoc.checkedRadioButtonId,
+                    context)
+                dialog.dismiss()
+            }else{
+                outputDoc.error = "O nome contém caracteres inválidos!"
+            }
         }
         dialog.show()
     }

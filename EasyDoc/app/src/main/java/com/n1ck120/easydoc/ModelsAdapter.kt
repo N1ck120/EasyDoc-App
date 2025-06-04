@@ -10,7 +10,7 @@ import com.google.android.material.card.MaterialCardView
 class ModelsAdapter(private val dataSet1: List<DocModel>, private val dataSet2: List<DocModel>, private val  docPosition: (Int) -> Unit) :
     RecyclerView.Adapter<ModelsAdapter.ViewHolder>() {
 
-    class ViewHolder(view: View, private val dataSet:List<DocModel>, docPosition1: (Int) -> Unit) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View,  docPosition1: (Int) -> Unit) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.title)
         val desc: TextView = view.findViewById(R.id.desc)
         val card: MaterialCardView = view.findViewById(R.id.recyclerCard)
@@ -28,7 +28,7 @@ class ModelsAdapter(private val dataSet1: List<DocModel>, private val dataSet2: 
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.recycler_models_layout, viewGroup, false)
 
-        return ViewHolder(view, dataSet1, docPosition)
+        return ViewHolder(view, docPosition)
     }
 
     // Replace the contents of a view (invoked by the layout manager)

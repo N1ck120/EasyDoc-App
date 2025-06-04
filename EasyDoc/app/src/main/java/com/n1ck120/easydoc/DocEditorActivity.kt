@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kotlinx.serialization.json.Json
+import kotlin.reflect.KProperty1
 import kotlin.reflect.full.memberProperties
 
 class DocEditorActivity : AppCompatActivity() {
@@ -42,22 +43,20 @@ class DocEditorActivity : AppCompatActivity() {
             fieldList.add(prop.name)
         }
 
-        fun test(){
+        fun iterateModel(classe : Any){
             var count = 0
             while (count < fieldList.size) {
-                val property = DocModel::class.memberProperties.find { it.name == fieldList[count] }
+                val property = classe::class.memberProperties.find { it.name == fieldList[count] } as? KProperty1<Any, *>
                 val propName = property?.name.toString()
-                val value = property?.get(docModel)
-                if (value is String && propName != "title" && propName != "type" && propName != "description"){
+                val valor = property?.get(classe)
+                if (valor is String && propName != "title" && propName != "type" && propName != "description"){
                     val textField = EditText(this)
                     textField.hint = propName.replaceFirst(propName.first(), propName.first().uppercaseChar()).replace("_", " ")
                     linear.addView(textField)
-                }else{
-
                 }
                 count++
             }
         }
-        test()
+        iterateModel(docModel)
     }
 }
