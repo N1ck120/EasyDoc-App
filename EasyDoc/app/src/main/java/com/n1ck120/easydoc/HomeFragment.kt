@@ -9,9 +9,12 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ScrollView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.badge.BadgeDrawable.TOP_START
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
@@ -30,6 +33,13 @@ class HomeFragment : Fragment() {
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
 
         val createDoc = view.findViewById<FloatingActionButton>(R.id.floatingActionButton)
+
+        /*
+        val badge = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation).getOrCreateBadge(R.id.item_1)
+        badge.badgeGravity = TOP_START
+        badge.backgroundColor = ContextCompat.getColor(requireContext(), R.color.md_theme_primary)
+        badge.badgeTextColor = ContextCompat.getColor(requireContext(), R.color.md_theme_primaryContainer)
+        */
 
         try {
             db = (requireActivity() as MainActivity).db
@@ -104,10 +114,13 @@ class HomeFragment : Fragment() {
                 })
                 recyclerView.layoutManager = LinearLayoutManager(requireContext())
                 recyclerView.adapter = homeAdapter
+                //badge.number = dataset.size
                 if (recyclerView.adapter?.itemCount.toString().toInt() > 0) {
                     nothing.visibility = GONE
+                    //badge.isVisible = true
                 }else{
                     nothing.visibility = VISIBLE
+                    //badge.isVisible = false
                 }
             }
         }

@@ -2,12 +2,15 @@ package com.n1ck120.easydoc
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kotlinx.serialization.json.Json
+import kotlin.reflect.full.memberProperties
 
 class DocEditorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,18 +22,42 @@ class DocEditorActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val linear = findViewById<LinearLayout>(R.id.linear)
         val jsonString = assets.open("doc_models.json").bufferedReader().use { it.readText() }
         val documentModels = Json.decodeFromString<DocumentModels>(jsonString)
         val docModel = documentModels.documents[intent.getIntExtra("Data", 0)]
 
-        val teste = findViewById<TextView>(R.id.modelTitle)
+        val title = findViewById<TextView>(R.id.modelTitle)
         val backBtn = findViewById<Button>(R.id.backButton)
+
+        title.text = docModel.title
 
         backBtn.setOnClickListener {
             finish()
         }
 
-        teste.text = docModel.title
+        var fieldList = mutableListOf<String>()
+        for (prop in DocModel::class.memberProperties) {
+            fieldList.add(prop.name)
+        }
 
+        fun test(){
+            var count = 0
+            while (count < fieldList.size) {
+                val property = DocModel::class.memberProperties.find { it.name == fieldList[count] }
+                val propName = property?.name.toString()
+                val value = property?.get(docModel)
+                if (value is String && propName != "title" && propName != "type" && propName != "description"){
+                    val textField = EditText(this)
+                    textField.hint = propName.replaceFirst(propName.first(), propName.first().uppercaseChar()).replace("_", " ")
+                    linear.addView(textField)
+                }else{
+
+                }
+                count++
+            }
+        }
+        test()
     }
 }

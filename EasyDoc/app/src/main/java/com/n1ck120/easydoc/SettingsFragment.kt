@@ -15,11 +15,13 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.core.net.toUri
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.badge.BadgeDrawable.TOP_START
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -31,16 +33,36 @@ import kotlinx.coroutines.runBlocking
 
 class SettingsFragment : Fragment() {
 
+    lateinit var db : AppDatabase
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val bottomNav : BottomNavigationView = (requireActivity() as MainActivity).bottomNavigation
-        // Inflate the layout for this fragment
+        //val db = (requireActivity() as MainActivity).db
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
         val gitCard = view.findViewById<MaterialCardView>(R.id.githubCard)
         val theme = view.findViewById<Button>(R.id.btnTheme)
         val offlineSwitch = view.findViewById<MaterialSwitch>(R.id.swwitch3)
+
+        /*
+        val badge = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation).getOrCreateBadge(R.id.item_1)
+        badge.badgeGravity = TOP_START
+        badge.backgroundColor = ContextCompat.getColor(requireContext(), R.color.md_theme_primary)
+        badge.badgeTextColor = ContextCompat.getColor(requireContext(), R.color.md_theme_primaryContainer)
+
+        lifecycleScope.launch {
+            db.userDao().getAll().collect { docs ->
+                val dataset = mutableListOf<Doc>()
+                val iterator = docs.listIterator()
+                while (iterator.hasNext()){
+                    dataset.add(iterator.next())
+                    badge.number = dataset.size
+                }
+            }
+        }
+       */
 
         val homeBtn = bottomNav.menu.findItem(R.id.item_1)
         val accountBtn = bottomNav.menu.findItem(R.id.item_3)
