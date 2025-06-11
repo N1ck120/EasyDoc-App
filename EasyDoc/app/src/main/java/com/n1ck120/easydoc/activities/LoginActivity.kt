@@ -1,4 +1,4 @@
-package com.n1ck120.easydoc
+package com.n1ck120.easydoc.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,16 +9,17 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-import androidx.compose.ui.text.toLowerCase
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.lifecycle.lifecycleScope
+import com.n1ck120.easydoc.R
+import com.n1ck120.easydoc.activities.SignUpActivity
+import com.n1ck120.easydoc.core.crypto.SodiumLazy
+import com.n1ck120.easydoc.database.datastore.SettingsDataStore
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import kotlin.text.Regex
 
 class LoginActivity : AppCompatActivity() {
 
@@ -37,12 +38,12 @@ class LoginActivity : AppCompatActivity() {
         val checkKeep = findViewById<CheckBox>(R.id.checkBox)
         val loginEmail = findViewById<EditText>(R.id.loginEmail)
         val loginPass = findViewById<EditText>(R.id.loginPass)
-        val intent = Intent(this,MainActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
 
         val lzSodium = SodiumLazy().lazySodium.sodium
 
         btnSignup.setOnClickListener {
-            val intent = Intent(this,SignUpActivity::class.java)
+            val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -82,7 +83,7 @@ class LoginActivity : AppCompatActivity() {
         val key = intPreferencesKey("theme")
         val offlineMode = intPreferencesKey("offlineMode")
         lifecycleScope.launch {
-            AppCompatDelegate.setDefaultNightMode(dataStore.data.first()[key] ?: MODE_NIGHT_FOLLOW_SYSTEM)
+            AppCompatDelegate.setDefaultNightMode(dataStore.data.first()[key] ?: AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             if ((dataStore.data.first()[offlineMode] ?: 0) == 1){
                 startActivity(intent)
                 finish()

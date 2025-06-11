@@ -1,4 +1,4 @@
-package com.n1ck120.easydoc
+package com.n1ck120.easydoc.utils
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,6 +7,9 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
+import com.n1ck120.easydoc.core.document.DocumentGen
+import com.n1ck120.easydoc.R
+import com.n1ck120.easydoc.database.room.Doc
 import java.time.LocalDateTime
 
 class DialogBuilder(private val context: Context, private val callback1: (Doc) -> Unit, private val callback2: (Boolean) -> Unit){

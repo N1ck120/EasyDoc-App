@@ -1,4 +1,4 @@
-package com.n1ck120.easydoc
+package com.n1ck120.easydoc.core.document
 
 import kotlinx.serialization.Serializable
 

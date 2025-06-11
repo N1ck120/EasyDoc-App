@@ -1,4 +1,4 @@
-package com.n1ck120.easydoc
+package com.n1ck120.easydoc.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import com.n1ck120.easydoc.utils.DialogBuilder
+import com.n1ck120.easydoc.activities.LoginActivity
+import com.n1ck120.easydoc.R
 
 class AccountFragment : Fragment() {
 
@@ -19,15 +22,15 @@ class AccountFragment : Fragment() {
         val logout = view.findViewById<Button>(R.id.btnLogout)
         val login = view.findViewById<Button>(R.id.btnLoginRedirect)
 
-        val dialog = DialogBuilder(view.context, {}, { a->
-            if (a == true){
+        val dialog = DialogBuilder(view.context, {}, { a ->
+            if (a == true) {
                 //TODO() Função apagar token
                 activity?.finish()
             }
         })
 
-        val dialog1 = DialogBuilder(view.context, {}, { a->
-            if (a == true){
+        val dialog1 = DialogBuilder(view.context, {}, { a ->
+            if (a == true) {
                 activity?.finish()
             }
         })
@@ -42,7 +45,7 @@ class AccountFragment : Fragment() {
         }
 
         login.setOnClickListener{
-            val intent = Intent(this.context,LoginActivity::class.java)
+            val intent = Intent(this.context, LoginActivity::class.java)
             startActivity(intent)
             activity?.finish()
         }

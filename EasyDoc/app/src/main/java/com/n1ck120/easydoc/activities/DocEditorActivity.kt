@@ -1,4 +1,4 @@
-package com.n1ck120.easydoc
+package com.n1ck120.easydoc.activities
 
 import android.os.Bundle
 import android.widget.Button
@@ -9,6 +9,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.n1ck120.easydoc.core.document.DocModel
+import com.n1ck120.easydoc.core.document.DocumentModels
+import com.n1ck120.easydoc.R
 import kotlinx.serialization.json.Json
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.memberProperties
@@ -26,7 +29,7 @@ class DocEditorActivity : AppCompatActivity() {
 
         val linear = findViewById<LinearLayout>(R.id.linear)
         val jsonString = assets.open("doc_models.json").bufferedReader().use { it.readText() }
-        val documentModels = Json.decodeFromString<DocumentModels>(jsonString)
+        val documentModels = Json.Default.decodeFromString<DocumentModels>(jsonString)
         val docModel = documentModels.documents[intent.getIntExtra("Data", 0)]
 
         val title = findViewById<TextView>(R.id.modelTitle)

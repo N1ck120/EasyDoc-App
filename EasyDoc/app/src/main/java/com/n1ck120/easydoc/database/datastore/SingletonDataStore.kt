@@ -1,4 +1,4 @@
-package com.n1ck120.easydoc
+package com.n1ck120.easydoc.database.datastore
 
 import android.content.Context
 import androidx.datastore.core.DataStore

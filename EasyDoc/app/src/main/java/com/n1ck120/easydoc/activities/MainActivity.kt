@@ -1,10 +1,9 @@
-package com.n1ck120.easydoc
+package com.n1ck120.easydoc.activities
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.datastore.preferences.core.intPreferencesKey
@@ -13,6 +12,13 @@ import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.n1ck120.easydoc.R
+import com.n1ck120.easydoc.database.datastore.SettingsDataStore
+import com.n1ck120.easydoc.database.room.AppDatabase
+import com.n1ck120.easydoc.fragments.AccountFragment
+import com.n1ck120.easydoc.fragments.DocsFragment
+import com.n1ck120.easydoc.fragments.HomeFragment
+import com.n1ck120.easydoc.fragments.SettingsFragment
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
@@ -98,7 +104,7 @@ class MainActivity : AppCompatActivity() {
         val key = intPreferencesKey("theme")
         val offlineMode = intPreferencesKey("offlineMode")
         lifecycleScope.launch {
-            AppCompatDelegate.setDefaultNightMode(dataStore.data.first()[key] ?: MODE_NIGHT_FOLLOW_SYSTEM)
+            AppCompatDelegate.setDefaultNightMode(dataStore.data.first()[key] ?: AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             if ((dataStore.data.first()[offlineMode] ?: 0) == 1){
                 accountBtn.isVisible = false
             }else{

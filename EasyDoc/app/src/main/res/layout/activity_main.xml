@@ -7,11 +7,11 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:name="com.n1ck120.easydoc.HomeFragment"
+        android:name="com.n1ck120.easydoc.fragments.HomeFragment"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp" />

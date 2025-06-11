@@ -1,4 +1,4 @@
-package com.n1ck120.easydoc
+package com.n1ck120.easydoc.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
+import com.n1ck120.easydoc.core.document.DocModel
+import com.n1ck120.easydoc.R
 
 class ModelsAdapter(private val dataSet1: List<DocModel>, private val dataSet2: List<DocModel>, private val  docPosition: (Int) -> Unit) :
     RecyclerView.Adapter<ModelsAdapter.ViewHolder>() {

@@ -1,4 +1,4 @@
-package com.n1ck120.easydoc
+package com.n1ck120.easydoc.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,11 +7,14 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
+import com.n1ck120.easydoc.R
+import com.n1ck120.easydoc.database.room.Doc
+import com.n1ck120.easydoc.utils.DialogBuilder
 
 class HomeAdapter(private val dataSet: MutableList<Doc>, private val  callDel: (Doc) -> Unit, private val  callUpd: (Doc, Doc) -> Unit) :
     RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
-    class ViewHolder(view: View, private val dataSet: MutableList<Doc> , private val  callbackDel: (Doc) -> Unit, private val  callbackUpd: (Doc, Doc) -> Unit) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View, private val dataSet: MutableList<Doc>, private val  callbackDel: (Doc) -> Unit, private val  callbackUpd: (Doc, Doc) -> Unit) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.title)
         val content: TextView = view.findViewById(R.id.content)
         val date: TextView = view.findViewById(R.id.modDate)
@@ -19,10 +22,10 @@ class HomeAdapter(private val dataSet: MutableList<Doc>, private val  callDel: (
         val delete: Button = view.findViewById(R.id.deleteButton)
 
         init {
-            val dialog = DialogBuilder(view.context, {doc ->
-                callbackUpd(dataSet[adapterPosition],doc)
-            },{a ->
-                if (a ==true){
+            val dialog = DialogBuilder(view.context, { doc ->
+                callbackUpd(dataSet[adapterPosition], doc)
+            }, { a ->
+                if (a == true) {
                     callbackDel(dataSet[adapterPosition])
                 }
             })

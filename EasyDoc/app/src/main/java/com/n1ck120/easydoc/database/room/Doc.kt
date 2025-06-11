@@ -1,4 +1,4 @@
-package com.n1ck120.easydoc
+package com.n1ck120.easydoc.database.room
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

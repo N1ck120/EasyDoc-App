@@ -1,9 +1,8 @@
-package com.n1ck120.easydoc
+package com.n1ck120.easydoc.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View.INVISIBLE
-import android.view.View.VISIBLE
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -11,12 +10,13 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.lifecycle.lifecycleScope
+import com.n1ck120.easydoc.R
+import com.n1ck120.easydoc.database.datastore.SettingsDataStore
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
@@ -38,7 +38,7 @@ class SignUpActivity : AppCompatActivity() {
         val message = findViewById<TextView>(R.id.textView10)
 
         btnLogin.setOnClickListener {
-            val intent = Intent(this,LoginActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -51,24 +51,24 @@ class SignUpActivity : AppCompatActivity() {
 
         signupPass1.doAfterTextChanged {
             if (signupPass1.text.toString().length < 8){
-                message.visibility = VISIBLE
+                message.visibility = View.VISIBLE
                 message.text = "A senha deve conter ao menos 8 caracteres"
             }else{
                 if (signupPass1.text.isNullOrBlank() || signupPass1.text.toString().contains(" ")){
-                    message.visibility = VISIBLE
+                    message.visibility = View.VISIBLE
                     message.text = "Senha inválida a senha não pode conter espaços"
                 }else{
-                    message.visibility = INVISIBLE
+                    message.visibility = View.INVISIBLE
                 }
             }
         }
 
         signupPass2.doAfterTextChanged {
             if (signupPass1.text.toString() != signupPass2.text.toString()){
-                message.visibility = VISIBLE
+                message.visibility = View.VISIBLE
                 message.text = "As senhas não coincidem!"
             }else{
-                message.visibility = INVISIBLE
+                message.visibility = View.INVISIBLE
             }
         }
 
@@ -87,7 +87,7 @@ class SignUpActivity : AppCompatActivity() {
                         }else{
                             //TODO() Função de cadastro aqui
                             Toast.makeText(this, "Cadastrado com sucesso!", Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this,LoginActivity::class.java)
+                            val intent = Intent(this, LoginActivity::class.java)
                             startActivity(intent)
                             finish()
                         }
@@ -100,7 +100,7 @@ class SignUpActivity : AppCompatActivity() {
         val dataStore = SettingsDataStore.getDataStorePrefs(this)
         val key = intPreferencesKey("theme")
         lifecycleScope.launch {
-            AppCompatDelegate.setDefaultNightMode(dataStore.data.first()[key] ?: MODE_NIGHT_FOLLOW_SYSTEM)
+            AppCompatDelegate.setDefaultNightMode(dataStore.data.first()[key] ?: AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         }
     }
 }

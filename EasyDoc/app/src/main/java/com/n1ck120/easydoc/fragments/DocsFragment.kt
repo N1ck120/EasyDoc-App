@@ -1,4 +1,4 @@
-package com.n1ck120.easydoc
+package com.n1ck120.easydoc.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.card.MaterialCardView
+import com.n1ck120.easydoc.activities.ConverterActivity
+import com.n1ck120.easydoc.activities.EditorActivity
+import com.n1ck120.easydoc.activities.ModelsActivity
+import com.n1ck120.easydoc.R
 
 class DocsFragment : Fragment() {
 

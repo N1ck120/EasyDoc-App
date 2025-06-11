@@ -1,4 +1,4 @@
-package com.n1ck120.easydoc
+package com.n1ck120.easydoc.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,14 +9,17 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ScrollView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.badge.BadgeDrawable.TOP_START
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
+import com.n1ck120.easydoc.database.room.AppDatabase
+import com.n1ck120.easydoc.utils.DialogBuilder
+import com.n1ck120.easydoc.database.room.Doc
+import com.n1ck120.easydoc.adapters.HomeAdapter
+import com.n1ck120.easydoc.activities.MainActivity
+import com.n1ck120.easydoc.R
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 
@@ -67,9 +70,8 @@ class HomeFragment : Fragment() {
                 while (iterator.hasNext()){
                     dataset.add(iterator.next())
                 }
-                val homeAdapter = HomeAdapter(dataset, callDel = {
-                        docDel ->
-                    val a =lifecycleScope.launch {
+                val homeAdapter = HomeAdapter(dataset, callDel = { docDel ->
+                    val a = lifecycleScope.launch {
                         db.userDao().delete(docDel)
                     }
                     a.invokeOnCompletion {
@@ -82,31 +84,38 @@ class HomeFragment : Fragment() {
                             .show()
                     }
 
-                }, callUpd = {
-                        docUpd1, docUpd2 ->
-                    val a =lifecycleScope.launch {
-                        var data : String
-                        if (LocalDateTime.now().dayOfMonth < 10){
+                }, callUpd = { docUpd1, docUpd2 ->
+                    val a = lifecycleScope.launch {
+                        var data: String
+                        if (LocalDateTime.now().dayOfMonth < 10) {
                             data = "0" + LocalDateTime.now().dayOfMonth.toString()
-                        }else{
+                        } else {
                             data = LocalDateTime.now().dayOfMonth.toString()
                         }
-                        if (LocalDateTime.now().monthValue < 10){
-                            data = data + "/0" + LocalDateTime.now().monthValue.toString() + "/" + LocalDateTime.now().year.toString()
-                        }else{
-                            data = data + "/" + LocalDateTime.now().monthValue.toString() + "/" + LocalDateTime.now().year.toString()
+                        if (LocalDateTime.now().monthValue < 10) {
+                            data =
+                                data + "/0" + LocalDateTime.now().monthValue.toString() + "/" + LocalDateTime.now().year.toString()
+                        } else {
+                            data =
+                                data + "/" + LocalDateTime.now().monthValue.toString() + "/" + LocalDateTime.now().year.toString()
                         }
-                        if (LocalDateTime.now().hour < 10){
+                        if (LocalDateTime.now().hour < 10) {
                             data = data + " às 0" + LocalDateTime.now().hour.toString()
-                        }else{
+                        } else {
                             data = data + " às " + LocalDateTime.now().hour.toString()
                         }
-                        if (LocalDateTime.now().minute < 10){
+                        if (LocalDateTime.now().minute < 10) {
                             data = data + ":0" + LocalDateTime.now().minute.toString()
-                        }else{
+                        } else {
                             data = data + ":" + LocalDateTime.now().minute.toString()
                         }
-                        db.userDao().update(docUpd1.uid, docUpd2.title.toString(), docUpd2.content.toString(), docUpd2.doc_name.toString(), data)
+                        db.userDao().update(
+                            docUpd1.uid,
+                            docUpd2.title.toString(),
+                            docUpd2.content.toString(),
+                            docUpd2.doc_name.toString(),
+                            data
+                        )
                     }
                     a.invokeOnCompletion {
                         Toast.makeText(view.context, "Atualizado", Toast.LENGTH_SHORT).show()

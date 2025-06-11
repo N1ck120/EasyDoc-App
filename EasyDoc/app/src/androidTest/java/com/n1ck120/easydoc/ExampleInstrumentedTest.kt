@@ -3,6 +3,7 @@ package com.n1ck120.easydoc
 import android.os.Environment
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.n1ck120.easydoc.core.document.DocumentGen
 
 import org.junit.Test
 import org.junit.runner.RunWith
