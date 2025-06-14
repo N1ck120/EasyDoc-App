@@ -1,6 +1,7 @@
 <p align="center">
   <picture>
-    <source srcset="EasyDoc/app/src/main/res/drawable/logo.png" width="200px">
+    <source media="(prefers-color-scheme: dark)" srcset="EasyDoc/app/src/main/res/drawable-night/logo.png" width="200px">
+    <source media="(prefers-color-scheme: light)" srcset="EasyDoc/app/src/main/res/drawable/logo.png" width="200px">
     <img alt="Logo do projeto.">
   </picture>
 </p>
