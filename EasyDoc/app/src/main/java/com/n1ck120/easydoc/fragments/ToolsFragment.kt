@@ -8,18 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.card.MaterialCardView
 import com.n1ck120.easydoc.activities.ConverterActivity
-import com.n1ck120.easydoc.activities.EditorActivity
+import com.n1ck120.easydoc.activities.CleanerActivity
 import com.n1ck120.easydoc.activities.ModelsActivity
 import com.n1ck120.easydoc.R
 
-class DocsFragment : Fragment() {
+class ToolsFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_docs, container, false)
+        val view = inflater.inflate(R.layout.fragment_tools, container, false)
         val models = view.findViewById<MaterialCardView>(R.id.doc_models)
         val converter = view.findViewById<MaterialCardView>(R.id.doc_converter)
         val editor = view.findViewById<MaterialCardView>(R.id.doc_mdeditor)
@@ -35,7 +35,7 @@ class DocsFragment : Fragment() {
         }
 
         editor.setOnClickListener {
-            val intent = Intent(requireActivity(), EditorActivity::class.java)
+            val intent = Intent(requireActivity(), CleanerActivity::class.java)
             startActivity(intent)
         }
         return view

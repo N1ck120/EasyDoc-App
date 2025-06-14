@@ -16,7 +16,7 @@
             android:name=".activities.DocEditorActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.EditorActivity"
+            android:name=".activities.CleanerActivity"
             android:exported="false" />
         <activity
             android:name=".activities.ConverterActivity"

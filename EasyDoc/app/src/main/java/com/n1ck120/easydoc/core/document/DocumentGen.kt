@@ -1,6 +1,7 @@
 package com.n1ck120.easydoc.core.document
 
 import android.content.Context
+import android.media.Image
 import android.os.Environment
 import android.view.LayoutInflater
 import android.widget.Button
@@ -27,7 +28,7 @@ object DocumentGen {
         }
     }
 
-    fun generateDocx(docTitle : String, docContent : String, docWorker : String, docName : String, context: Context?){
+    fun generateDocx(docTitle : String, docContent : String, docName : String, context: Context?){
         System.setProperty("org.apache.poi.javax.xml.stream.XMLInputFactory", "com.fasterxml.aalto.stax.InputFactoryImpl")
         System.setProperty("org.apache.poi.javax.xml.stream.XMLOutputFactory", "com.fasterxml.aalto.stax.OutputFactoryImpl")
         System.setProperty("org.apache.poi.javax.xml.stream.XMLEventFactory", "com.fasterxml.aalto.stax.EventFactoryImpl")
@@ -36,6 +37,7 @@ object DocumentGen {
         val tmpParagraph = document.createParagraph()
         val tmpRun = tmpParagraph.createRun()
 
+        tmpRun.setText(docTitle)
         tmpRun.setText(docContent)
         //tmpRun.setFontSize(18)
         document.write(FileOutputStream(File(docName)))
@@ -45,22 +47,21 @@ object DocumentGen {
         }
     }
 
-    fun generatePDF(docTitle : String, docContent : String, docWorker : String, docName : String, context: Context?){
+    fun generatePDF(docTitle : String, docContent : String, docName : String, context: Context?){
         val writer = PdfWriter(File(docName))
         val pdfDoc = PdfDocument(writer)
         val document = Document(pdfDoc)
 
         //document.setFontSize(20F)
+        document.add(Paragraph(docTitle))
         document.add(Paragraph(docContent))
-        //document.setFontSize(12F)
-        //document.add(Paragraph(contentDoc))
         document.close()
         if (context != null){
             Toast.makeText(context, "Salvo em: $docName", Toast.LENGTH_LONG).show()
         }
     }
 
-    fun generateDoc(docTitle : String, docContent : String, docWorker : String, docName : String, docType : Int, context: Context){
+    fun generateDoc(docTitle : String, docContent : String, docName : String, docType : Int, context: Context){
         val dialogView = LayoutInflater.from(context).inflate(R.layout.rename_dialog, null)
         val dialog = MaterialAlertDialogBuilder(context)
             .setView(dialogView)
@@ -76,20 +77,20 @@ object DocumentGen {
                 nameText.setText(veryEntry(docName))
                 overwriteBtn.setOnClickListener {
                     dialog.dismiss()
-                    generatePDF(docTitle, docContent, docWorker, filePath, context)
+                    generatePDF(docTitle, docContent, filePath, context)
                 }
                 renameBtn.setOnClickListener {
                     if (nameText.text.isNullOrBlank()){
                         nameText.error = "O nome não pode ser vazio"
                     }else{
                         filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString() + "/"+veryEntry(nameText.text.toString())+".pdf"
-                        generatePDF(docTitle, docContent, docWorker, filePath, context)
+                        generatePDF(docTitle, docContent, filePath, context)
                         dialog.dismiss()
                     }
                 }
                 dialog.show()
             }else{
-                generatePDF(docTitle, docContent, docWorker, filePath, context)
+                generatePDF(docTitle, docContent, filePath, context)
             }
         }else{
             var filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString() + "/"+veryEntry(docName)+".docx"
@@ -98,20 +99,20 @@ object DocumentGen {
                 nameText.setText(veryEntry(docName))
                 overwriteBtn.setOnClickListener {
                     dialog.dismiss()
-                    generateDocx(docTitle, docContent, docWorker, filePath, context)
+                    generateDocx(docTitle, docContent, filePath, context)
                 }
                 renameBtn.setOnClickListener {
                     if (nameText.text.isNullOrBlank()){
                         nameText.error = "O nome não pode ser vazio"
                     }else{
                         filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString() + "/"+veryEntry(nameText.text.toString())+".docx"
-                        generateDocx(docTitle, docContent, docWorker, filePath, context)
+                        generateDocx(docTitle, docContent, filePath, context)
                         dialog.dismiss()
                     }
                 }
                 dialog.show()
             }else{
-                generatePDF(docTitle, docContent, docWorker, filePath, context)
+                generatePDF(docTitle, docContent, filePath, context)
             }
         }
     }

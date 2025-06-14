@@ -6,14 +6,14 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.EditorActivity">
+    tools:context=".activities.CleanerActivity">
 
   <TextView
       android:id="@+id/documentText"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="16dp"
-      android:text="Editor de metadados"
+      android:text="Limpar metadados"
       android:textSize="25sp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"

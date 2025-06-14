@@ -16,7 +16,7 @@ import com.n1ck120.easydoc.R
 import com.n1ck120.easydoc.database.datastore.SettingsDataStore
 import com.n1ck120.easydoc.database.room.AppDatabase
 import com.n1ck120.easydoc.fragments.AccountFragment
-import com.n1ck120.easydoc.fragments.DocsFragment
+import com.n1ck120.easydoc.fragments.ToolsFragment
 import com.n1ck120.easydoc.fragments.HomeFragment
 import com.n1ck120.easydoc.fragments.SettingsFragment
 import kotlinx.coroutines.flow.first
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.commit {
                         setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                         if (actualFragment(supportFragmentManager.findFragmentByTag("Docs"))){
-                            replace(R.id.fragmentContainerView, DocsFragment(), "Docs")
+                            replace(R.id.fragmentContainerView, ToolsFragment(), "Docs")
                         }
                     }
                     item.setIcon(R.drawable.baseline_build_24)

@@ -17,7 +17,6 @@ class DialogBuilder(private val context: Context, private val callback1: (Doc) -
         title: String,
         docTitle: String = "",
         docContent: String = "",
-        docWorker: String = "",
         docOut: String = "",
     ){
         val dialogView = LayoutInflater.from(context).inflate(R.layout.create_doc, null)
@@ -28,7 +27,6 @@ class DialogBuilder(private val context: Context, private val callback1: (Doc) -
         val titleDialog = dialogView.findViewById<TextView>(R.id.textView)
         val titleDoc = dialogView.findViewById<TextInputEditText>(R.id.title)
         val contentDoc = dialogView.findViewById<TextInputEditText>(R.id.content)
-        val workerDoc = dialogView.findViewById<TextInputEditText>(R.id.worker)
         val outputDoc = dialogView.findViewById<TextInputEditText>(R.id.outputname)
         val typeDoc = dialogView.findViewById<RadioGroup>(R.id.groupType)
         val generateBtn = dialogView.findViewById<Button>(R.id.generatedoc)
@@ -37,7 +35,6 @@ class DialogBuilder(private val context: Context, private val callback1: (Doc) -
         titleDialog.text = title
         titleDoc.setText(docTitle)
         contentDoc.setText(docContent)
-        workerDoc.setText(docWorker)
         outputDoc.setText(docOut)
 
         val doc = DocumentGen
@@ -88,7 +85,6 @@ class DialogBuilder(private val context: Context, private val callback1: (Doc) -
                 doc.generateDoc(
                     titleDoc.text.toString(),
                     contentDoc.text.toString(),
-                    workerDoc.text.toString(),
                     outputDoc.text.toString(),
                     typeDoc.checkedRadioButtonId,
                     context)
