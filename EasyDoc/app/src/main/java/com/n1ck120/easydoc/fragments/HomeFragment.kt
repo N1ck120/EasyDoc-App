@@ -1,7 +1,6 @@
 package com.n1ck120.easydoc.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -9,17 +8,18 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ScrollView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
-import com.n1ck120.easydoc.database.room.AppDatabase
-import com.n1ck120.easydoc.utils.DialogBuilder
-import com.n1ck120.easydoc.database.room.Doc
-import com.n1ck120.easydoc.adapters.HomeAdapter
-import com.n1ck120.easydoc.activities.MainActivity
 import com.n1ck120.easydoc.R
+import com.n1ck120.easydoc.activities.MainActivity
+import com.n1ck120.easydoc.adapters.HomeAdapter
+import com.n1ck120.easydoc.database.room.AppDatabase
+import com.n1ck120.easydoc.database.room.Doc
+import com.n1ck120.easydoc.utils.DialogBuilder
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 

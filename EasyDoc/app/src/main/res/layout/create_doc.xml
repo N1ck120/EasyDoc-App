@@ -77,14 +77,14 @@
             android:layout_height="match_parent" >
 
             <RadioButton
-                android:id="@+id/radioPdf"
+                android:id="@+id/pdf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="PDF" />
 
             <RadioButton
-                android:id="@+id/radioDocx"
+                android:id="@+id/docx"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="DOCX" />
@@ -122,7 +122,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/share"
                 style="?attr/materialIconButtonOutlinedStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

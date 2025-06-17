@@ -105,19 +105,11 @@ class MainActivity : AppCompatActivity() {
         val offlineMode = intPreferencesKey("offlineMode")
         lifecycleScope.launch {
             AppCompatDelegate.setDefaultNightMode(dataStore.data.first()[key] ?: AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-            if ((dataStore.data.first()[offlineMode] ?: 0) == 1){
-                accountBtn.isVisible = false
-            }else{
-                accountBtn.isVisible = true
-            }
+            accountBtn.isVisible = (dataStore.data.first()[offlineMode] ?: 0) != 1
         }
     }
 
     private fun actualFragment(tag : Fragment?): Boolean {
-        if (tag != null && tag.isVisible){
-            return false
-        }else{
-            return true
-        }
+        return !(tag != null && tag.isVisible)
     }
 }

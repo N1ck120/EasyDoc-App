@@ -1,6 +1,7 @@
 package com.n1ck120.easydoc.utils
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.RadioGroup
@@ -31,6 +32,7 @@ class DialogBuilder(private val context: Context, private val callback1: (Doc) -
         val typeDoc = dialogView.findViewById<RadioGroup>(R.id.groupType)
         val generateBtn = dialogView.findViewById<Button>(R.id.generatedoc)
         val save = dialogView.findViewById<Button>(R.id.save)
+        val share = dialogView.findViewById<Button>(R.id.share)
 
         titleDialog.text = title
         titleDoc.setText(docTitle)
@@ -82,12 +84,36 @@ class DialogBuilder(private val context: Context, private val callback1: (Doc) -
 
         generateBtn.setOnClickListener {
             if (outputDoc.text.toString().contains(Regex("^[A-Za-z0-9._%+-]"))){
-                doc.generateDoc(
+                doc.docGenerator(
                     titleDoc.text.toString(),
                     contentDoc.text.toString(),
                     outputDoc.text.toString(),
-                    typeDoc.checkedRadioButtonId,
+                    dialogView.resources.getResourceEntryName(typeDoc.checkedRadioButtonId),//Busca o nome do ID da opção selecionada
                     context)
+                dialog.dismiss()
+            }else{
+                outputDoc.error = "O nome contém caracteres inválidos!"
+            }
+        }
+
+        share.setOnClickListener {
+            if (outputDoc.text.toString().contains(Regex("^[A-Za-z0-9._%+-]"))){
+                val uri = doc.docGenerator(
+                    titleDoc.text.toString(),
+                    contentDoc.text.toString(),
+                    outputDoc.text.toString(),
+                    dialogView.resources.getResourceEntryName(typeDoc.checkedRadioButtonId),//Busca o nome do ID da opção selecionada
+                    context)
+
+                val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                    type = "application/pdf"
+                    putExtra(Intent.EXTRA_STREAM, uri)
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                }
+
+                // Iniciar o chooser
+                context.startActivity(Intent.createChooser(shareIntent, "Compartilhar via"))
+
                 dialog.dismiss()
             }else{
                 outputDoc.error = "O nome contém caracteres inválidos!"

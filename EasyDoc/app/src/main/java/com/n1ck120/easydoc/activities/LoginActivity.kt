@@ -1,9 +1,7 @@
 package com.n1ck120.easydoc.activities
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -16,13 +14,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.lifecycle.lifecycleScope
-import com.google.android.material.snackbar.Snackbar
 import com.n1ck120.easydoc.R
-import com.n1ck120.easydoc.activities.SignUpActivity
 import com.n1ck120.easydoc.core.crypto.SodiumLazy
 import com.n1ck120.easydoc.database.datastore.SettingsDataStore
-import io.jsonwebtoken.Jwt
-import io.jsonwebtoken.Jwts
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
@@ -66,7 +60,8 @@ class LoginActivity : AppCompatActivity() {
                 if (loginPass.text.toString().isBlank() || loginPass.text.toString().length < 8 || loginPass.text.toString().contains(" ")){
                     Toast.makeText(this, "Senha inválida!", Toast.LENGTH_SHORT).show()
                 }else{
-                    if (false){
+                    
+                    /*if (false){
                         /*TODO() Função de login aqui
                         loginEmail.text.toString().lowercase()
                         */
@@ -75,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
                             .setAction("Tentar novamente"){
                             }
                             .show()
-                    }
+                    }*/
                 }
             }
         }

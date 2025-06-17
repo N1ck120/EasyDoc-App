@@ -31,37 +31,15 @@ import kotlinx.coroutines.runBlocking
 
 class SettingsFragment : Fragment() {
 
-    lateinit var db : AppDatabase
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val bottomNav : BottomNavigationView = (requireActivity() as MainActivity).bottomNavigation
-        //val db = (requireActivity() as MainActivity).db
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
         val gitCard = view.findViewById<MaterialCardView>(R.id.githubCard)
         val theme = view.findViewById<Button>(R.id.btnTheme)
         val offlineSwitch = view.findViewById<MaterialSwitch>(R.id.swwitch3)
-
-        /*
-        val badge = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation).getOrCreateBadge(R.id.item_1)
-        badge.badgeGravity = TOP_START
-        badge.backgroundColor = ContextCompat.getColor(requireContext(), R.color.md_theme_primary)
-        badge.badgeTextColor = ContextCompat.getColor(requireContext(), R.color.md_theme_primaryContainer)
-
-        lifecycleScope.launch {
-            db.userDao().getAll().collect { docs ->
-                val dataset = mutableListOf<Doc>()
-                val iterator = docs.listIterator()
-                while (iterator.hasNext()){
-                    dataset.add(iterator.next())
-                    badge.number = dataset.size
-                }
-            }
-        }
-       */
-
         val homeBtn = bottomNav.menu.findItem(R.id.item_1)
         val accountBtn = bottomNav.menu.findItem(R.id.item_3)
         val settingBtn = bottomNav.menu.findItem(R.id.item_4)
