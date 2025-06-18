@@ -13,7 +13,8 @@ import com.n1ck120.easydoc.R
 import com.n1ck120.easydoc.database.room.Doc
 import java.time.LocalDateTime
 
-class DialogBuilder(private val context: Context, private val callback1: (Doc) -> Unit, private val callback2: (Boolean) -> Unit){
+class DialogBuilder(private val context: Context, private val callback1: (Doc) -> Unit, private val callback2: (Boolean) -> Unit, private val callback3: (Doc) -> Unit){
+
     fun docDialog(
         title: String,
         docTitle: String = "",
@@ -41,7 +42,7 @@ class DialogBuilder(private val context: Context, private val callback1: (Doc) -
 
         val doc = DocumentGen
 
-        save.setOnClickListener {
+        fun getData(): String{
             var data : String
             if (LocalDateTime.now().dayOfMonth < 10){
                 data = "0" + LocalDateTime.now().dayOfMonth.toString()
@@ -63,7 +64,10 @@ class DialogBuilder(private val context: Context, private val callback1: (Doc) -
             }else{
                 data = data + ":" + LocalDateTime.now().minute.toString()
             }
+            return data
+        }
 
+        save.setOnClickListener {
             if (titleDoc.text.isNullOrBlank()){
                 titleDoc.error = "Campo obrigatório"
             }else{
@@ -74,7 +78,7 @@ class DialogBuilder(private val context: Context, private val callback1: (Doc) -
                         doc_name = outputDoc.text.toString(),
                         title = titleDoc.text.toString(),
                         content = contentDoc.text.toString(),
-                        date = data
+                        date = getData()
                     )
                     callback1(dox)
                     dialog.dismiss()
@@ -90,6 +94,13 @@ class DialogBuilder(private val context: Context, private val callback1: (Doc) -
                     outputDoc.text.toString(),
                     dialogView.resources.getResourceEntryName(typeDoc.checkedRadioButtonId),//Busca o nome do ID da opção selecionada
                     context)
+                val dox = Doc(
+                    doc_name = outputDoc.text.toString(),
+                    title = titleDoc.text.toString(),
+                    content = contentDoc.text.toString(),
+                    date = getData()
+                )
+                callback3(dox)
                 dialog.dismiss()
             }else{
                 outputDoc.error = "O nome contém caracteres inválidos!"

@@ -27,13 +27,13 @@ class AccountFragment : Fragment() {
                 //TODO() Função apagar token
                 activity?.finish()
             }
-        })
+        },{})
 
         val dialog1 = DialogBuilder(view.context, {}, { a ->
             if (a == true) {
                 activity?.finish()
             }
-        })
+        },{})
 
         logout.setOnClickListener {
             if (false){

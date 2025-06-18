@@ -28,7 +28,7 @@ class HomeAdapter(private val dataSet: MutableList<Doc>, private val  callDel: (
                 if (a == true) {
                     callbackDel(dataSet[adapterPosition])
                 }
-            })
+            },{})
 
             // Define click listener for the ViewHolder's View
             card.setOnClickListener {

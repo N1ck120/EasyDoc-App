@@ -21,10 +21,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.materialswitch.MaterialSwitch
-import com.n1ck120.easydoc.database.room.AppDatabase
 import com.n1ck120.easydoc.activities.MainActivity
 import com.n1ck120.easydoc.R
 import com.n1ck120.easydoc.database.datastore.SettingsDataStore
+import com.n1ck120.easydoc.utils.DialogBuilder
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -39,10 +39,14 @@ class SettingsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
         val gitCard = view.findViewById<MaterialCardView>(R.id.githubCard)
         val theme = view.findViewById<Button>(R.id.btnTheme)
-        val offlineSwitch = view.findViewById<MaterialSwitch>(R.id.swwitch3)
+        val offlineSwitch = view.findViewById<MaterialSwitch>(R.id.offlineMode)
+        val saveSwitch = view.findViewById<MaterialSwitch>(R.id.saveExported)
         val homeBtn = bottomNav.menu.findItem(R.id.item_1)
         val accountBtn = bottomNav.menu.findItem(R.id.item_3)
         val settingBtn = bottomNav.menu.findItem(R.id.item_4)
+        val helpBtn = view.findViewById<Button>(R.id.helpButton)
+
+        val dialog = DialogBuilder(requireContext(), {},{},{})
 
         homeBtn.setIcon(R.drawable.outline_insert_drive_file_24)
         settingBtn.setIcon(R.drawable.baseline_settings_24)
@@ -55,6 +59,13 @@ class SettingsFragment : Fragment() {
         val dataStore = SettingsDataStore.getDataStorePrefs(requireContext())
         val key = intPreferencesKey("theme")
         val offlineMode = intPreferencesKey("offlineMode")
+        val saveExported = intPreferencesKey("saveExported")
+
+        lifecycleScope.launch {
+            if (runBlocking { dataStore.data.first()[saveExported] ?: 1 } == 0){
+                saveSwitch.isChecked = false
+            }
+        }
 
         lifecycleScope.launch {
             if (runBlocking { dataStore.data.first()[offlineMode] ?: 0 } == 1){
@@ -75,6 +86,22 @@ class SettingsFragment : Fragment() {
                     dataStore.edit { settings ->
                         settings[offlineMode] = 0
                         accountBtn.isVisible = true
+                    }
+                }
+            }
+        }
+
+        saveSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked){
+                lifecycleScope.launch {
+                    dataStore.edit { settings ->
+                        settings[saveExported] = 1
+                    }
+                }
+            }else{
+                lifecycleScope.launch {
+                    dataStore.edit { settings ->
+                        settings[saveExported] = 0
                     }
                 }
             }
@@ -160,6 +187,10 @@ class SettingsFragment : Fragment() {
                 dialog.dismiss()
             }
             dialog.show()
+        }
+
+        helpBtn.setOnClickListener {
+            dialog.genericDialog("Ajuda","Tema do app: Define o esquema de cores que será usado por todo o aplicativo. \n\n Manter logado: Mantém sua sessão ativa removendo a necessidade de fazer login a cada vez que abre o app(esta opção só é habilitada quando logado). \n\n Sincronização automática: Baixa e Atualiza os documentos salvos na nuvem automaticamente. \n\n Modo offline: Desabilita todas as funcionalidades que dependem de internet e loga automaticamente no modo offline. \n\n Salvar ao exportar: Ao exportar um documento o mesmo será salvo na tela inicial.",requireContext(),"Entendi", null)
         }
         return view
     }

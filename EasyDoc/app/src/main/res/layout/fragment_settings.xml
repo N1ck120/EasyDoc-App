@@ -18,6 +18,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/helpButton"
+        style="?attr/materialIconButtonFilledTonalStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        app:icon="@drawable/round_help_24"
+        app:layout_constraintBottom_toBottomOf="@+id/settingsText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/settingsText" />
+
     <com.google.android.material.card.MaterialCardView
         style="?attr/materialCardViewFilledStyle"
         android:layout_width="match_parent"
@@ -81,7 +92,7 @@
                         android:background="?android:attr/listDivider" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
-                        android:id="@+id/switch2"
+                        android:id="@+id/keepLogin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -96,7 +107,7 @@
                         android:background="?android:attr/listDivider" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
-                        android:id="@+id/switch3"
+                        android:id="@+id/autoSync"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -112,7 +123,7 @@
                         android:background="?android:attr/listDivider" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
-                        android:id="@+id/swwitch3"
+                        android:id="@+id/offlineMode"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -126,16 +137,31 @@
                         android:layout_height="1dp"
                         android:background="?android:attr/listDivider" />
 
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/saveExported"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:checked="true"
+                        android:text="Salvar ao exportar"
+                        android:textSize="16sp" />
+
+                    <View
+                        android:id="@+id/divisefwder3"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?android:attr/listDivider" />
+
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/githubCard"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginTop="80dp"
+                        android:layout_marginBottom="20dp"
                         android:checkable="true"
                         android:clickable="true"
                         android:focusable="true"
-                        android:layout_marginTop="80dp"
-                        android:layout_marginBottom="20dp"
                         app:cardCornerRadius="20dp">
 
                         <ImageView

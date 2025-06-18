@@ -8,6 +8,8 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ScrollView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,9 +19,11 @@ import com.google.android.material.snackbar.Snackbar
 import com.n1ck120.easydoc.R
 import com.n1ck120.easydoc.activities.MainActivity
 import com.n1ck120.easydoc.adapters.HomeAdapter
+import com.n1ck120.easydoc.database.datastore.SettingsDataStore
 import com.n1ck120.easydoc.database.room.AppDatabase
 import com.n1ck120.easydoc.database.room.Doc
 import com.n1ck120.easydoc.utils.DialogBuilder
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 
@@ -30,25 +34,21 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         val nothing = view.findViewById<ScrollView>(R.id.nothing)
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
 
         val createDoc = view.findViewById<FloatingActionButton>(R.id.floatingActionButton)
 
-        /*
-        val badge = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation).getOrCreateBadge(R.id.item_1)
-        badge.badgeGravity = TOP_START
-        badge.backgroundColor = ContextCompat.getColor(requireContext(), R.color.md_theme_primary)
-        badge.badgeTextColor = ContextCompat.getColor(requireContext(), R.color.md_theme_primaryContainer)
-        */
-
         try {
             db = (requireActivity() as MainActivity).db
         }catch (e : Exception){
             Toast.makeText(requireActivity(), "Erro: $e", Toast.LENGTH_SHORT).show()
         }
+
+        val dataStore = SettingsDataStore.getDataStorePrefs(requireContext())
+        val saveExported = intPreferencesKey("saveExported")
+
 
         val dialog = DialogBuilder(requireContext(), { doc ->
             val a = lifecycleScope.launch {
@@ -57,7 +57,18 @@ class HomeFragment : Fragment() {
             a.invokeOnCompletion {
                 Toast.makeText(requireContext(), "Salvo", Toast.LENGTH_SHORT).show()
             }
-        }, {})
+        }, {},{ doc ->
+            lifecycleScope.launch {
+                if ((dataStore.data.first()[saveExported] ?: 1) == 1){
+                    val a = lifecycleScope.launch {
+                        db.userDao().insertAll(doc)
+                    }
+                    a.invokeOnCompletion {
+                        Toast.makeText(requireContext(), "Salvo", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        })
 
         createDoc.setOnClickListener {
             dialog.docDialog("Criar novo documento")
@@ -123,13 +134,10 @@ class HomeFragment : Fragment() {
                 })
                 recyclerView.layoutManager = LinearLayoutManager(requireContext())
                 recyclerView.adapter = homeAdapter
-                //badge.number = dataset.size
                 if (recyclerView.adapter?.itemCount.toString().toInt() > 0) {
                     nothing.visibility = GONE
-                    //badge.isVisible = true
                 }else{
                     nothing.visibility = VISIBLE
-                    //badge.isVisible = false
                 }
             }
         }
