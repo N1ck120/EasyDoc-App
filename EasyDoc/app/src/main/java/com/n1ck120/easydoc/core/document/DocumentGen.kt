@@ -10,6 +10,7 @@ import com.itextpdf.kernel.pdf.PdfDocument
 import com.itextpdf.kernel.pdf.PdfWriter
 import com.itextpdf.layout.Document
 import com.itextpdf.layout.element.Paragraph
+import org.apache.poi.xwpf.usermodel.ParagraphAlignment
 import org.apache.poi.xwpf.usermodel.XWPFDocument
 
 object DocumentGen {
@@ -46,9 +47,12 @@ object DocumentGen {
 
                     val document = XWPFDocument()
                     val tmpParagraph = document.createParagraph()
+
+                    tmpParagraph.alignment = ParagraphAlignment.LEFT
                     val tmpRun = tmpParagraph.createRun()
 
                     tmpRun.setText(docTitle)
+
                     tmpRun.setText(docContent)
                     //tmpRun.setFontSize(18)
                     document.write(outputStream)

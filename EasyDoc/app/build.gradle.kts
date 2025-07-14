@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.n1ck120.easydoc"
-    compileSdk = 35
+    compileSdk = 36
 
     packaging {
         resources.excludes.add("META-INF/**")
@@ -70,6 +70,8 @@ dependencies {
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlin.reflect)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
     //noinspection UseTomlInstead
     implementation("net.java.dev.jna:jna:5.17.0@aar")
     //noinspection UseTomlInstead

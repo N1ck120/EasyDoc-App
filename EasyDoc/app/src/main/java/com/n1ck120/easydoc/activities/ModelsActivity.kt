@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.n1ck120.easydoc.core.document.DocumentModels
 import com.n1ck120.easydoc.adapters.ModelsAdapter
 import com.n1ck120.easydoc.R
+import com.n1ck120.easydoc.utils.DialogBuilder
 import kotlinx.serialization.json.Json
 
 class ModelsActivity : AppCompatActivity() {
@@ -26,9 +27,16 @@ class ModelsActivity : AppCompatActivity() {
             insets
         }
         val backBtn = findViewById<Button>(R.id.backButton)
+        val helpBtn = findViewById<Button>(R.id.helpButton)
+
+        val dialog = DialogBuilder(this, {},{},{})
 
         backBtn.setOnClickListener {
             finish()
+        }
+
+        helpBtn.setOnClickListener {
+            dialog.genericDialog("Ajuda","A categoria Modelos Prontos fornece diversos modelos comuns de documentos com campos predefinidos, permitindo a geração rápida de um documento formatado.",this,"Entendi",null)
         }
 
         val jsonString = assets.open("doc_models.json").bufferedReader().use { it.readText() }
