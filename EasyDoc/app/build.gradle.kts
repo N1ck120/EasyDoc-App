@@ -1,8 +1,16 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("com.google.devtools.ksp")
     kotlin("plugin.serialization")
+}
+
+kotlin{
+    compilerOptions{
+        jvmTarget.set(JvmTarget.JVM_23)
+    }
 }
 
 android {
@@ -38,9 +46,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_23
     }
 
-    kotlinOptions {
-        jvmTarget = "23"
-    }
     //Libsodium
     sourceSets["main"].jniLibs.srcDirs("src/main/jniLibs")
 
@@ -75,7 +80,7 @@ dependencies {
     //noinspection UseTomlInstead
     implementation("net.java.dev.jna:jna:5.17.0@aar")
     //noinspection UseTomlInstead
-    implementation("com.goterl:lazysodium-android:5.1.0@aar")
+    implementation("com.goterl:lazysodium-android:5.2.0@aar")
     //Room
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
