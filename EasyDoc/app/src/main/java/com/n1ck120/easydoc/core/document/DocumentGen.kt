@@ -1,5 +1,6 @@
 package com.n1ck120.easydoc.core.document
 
+import android.R
 import android.content.ContentValues
 import android.content.Context
 import android.net.Uri
@@ -41,19 +42,41 @@ object DocumentGen {
                     document.add(Paragraph(docContent))
                     document.close()
                 }else{
-                    System.setProperty("org.apache.poi.javax.xml.stream.XMLInputFactory", "com.fasterxml.aalto.stax.InputFactoryImpl")
-                    System.setProperty("org.apache.poi.javax.xml.stream.XMLOutputFactory", "com.fasterxml.aalto.stax.OutputFactoryImpl")
-                    System.setProperty("org.apache.poi.javax.xml.stream.XMLEventFactory", "com.fasterxml.aalto.stax.EventFactoryImpl")
+                    //System.setProperty("org.apache.poi.javax.xml.stream.XMLInputFactory", "com.fasterxml.aalto.stax.InputFactoryImpl")
+                    //System.setProperty("org.apache.poi.javax.xml.stream.XMLOutputFactory", "com.fasterxml.aalto.stax.OutputFactoryImpl")
+                    //System.setProperty("org.apache.poi.javax.xml.stream.XMLEventFactory", "com.fasterxml.aalto.stax.EventFactoryImpl")
 
                     val document = XWPFDocument()
                     val tmpParagraph = document.createParagraph()
 
-                    tmpParagraph.alignment = ParagraphAlignment.LEFT
+                    //tmpParagraph.alignment = ParagraphAlignment.LEFT
                     val tmpRun = tmpParagraph.createRun()
 
-                    tmpRun.setText(docTitle)
+                    if (docTitle.contains("\n")){
+                        val lines = docTitle.split("\n")
+                        var i = 0
+                        while (i < lines.size){
+                            tmpRun.setText(lines[i])
+                            tmpRun.addBreak()
+                            i++
+                        }
+                    }else{
+                        tmpRun.setText(docTitle)
+                    }
 
-                    tmpRun.setText(docContent)
+
+                    if (docContent.contains("\n")){
+                        val lines2 = docContent.split("\n")
+                        var i2 = 0
+                        while (i2 < lines2.size){
+                            tmpRun.setText(lines2[i2])
+                            tmpRun.addBreak()
+                            i2++
+                        }
+                    }else{
+                        tmpRun.setText(docContent)
+                    }
+
                     //tmpRun.setFontSize(18)
                     document.write(outputStream)
                     document.close()
