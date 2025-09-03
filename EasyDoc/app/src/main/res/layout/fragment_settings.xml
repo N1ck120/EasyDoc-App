@@ -19,6 +19,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/agreementButton"
+        style="?attr/materialIconButtonFilledTonalStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        app:icon="@drawable/round_assignment_24"
+        app:layout_constraintBottom_toBottomOf="@+id/settingsText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/settingsText" />
+
+    <Button
         android:id="@+id/helpButton"
         style="?attr/materialIconButtonFilledTonalStyle"
         android:layout_width="wrap_content"

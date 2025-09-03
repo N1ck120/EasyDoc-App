@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatDelegate
@@ -45,6 +46,7 @@ class SettingsFragment : Fragment() {
         val accountBtn = bottomNav.menu.findItem(R.id.item_3)
         val settingBtn = bottomNav.menu.findItem(R.id.item_4)
         val helpBtn = view.findViewById<Button>(R.id.helpButton)
+        val agreementBtn = view.findViewById<Button>(R.id.agreementButton)
 
         val dialog = DialogBuilder(requireContext(), {},{},{})
 
@@ -191,6 +193,20 @@ class SettingsFragment : Fragment() {
 
         helpBtn.setOnClickListener {
             dialog.genericDialog("Ajuda","Tema do app: Define o esquema de cores que será usado por todo o aplicativo. \n\n Manter logado: Mantém sua sessão ativa removendo a necessidade de fazer login a cada vez que abre o app(esta opção só é habilitada quando logado). \n\n Sincronização automática: Baixa e Atualiza os documentos salvos na nuvem automaticamente. \n\n Modo offline: Desabilita todas as funcionalidades que dependem de internet e loga automaticamente no modo offline. \n\n Salvar ao exportar: Ao exportar um documento o mesmo será salvo na tela inicial.",requireContext(),"Entendi", null)
+        }
+
+        agreementBtn.setOnClickListener {
+            val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.user_agreement_dialog, null)
+            val a = dialogView.findViewById<Button>(R.id.button3)
+            val b = dialogView.findViewById<CheckBox>(R.id.checkBox3)
+            val dialog = MaterialAlertDialogBuilder(requireContext())
+                .setView(dialogView)
+                .setTitle("Termos de uso")
+                .create()
+            a.isEnabled = false
+            b.isChecked = true
+            b.isEnabled = false
+                dialog.show()
         }
         return view
     }

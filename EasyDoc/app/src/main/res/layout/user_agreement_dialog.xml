@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_weight="40"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:text="Última atualização:
+[26/08/2025]
+1. Sobre o EasyDoc
+O EasyDoc é um aplicativo que permite ao usuário criar uma conta, armazenar e gerenciar conteúdos de texto de forma segura em nossos servidores. Nosso compromisso é oferecer praticidade com foco em segurança e privacidade.
+2. Criação de Conta
+- Para utilizar o EasyDoc, o usuário deve criar uma conta com informações verdadeiras e manter suas credenciais em sigilo.
+- As senhas são protegidas utilizando o algoritmo Argon2.
+- O usuário é responsável por todas as atividades realizadas em sua conta.
+3. Privacidade e Segurança
+- Todos os dados enviados ao EasyDoc são criptografados localmente no dispositivo do usuário antes de serem transmitidos aos servidores.
+- Nenhuma informação fornecida pelo usuário será utilizada para propaganda, venda, cessão ou finalidade comercial de terceiros.
+- Adotamos medidas técnicas e organizacionais adequadas para proteger os dados, mas não podemos garantir segurança absoluta contra incidentes fora do nosso controle.
+4. Armazenamento e Conteúdo
+- O usuário pode salvar conteúdos de texto em nossos servidores.
+- O conteúdo armazenado é de responsabilidade exclusiva do usuário, que deve garantir que não viole direitos de terceiros ou a legislação vigente.
+- Reservamo-nos o direito de remover ou suspender contas que violem estes Termos ou a lei.
+5. Uso Adequado
+Ao utilizar o EasyDoc, o usuário concorda em não:
+- Utilizar o serviço para atividades ilegais ou não autorizadas.
+- Tentar acessar dados de outros usuários.
+- Prejudicar, comprometer ou sobrecarregar os servidores e sistemas do EasyDoc.
+6. Limitação de Responsabilidade
+O EasyDoc é fornecido “como está” e “conforme disponível”. Não nos responsabilizamos por:
+- Perda de dados resultante de falhas técnicas, manutenção ou atualizações.
+- Interrupções de serviço causadas por fatores externos ao nosso controle.
+- Danos indiretos, incidentais ou consequenciais decorrentes do uso do Aplicativo.
+7. Suporte
+Em caso de dúvidas ou solicitações, o usuário pode entrar em contato com nosso suporte através do e-mail:
+📧 placeholder@placeholder.com
+8. Alterações nos Termos
+Podemos atualizar estes Termos periodicamente. Notificaremos os usuários sobre mudanças relevantes. O uso contínuo do EasyDoc após tais alterações implica na aceitação dos novos Termos.
+9. Encerramento de Conta
+O usuário pode encerrar sua conta a qualquer momento. Também podemos suspender ou excluir contas que violem estes Termos ou apresentem atividades suspeitas.
+10. Legislação Aplicável
+Estes Termos são regidos pelas leis do Brasil. Qualquer disputa será submetida ao foro da comarca do domicílio do usuário, salvo disposição legal em contrário." />
+        </LinearLayout>
+    </ScrollView>
+
+    <CheckBox
+        android:id="@+id/checkBox3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:text="Eu li e concordo com os termos de uso" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1"
+        android:enabled="false"
+        android:text="Confirmar" />
+</LinearLayout>

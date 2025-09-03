@@ -1,7 +1,9 @@
 package com.n1ck120.easydoc.activities
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -9,14 +11,19 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.AlertDialogLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doAfterTextChanged
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.n1ck120.easydoc.R
 import com.n1ck120.easydoc.core.crypto.SodiumLazy
 import com.n1ck120.easydoc.database.datastore.SettingsDataStore
+import com.n1ck120.easydoc.utils.DialogBuilder
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
@@ -31,6 +38,12 @@ class LoginActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val dataStore = SettingsDataStore.getDataStorePrefs(this)
+        val key = intPreferencesKey("theme")
+        val offlineMode = intPreferencesKey("offlineMode")
+        val accepted = booleanPreferencesKey("accepted")
+
         val btnLogin = findViewById<Button>(R.id.btnLogin)
         val btnSignup = findViewById<Button>(R.id.btnSignup)
         val btnOffline = findViewById<Button>(R.id.btnReturn)
@@ -75,6 +88,34 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+        val userAgreement = intPreferencesKey("userAgreement")
+
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.user_agreement_dialog, null)
+        val a = dialogView.findViewById<Button>(R.id.button3)
+        val b = dialogView.findViewById<CheckBox>(R.id.checkBox3)
+        val dialog = MaterialAlertDialogBuilder(this)
+            .setView(dialogView)
+            .setTitle("Termos de uso")
+            .setCancelable(false)
+            .create()
+
+        b.setOnCheckedChangeListener { buttonView, isChecked ->
+            a.isEnabled = isChecked
+        }
+        a.setOnClickListener {
+            lifecycleScope.launch {
+                dataStore.edit { preferences ->
+                    preferences[accepted] = true
+                    dialog.dismiss()
+                }
+            }
+        }
+        lifecycleScope.launch {
+            if (!(dataStore.data.first()[accepted] ?: false)){
+                dialog.show()
+            }
+        }
+
         btnOffline.setOnClickListener {
             startActivity(intent)
             /*if (checkKeep.isChecked){
@@ -86,9 +127,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
         //Verifica o tema salvo no datastore e troca caso necessario
-        val dataStore = SettingsDataStore.getDataStorePrefs(this)
-        val key = intPreferencesKey("theme")
-        val offlineMode = intPreferencesKey("offlineMode")
         lifecycleScope.launch {
             AppCompatDelegate.setDefaultNightMode(dataStore.data.first()[key] ?: AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             if ((dataStore.data.first()[offlineMode] ?: 0) == 1){
