@@ -71,7 +71,7 @@ class HomeFragment : Fragment() {
         })
 
         createDoc.setOnClickListener {
-            dialog.docDialog("Criar novo documento")
+            dialog.docDialog(getString(R.string.create_a_new_document))
         }
 
         lifecycleScope.launch {

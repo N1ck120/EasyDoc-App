@@ -45,18 +45,18 @@ class SignUpActivity : AppCompatActivity() {
 
         signupEmail.setOnFocusChangeListener { view, hasFocus ->
             if (!hasFocus && !signupEmail.text.toString().contains(Regex("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"))){
-                signupEmail.error = "Email inválido!"
+                signupEmail.error = getString(R.string.email_invalid)
             }
         }
 
         signupPass1.doAfterTextChanged {
             if (signupPass1.text.toString().length < 8){
                 message.visibility = View.VISIBLE
-                message.text = "A senha deve conter ao menos 8 caracteres"
+                message.text = getString(R.string.invalid_password_length)
             }else{
                 if (signupPass1.text.isNullOrBlank() || signupPass1.text.toString().contains(" ")){
                     message.visibility = View.VISIBLE
-                    message.text = "Senha inválida a senha não pode conter espaços"
+                    message.text = getString(R.string.invalid_password_character)
                 }else{
                     message.visibility = View.INVISIBLE
                 }
@@ -66,7 +66,7 @@ class SignUpActivity : AppCompatActivity() {
         signupPass2.doAfterTextChanged {
             if (signupPass1.text.toString() != signupPass2.text.toString()){
                 message.visibility = View.VISIBLE
-                message.text = "As senhas não coincidem!"
+                message.text = getString(R.string.password_mismatch)
             }else{
                 message.visibility = View.INVISIBLE
             }
@@ -74,19 +74,20 @@ class SignUpActivity : AppCompatActivity() {
 
         btnSignup.setOnClickListener {
             if (!signupEmail.text.toString().contains(Regex("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"))){
-                Toast.makeText(this, "Email inválido!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.invalid_email), Toast.LENGTH_SHORT).show()
             }else{
                 if (signupPass1.text.toString().length < 8){
-                    Toast.makeText(this, "A senha deve conter ao menos 8 caracteres", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.invalid_password_length), Toast.LENGTH_SHORT).show()
                 }else{
                     if (signupPass1.text.isNullOrBlank() || signupPass1.text.toString().contains(" ")){
-                        Toast.makeText(this, "Senha inválida a senha não pode conter espaços", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, getString(R.string.invalid_password_character), Toast.LENGTH_SHORT).show()
                     }else{
                         if (signupPass1.text.toString() != signupPass2.text.toString()){
-                            Toast.makeText(this, "As senhas não coincidem!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, getString(R.string.password_mismatch), Toast.LENGTH_SHORT).show()
                         }else{
                             //TODO() Função de cadastro aqui
-                            Toast.makeText(this, "Cadastrado com sucesso!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this,
+                                getString(R.string.successfully_registered), Toast.LENGTH_SHORT).show()
                             val intent = Intent(this, LoginActivity::class.java)
                             startActivity(intent)
                             finish()

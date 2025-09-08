@@ -23,14 +23,14 @@ class AccountFragment : Fragment() {
         val login = view.findViewById<Button>(R.id.btnLoginRedirect)
 
         val dialog = DialogBuilder(view.context, {}, { a ->
-            if (a == true) {
+            if (a) {
                 //TODO() Função apagar token
                 activity?.finish()
             }
         },{})
 
         val dialog1 = DialogBuilder(view.context, {}, { a ->
-            if (a == true) {
+            if (a) {
                 activity?.finish()
             }
         },{})

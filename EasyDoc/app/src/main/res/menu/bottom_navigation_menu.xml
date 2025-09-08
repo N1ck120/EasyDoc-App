@@ -3,20 +3,20 @@
         android:id="@+id/item_1"
         android:enabled="true"
         android:icon="@drawable/baseline_insert_drive_file_24"
-        android:title="Documentos" />
+        android:title="@string/documents" />
     <item
         android:id="@+id/item_2"
         android:enabled="true"
         android:icon="@drawable/outline_build_24"
-        android:title="Toolbox" />
+        android:title="@string/toolbox" />
     <item
         android:id="@+id/item_3"
         android:enabled="true"
         android:icon="@drawable/outline_account_circle_24"
-        android:title="Conta"/>
+        android:title="@string/account"/>
     <item
         android:id="@+id/item_4"
         android:enabled="true"
         android:icon="@drawable/outline_settings_24"
-        android:title="Configurações"/>
+        android:title="@string/settings"/>
 </menu>

@@ -41,7 +41,7 @@ class DocEditorActivity : AppCompatActivity() {
             finish()
         }
 
-        var fieldList = mutableListOf<String>()
+        val fieldList = mutableListOf<String>()
         for (prop in DocModel::class.memberProperties) {
             fieldList.add(prop.name)
         }

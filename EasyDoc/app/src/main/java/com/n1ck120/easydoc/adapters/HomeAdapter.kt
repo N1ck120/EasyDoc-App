@@ -23,16 +23,16 @@ class HomeAdapter(private val dataSet: MutableList<Doc>, private val  callDel: (
 
         init {
             val dialog = DialogBuilder(view.context, { doc ->
-                callbackUpd(dataSet[adapterPosition], doc)
+                callbackUpd(dataSet[absoluteAdapterPosition], doc)
             }, { a ->
                 if (a == true) {
-                    callbackDel(dataSet[adapterPosition])
+                    callbackDel(dataSet[absoluteAdapterPosition])
                 }
             },{})
 
             // Define click listener for the ViewHolder's View
             card.setOnClickListener {
-                dialog.docDialog("Editar documento",dataSet[adapterPosition].title.toString(),dataSet[adapterPosition].content.toString().toString(),dataSet[adapterPosition].doc_name.toString().toString())
+                dialog.docDialog("Editar documento",dataSet[absoluteAdapterPosition].title.toString(),dataSet[absoluteAdapterPosition].content.toString().toString(),dataSet[absoluteAdapterPosition].doc_name.toString().toString())
             }
 
             delete.setOnClickListener {
@@ -59,9 +59,9 @@ class HomeAdapter(private val dataSet: MutableList<Doc>, private val  callDel: (
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.title.text = "Título: " + dataSet[position].title
-        viewHolder.content.text = "Conteúdo: " + dataSet[position].content
-        viewHolder.date.text = "Última modificação: " + dataSet[position].date.toString()
+        viewHolder.title.text = "Titulo:" + dataSet[position].title
+        viewHolder.content.text = "Conteúdo:" + dataSet[position].content
+        viewHolder.date.text = "Última modificação: " + dataSet[position].date
     }
 
     // Return the size of your dataset (invoked by the layout manager)

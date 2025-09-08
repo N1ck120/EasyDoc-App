@@ -22,14 +22,15 @@ class CleanerActivity : AppCompatActivity() {
         val backBtn = findViewById<Button>(R.id.backButton)
         val helpBtn = findViewById<Button>(R.id.helpButton)
 
-        val dialog = DialogBuilder(this, {},{},{})
+        val dialog = DialogBuilder(this)
 
         backBtn.setOnClickListener {
             finish()
         }
 
         helpBtn.setOnClickListener {
-            dialog.genericDialog("Ajuda","Metadados incluem informações como quem criou o documento, quando e com qual aplicação. Essas informações podem ser críticas em alguns contextos. O limpador de metadados as remove para melhorar sua privacidade.", this, "Entendi", null)
+            dialog.genericDialog(getString(R.string.help),
+                getString(R.string.help_metadata_cleaner), this, "Entendi", null)
         }
     }
 }

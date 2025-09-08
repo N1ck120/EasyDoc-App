@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="Login"
+            android:text="@string/login"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10dp"
-                android:hint="Email"
+                android:hint="@string/email"
                 android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -84,7 +84,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:hint="Senha"
+                android:hint="@string/password"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -94,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Manter Logado"
+            android:text="@string/stay_signed_in"
             android:textSize="15sp"
             app:layout_constraintBottom_toTopOf="@+id/btnLogin"
             app:layout_constraintEnd_toEndOf="parent"
@@ -107,7 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Login"
+            android:text="@string/login"
             app:layout_constraintBottom_toTopOf="@+id/btnSignup"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -121,7 +121,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="50dp"
-            android:text="Cadastro"
+            android:text="@string/register"
             app:layout_constraintBottom_toTopOf="@+id/textView4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -133,7 +133,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Quer usar apenas offline?"
+            android:text="@string/use_offline"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/btnReturn"
             app:layout_constraintEnd_toEndOf="parent"
@@ -147,7 +147,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Login Offline"
+            android:text="@string/offline_login"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

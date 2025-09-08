@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
-        android:text="Configurações"
+        android:text="@string/settings"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +84,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Tema do app"
+                            android:text="@string/theme"
                             android:textSize="16sp" />
 
                         <Button
@@ -93,7 +93,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="0"
-                            android:text="Sistema" />
+                            android:text="@string/system" />
                     </LinearLayout>
 
                     <View
@@ -108,7 +108,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:enabled="false"
-                        android:text="Manter logado"
+                        android:text="@string/stay_signed_in"
                         android:textSize="16sp" />
 
                     <View
@@ -124,7 +124,7 @@
                         android:layout_margin="10dp"
                         android:checked="true"
                         android:enabled="false"
-                        android:text="Sincronização automática"
+                        android:text="@string/auto_sync"
                         android:textSize="16sp" />
 
                     <View
@@ -139,7 +139,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:checked="false"
-                        android:text="Modo offline"
+                        android:text="@string/offline_mode"
                         android:textSize="16sp" />
 
                     <View
@@ -154,7 +154,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:checked="true"
-                        android:text="Salvar ao exportar"
+                        android:text="@string/save_on_export"
                         android:textSize="16sp" />
 
                     <View

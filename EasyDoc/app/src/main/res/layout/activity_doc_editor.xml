@@ -81,7 +81,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Formato"
+                            android:text="@string/format"
                             android:textSize="20sp" />
 
                         <RadioGroup
@@ -96,13 +96,13 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="true"
-                                android:text="PDF" />
+                                android:text="@string/pdf" />
 
                             <RadioButton
                                 android:id="@+id/docx"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="DOCX" />
+                                android:text="@string/docx" />
 
                         </RadioGroup>
 
@@ -119,7 +119,7 @@
                             style="?attr/materialIconButtonFilledTonalStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text=" Salvar"
+                            android:text="@string/save"
                             app:icon="@drawable/round_save_24" />
 
                         <Space
@@ -131,7 +131,7 @@
                             style="?attr/materialIconButtonFilledStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text=" Exportar"
+                            android:text="@string/export"
                             app:icon="@drawable/round_save_alt_24" />
 
                     </LinearLayout>

@@ -111,15 +111,15 @@ class SettingsFragment : Fragment() {
 
         when(AppCompatDelegate.getDefaultNightMode()){
             MODE_NIGHT_FOLLOW_SYSTEM ->{
-                theme.text = "Sistema"
+                theme.text = getString(R.string.system)
             }
             MODE_NIGHT_NO ->{
-                theme.text = "Claro"
+                theme.text = getString(R.string.light)
             }
             MODE_NIGHT_YES ->{
-                theme.text = "Escuro"
+                theme.text = getString(R.string.dark)
             }
-            else -> theme.text = "Sistema"
+            else -> theme.text = getString(R.string.system)
         }
 
         theme.setOnClickListener {
@@ -150,7 +150,7 @@ class SettingsFragment : Fragment() {
             btnOk.setOnClickListener {
                 when(grpTheme.checkedRadioButtonId){
                     R.id.radioSystem ->{
-                        theme.text = "Sistema"
+                        theme.text = getString(R.string.system)
                         val a = lifecycleScope.launch {
                             dataStore.edit { settings ->
                                 settings[key] = MODE_NIGHT_FOLLOW_SYSTEM
@@ -161,7 +161,7 @@ class SettingsFragment : Fragment() {
                         }
                     }
                     R.id.radioLight ->{
-                        theme.text = "Claro"
+                        theme.text = getString(R.string.light)
                         val a = lifecycleScope.launch {
                             dataStore.edit { settings ->
                                 settings[key] = MODE_NIGHT_NO
@@ -172,7 +172,7 @@ class SettingsFragment : Fragment() {
                         }
                     }
                     R.id.radioDark ->{
-                        theme.text = "Escuro"
+                        theme.text = getString(R.string.dark)
                         val a = lifecycleScope.launch {
                             dataStore.edit { settings ->
                                 settings[key] = MODE_NIGHT_YES
@@ -192,7 +192,8 @@ class SettingsFragment : Fragment() {
         }
 
         helpBtn.setOnClickListener {
-            dialog.genericDialog("Ajuda","Tema do app: Define o esquema de cores que será usado por todo o aplicativo. \n\n Manter logado: Mantém sua sessão ativa removendo a necessidade de fazer login a cada vez que abre o app(esta opção só é habilitada quando logado). \n\n Sincronização automática: Baixa e Atualiza os documentos salvos na nuvem automaticamente. \n\n Modo offline: Desabilita todas as funcionalidades que dependem de internet e loga automaticamente no modo offline. \n\n Salvar ao exportar: Ao exportar um documento o mesmo será salvo na tela inicial.",requireContext(),"Entendi", null)
+            dialog.genericDialog(getString(R.string.help),
+                getString(R.string.help_info),requireContext(),"Entendi", null)
         }
 
         agreementBtn.setOnClickListener {
@@ -201,7 +202,7 @@ class SettingsFragment : Fragment() {
             val b = dialogView.findViewById<CheckBox>(R.id.checkBox3)
             val dialog = MaterialAlertDialogBuilder(requireContext())
                 .setView(dialogView)
-                .setTitle("Termos de uso")
+                .setTitle(getString(R.string.terms_of_use))
                 .create()
             a.isEnabled = false
             b.isChecked = true

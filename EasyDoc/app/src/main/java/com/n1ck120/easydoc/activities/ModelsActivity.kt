@@ -29,14 +29,15 @@ class ModelsActivity : AppCompatActivity() {
         val backBtn = findViewById<Button>(R.id.backButton)
         val helpBtn = findViewById<Button>(R.id.helpButton)
 
-        val dialog = DialogBuilder(this, {},{},{})
+        val dialog = DialogBuilder(this)
 
         backBtn.setOnClickListener {
             finish()
         }
 
         helpBtn.setOnClickListener {
-            dialog.genericDialog("Ajuda","A categoria Modelos Prontos fornece diversos modelos comuns de documentos com campos predefinidos, permitindo a geração rápida de um documento formatado.",this,"Entendi",null)
+            dialog.genericDialog(getString(R.string.help),
+                getString(R.string.help_models),this,"Entendi",null)
         }
 
         val jsonString = assets.open("doc_models.json").bufferedReader().use { it.readText() }

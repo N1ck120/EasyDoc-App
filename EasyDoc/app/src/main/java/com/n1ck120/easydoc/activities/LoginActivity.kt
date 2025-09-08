@@ -95,7 +95,7 @@ class LoginActivity : AppCompatActivity() {
         val b = dialogView.findViewById<CheckBox>(R.id.checkBox3)
         val dialog = MaterialAlertDialogBuilder(this)
             .setView(dialogView)
-            .setTitle("Termos de uso")
+            .setTitle(getString(R.string.terms_of_use))
             .setCancelable(false)
             .create()
 

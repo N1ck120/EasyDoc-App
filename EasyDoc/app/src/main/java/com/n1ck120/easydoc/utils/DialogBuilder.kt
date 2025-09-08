@@ -13,7 +13,7 @@ import com.n1ck120.easydoc.R
 import com.n1ck120.easydoc.database.room.Doc
 import java.time.LocalDateTime
 
-class DialogBuilder(private val context: Context, private val callback1: (Doc) -> Unit, private val callback2: (Boolean) -> Unit, private val callback3: (Doc) -> Unit){
+class DialogBuilder(private val context: Context, private val callback1: ((Doc) -> Unit)? = null, private val callback2: ((Boolean) -> Unit)? = null, private val callback3: ((Doc) -> Unit)? = null){
 
     fun docDialog(
         title: String,
@@ -80,7 +80,7 @@ class DialogBuilder(private val context: Context, private val callback1: (Doc) -
                         content = contentDoc.text.toString(),
                         date = getData()
                     )
-                    callback1(dox)
+                    callback1?.invoke(dox)
                     dialog.dismiss()
                 }
             }
@@ -100,7 +100,7 @@ class DialogBuilder(private val context: Context, private val callback1: (Doc) -
                     content = contentDoc.text.toString(),
                     date = getData()
                 )
-                callback3(dox)
+                callback3?.invoke(dox)
                 dialog.dismiss()
             }else{
                 outputDoc.error = "O nome contém caracteres inválidos!"
@@ -140,11 +140,11 @@ class DialogBuilder(private val context: Context, private val callback1: (Doc) -
             .setCancelable(cancelable)
             .setNegativeButton(cancel) { dialog, which ->
                 dialog.dismiss()
-                callback2(false)
+                callback2?.invoke(false)
             }
             .setPositiveButton(confirm) { dialog, which ->
                 dialog.dismiss()
-                callback2(true)
+                callback2?.invoke(true)
             }
             .show()
     }

@@ -19,7 +19,7 @@ class ModelsAdapter(private val dataSet1: List<DocModel>, private val dataSet2: 
 
         init {
             card.setOnClickListener {
-                docPosition1(adapterPosition)
+                docPosition1(absoluteAdapterPosition)
             }
         }
     }
