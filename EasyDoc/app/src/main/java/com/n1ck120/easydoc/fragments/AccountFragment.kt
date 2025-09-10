@@ -37,9 +37,12 @@ class AccountFragment : Fragment() {
 
         logout.setOnClickListener {
             if (false){
-                dialog.genericDialog("Sair da sua conta?", "Você terá que fazer login novamente para usar a sincronização de documentos",requireActivity(), "Sair")
+                dialog.genericDialog(getString(R.string.logout_account),
+                    getString(R.string.logout_warning),requireActivity(), getString(R.string.exit))
             }else{
-                dialog1.genericDialog("Sair do app?", null, requireActivity(), "Sair")
+                dialog1.genericDialog(
+                    getString(R.string.exit_app), null, requireActivity(),
+                    getString(R.string.exit))
             }
 
         }

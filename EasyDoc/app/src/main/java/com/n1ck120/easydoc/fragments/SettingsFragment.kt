@@ -193,7 +193,7 @@ class SettingsFragment : Fragment() {
 
         helpBtn.setOnClickListener {
             dialog.genericDialog(getString(R.string.help),
-                getString(R.string.help_info),requireContext(),"Entendi", null)
+                getString(R.string.help_info),requireContext(),getString(R.string.understood), null)
         }
 
         agreementBtn.setOnClickListener {

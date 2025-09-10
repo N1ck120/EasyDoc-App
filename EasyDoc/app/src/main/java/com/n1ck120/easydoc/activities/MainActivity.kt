@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigation = findViewById(R.id.bottom_navigation)
 
         db = Room.databaseBuilder(
             applicationContext,

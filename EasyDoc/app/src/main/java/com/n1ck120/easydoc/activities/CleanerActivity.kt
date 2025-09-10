@@ -30,7 +30,8 @@ class CleanerActivity : AppCompatActivity() {
 
         helpBtn.setOnClickListener {
             dialog.genericDialog(getString(R.string.help),
-                getString(R.string.help_metadata_cleaner), this, "Entendi", null)
+                getString(R.string.help_metadata_cleaner), this,
+                getString(R.string.understood), null)
         }
     }
 }

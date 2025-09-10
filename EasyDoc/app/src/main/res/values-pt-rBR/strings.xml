@@ -49,4 +49,17 @@
     <string name="theme_selection">Selecione o tema desejado</string>
     <string name="cancel">Cancelar</string>
     <string name="apply">Aplicar</string>
+    <string name="understood">Entendi</string>
+    <string name="invalid_password">Senha inválida!</string>
+    <string name="saved">Salvo</string>
+    <string name="deleted">Apagado</string>
+    <string name="undo">Desfazer</string>
+    <string name="updated">Atualizado</string>
+    <string name="create_password">Crie uma senha</string>
+    <string name="repeat_password">Repita a senha</string>
+    <string name="have_account">Já tem uma conta?</string>
+    <string name="logout_warning">Você terá que fazer login novamente para usar a sincronização de documentos</string>
+    <string name="logout_account">Sair da sua conta?</string>
+    <string name="exit">Sair</string>
+    <string name="exit_app">Sair do app?</string>
 </resources>

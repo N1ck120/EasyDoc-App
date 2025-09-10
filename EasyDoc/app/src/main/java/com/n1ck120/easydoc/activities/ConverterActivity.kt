@@ -30,7 +30,7 @@ class ConverterActivity : AppCompatActivity() {
 
         helpBtn.setOnClickListener {
             dialog.genericDialog(getString(R.string.help),
-                getString(R.string.help_converter),this, "Entendi", null)
+                getString(R.string.help_converter),this, getString(R.string.understood), null)
         }
     }
 }

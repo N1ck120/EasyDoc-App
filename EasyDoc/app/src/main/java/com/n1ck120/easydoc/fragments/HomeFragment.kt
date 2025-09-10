@@ -55,7 +55,7 @@ class HomeFragment : Fragment() {
                 db.userDao().insertAll(doc)
             }
             a.invokeOnCompletion {
-                Toast.makeText(requireContext(), "Salvo", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.saved), Toast.LENGTH_SHORT).show()
             }
         }, {},{ doc ->
             lifecycleScope.launch {
@@ -64,7 +64,8 @@ class HomeFragment : Fragment() {
                         db.userDao().insertAll(doc)
                     }
                     a.invokeOnCompletion {
-                        Toast.makeText(requireContext(), "Salvo", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(),
+                            getString(R.string.saved), Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -86,8 +87,8 @@ class HomeFragment : Fragment() {
                         db.userDao().delete(docDel)
                     }
                     a.invokeOnCompletion {
-                        Snackbar.make(view, "${docDel.title} apagado", Snackbar.LENGTH_LONG)
-                            .setAction("Desfazer") {
+                        Snackbar.make(view, "${docDel.title} "+ getString(R.string.deleted), Snackbar.LENGTH_LONG)
+                            .setAction(getString(R.string.undo)) {
                                 lifecycleScope.launch {
                                     db.userDao().insertAll(docDel)
                                 }
@@ -129,7 +130,7 @@ class HomeFragment : Fragment() {
                         )
                     }
                     a.invokeOnCompletion {
-                        Toast.makeText(view.context, "Atualizado", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(view.context, getString(R.string.updated), Toast.LENGTH_SHORT).show()
                     }
                 })
                 recyclerView.layoutManager = LinearLayoutManager(requireContext())

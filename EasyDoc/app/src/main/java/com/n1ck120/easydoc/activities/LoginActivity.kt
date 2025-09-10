@@ -62,16 +62,16 @@ class LoginActivity : AppCompatActivity() {
 
         loginEmail.doAfterTextChanged {
             if (!loginEmail.text.toString().contains(Regex("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"))){
-                loginEmail.error = "Email inválido!"
+                loginEmail.error = getString(R.string.invalid_email)
             }
         }
 
         btnLogin.setOnClickListener {
             if (!loginEmail.text.toString().contains(Regex("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"))){
-                Toast.makeText(this, "Email inválido!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.invalid_email), Toast.LENGTH_SHORT).show()
             }else{
                 if (loginPass.text.toString().isBlank() || loginPass.text.toString().length < 8 || loginPass.text.toString().contains(" ")){
-                    Toast.makeText(this, "Senha inválida!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.invalid_password), Toast.LENGTH_SHORT).show()
                 }else{
                     
                     /*if (false){

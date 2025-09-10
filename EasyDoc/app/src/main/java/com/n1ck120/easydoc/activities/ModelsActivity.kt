@@ -37,7 +37,7 @@ class ModelsActivity : AppCompatActivity() {
 
         helpBtn.setOnClickListener {
             dialog.genericDialog(getString(R.string.help),
-                getString(R.string.help_models),this,"Entendi",null)
+                getString(R.string.help_models),this,getString(R.string.understood),null)
         }
 
         val jsonString = assets.open("doc_models.json").bufferedReader().use { it.readText() }

@@ -133,7 +133,7 @@ class DialogBuilder(private val context: Context, private val callback1: ((Doc) 
         dialog.show()
     }
 
-    fun genericDialog(title: String, message: String?, context: Context, confirm: String? = "Confirmar", cancel: String? = "Cancelar", cancelable: Boolean = true) {
+    fun genericDialog(title: String, message: String?, context: Context, confirm: String? = context.getString(R.string.confirm), cancel: String? = context.getString(R.string.cancel), cancelable: Boolean = true) {
         MaterialAlertDialogBuilder(context)
             .setTitle(title)
             .setMessage(message)

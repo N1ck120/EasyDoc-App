@@ -56,4 +56,17 @@
     <string name="theme_selection">Select the desired theme</string>
     <string name="cancel">Cancel</string>
     <string name="apply">Apply</string>
+    <string name="understood">I understood</string>
+    <string name="invalid_password">Invalid password!</string>
+    <string name="saved">Saved</string>
+    <string name="deleted">Deleted</string>
+    <string name="undo">Undo</string>
+    <string name="updated">Updated</string>
+    <string name="create_password">Create a password</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="have_account">Already have an account?</string>
+    <string name="logout_warning">You will need to log in again to use document synchronization</string>
+    <string name="logout_account">Log out of your account?</string>
+    <string name="exit">Exit</string>
+    <string name="exit_app">Exit the app?</string>
 </resources>
