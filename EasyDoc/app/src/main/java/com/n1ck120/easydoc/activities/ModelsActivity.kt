@@ -10,9 +10,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.n1ck120.easydoc.core.document.DocumentModels
-import com.n1ck120.easydoc.adapters.ModelsAdapter
 import com.n1ck120.easydoc.R
+import com.n1ck120.easydoc.adapters.ModelsAdapter
+import com.n1ck120.easydoc.core.document.DocumentModels
 import com.n1ck120.easydoc.utils.DialogBuilder
 import kotlinx.serialization.json.Json
 
@@ -26,9 +26,10 @@ class ModelsActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        //Declaração de variaveis globais
         val backBtn = findViewById<Button>(R.id.backButton)
         val helpBtn = findViewById<Button>(R.id.helpButton)
-
+        //Instanciando DialogBuilder
         val dialog = DialogBuilder(this)
 
         backBtn.setOnClickListener {
@@ -44,11 +45,10 @@ class ModelsActivity : AppCompatActivity() {
         val documentModels = Json.Default.decodeFromString<DocumentModels>(jsonString)
         val docModel = documentModels.documents
 
-
         val dataset1 = docModel
         val dataset2 = docModel
         val modelsAdapter = ModelsAdapter(dataset1, dataset2, { docPosition ->
-            val intent = Intent(this, DocEditorActivity::class.java)
+            val intent = Intent(this, ModelEditorActivity::class.java)
             intent.putExtra("Data", docPosition)
             startActivity(intent)
         })

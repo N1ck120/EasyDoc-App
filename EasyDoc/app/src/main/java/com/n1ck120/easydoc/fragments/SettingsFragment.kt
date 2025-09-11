@@ -13,17 +13,17 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
-import androidx.fragment.app.Fragment
 import androidx.core.net.toUri
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.materialswitch.MaterialSwitch
-import com.n1ck120.easydoc.activities.MainActivity
 import com.n1ck120.easydoc.R
+import com.n1ck120.easydoc.activities.MainActivity
 import com.n1ck120.easydoc.database.datastore.SettingsDataStore
 import com.n1ck120.easydoc.utils.DialogBuilder
 import kotlinx.coroutines.flow.first
@@ -36,8 +36,9 @@ class SettingsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val bottomNav : BottomNavigationView = (requireActivity() as MainActivity).bottomNavigation
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
+        //Declaração de variaveis globais
+        val bottomNav : BottomNavigationView = (requireActivity() as MainActivity).bottomNavigation
         val gitCard = view.findViewById<MaterialCardView>(R.id.githubCard)
         val theme = view.findViewById<Button>(R.id.btnTheme)
         val offlineSwitch = view.findViewById<MaterialSwitch>(R.id.offlineMode)
@@ -47,8 +48,13 @@ class SettingsFragment : Fragment() {
         val settingBtn = bottomNav.menu.findItem(R.id.item_4)
         val helpBtn = view.findViewById<Button>(R.id.helpButton)
         val agreementBtn = view.findViewById<Button>(R.id.agreementButton)
-
-        val dialog = DialogBuilder(requireContext(), {},{},{})
+        //Instanciando DialogBuilder
+        val dialog = DialogBuilder(requireContext())
+        //Declaração de variaveis relacionadas ao dataStore
+        val dataStore = SettingsDataStore.getDataStorePrefs(requireContext())
+        val key = intPreferencesKey("theme")
+        val offlineMode = intPreferencesKey("offlineMode")
+        val saveExported = intPreferencesKey("saveExported")
 
         homeBtn.setIcon(R.drawable.outline_insert_drive_file_24)
         settingBtn.setIcon(R.drawable.baseline_settings_24)
@@ -57,11 +63,6 @@ class SettingsFragment : Fragment() {
             val browserIntent = Intent(Intent.ACTION_VIEW, "https://github.com/N1ck120/EasyDoc-App".toUri())
             startActivity(browserIntent)
         }
-
-        val dataStore = SettingsDataStore.getDataStorePrefs(requireContext())
-        val key = intPreferencesKey("theme")
-        val offlineMode = intPreferencesKey("offlineMode")
-        val saveExported = intPreferencesKey("saveExported")
 
         lifecycleScope.launch {
             if (runBlocking { dataStore.data.first()[saveExported] ?: 1 } == 0){
@@ -197,7 +198,7 @@ class SettingsFragment : Fragment() {
         }
 
         agreementBtn.setOnClickListener {
-            val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.user_agreement_dialog, null)
+            val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.eula_dialog, null)
             val a = dialogView.findViewById<Button>(R.id.button3)
             val b = dialogView.findViewById<CheckBox>(R.id.checkBox3)
             val dialog = MaterialAlertDialogBuilder(requireContext())

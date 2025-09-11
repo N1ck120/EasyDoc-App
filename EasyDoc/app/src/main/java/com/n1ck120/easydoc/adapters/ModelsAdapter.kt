@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
-import com.n1ck120.easydoc.core.document.DocModel
 import com.n1ck120.easydoc.R
+import com.n1ck120.easydoc.core.document.DocModel
 
 class ModelsAdapter(private val dataSet1: List<DocModel>, private val dataSet2: List<DocModel>, private val  docPosition: (Int) -> Unit) :
     RecyclerView.Adapter<ModelsAdapter.ViewHolder>() {

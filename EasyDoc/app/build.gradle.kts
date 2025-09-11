@@ -24,7 +24,7 @@ android {
     defaultConfig {
         applicationId = "com.n1ck120.easydoc"
         minSdk = 29
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -44,6 +44,14 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_23
         targetCompatibility = JavaVersion.VERSION_23
+    }
+
+    buildFeatures {
+        viewBinding = false
+    }
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
     }
 
     //Libsodium

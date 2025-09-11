@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EasyDoc">
         <activity
-            android:name=".activities.DocEditorActivity"
+            android:name=".activities.ModelEditorActivity"
             android:exported="false" />
         <activity
             android:name=".activities.CleanerActivity"
@@ -24,7 +24,7 @@
             android:name=".activities.ModelsActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.SignUpActivity"
+            android:name=".activities.RegisterActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity

@@ -19,9 +19,10 @@ class CleanerActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        //Declaração de variaveis globais
         val backBtn = findViewById<Button>(R.id.backButton)
         val helpBtn = findViewById<Button>(R.id.helpButton)
-
+        //Instanciando DialogBuilder
         val dialog = DialogBuilder(this)
 
         backBtn.setOnClickListener {

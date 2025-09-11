@@ -8,8 +8,8 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
-import com.n1ck120.easydoc.core.document.DocumentGen
 import com.n1ck120.easydoc.R
+import com.n1ck120.easydoc.core.document.DocumentGen
 import com.n1ck120.easydoc.database.room.Doc
 import java.time.LocalDateTime
 

@@ -1,6 +1,5 @@
 package com.n1ck120.easydoc.activities
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +10,6 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.widget.AlertDialogLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doAfterTextChanged
@@ -21,9 +19,7 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.n1ck120.easydoc.R
-import com.n1ck120.easydoc.core.crypto.SodiumLazy
 import com.n1ck120.easydoc.database.datastore.SettingsDataStore
-import com.n1ck120.easydoc.utils.DialogBuilder
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
@@ -38,24 +34,23 @@ class LoginActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
+        //Declaração de variaveis globais
+        val btnLogin = findViewById<Button>(R.id.btnLogin)
+        val btnSignup = findViewById<Button>(R.id.btnSignup)
+        val btnOffline = findViewById<Button>(R.id.btnReturn)
+        //val checkKeep = findViewById<CheckBox>(R.id.checkBox)
+        val loginEmail = findViewById<EditText>(R.id.loginEmail)
+        val loginPass = findViewById<EditText>(R.id.loginPass)
+        //Declaração de variaveis relacionadas ao dataStore
         val dataStore = SettingsDataStore.getDataStorePrefs(this)
         val key = intPreferencesKey("theme")
         val offlineMode = intPreferencesKey("offlineMode")
         val accepted = booleanPreferencesKey("accepted")
 
-        val btnLogin = findViewById<Button>(R.id.btnLogin)
-        val btnSignup = findViewById<Button>(R.id.btnSignup)
-        val btnOffline = findViewById<Button>(R.id.btnReturn)
-        val checkKeep = findViewById<CheckBox>(R.id.checkBox)
-        val loginEmail = findViewById<EditText>(R.id.loginEmail)
-        val loginPass = findViewById<EditText>(R.id.loginPass)
         val intent = Intent(this, MainActivity::class.java)
 
-        val lzSodium = SodiumLazy().lazySodium.sodium
-
         btnSignup.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
+            val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -73,24 +68,14 @@ class LoginActivity : AppCompatActivity() {
                 if (loginPass.text.toString().isBlank() || loginPass.text.toString().length < 8 || loginPass.text.toString().contains(" ")){
                     Toast.makeText(this, getString(R.string.invalid_password), Toast.LENGTH_SHORT).show()
                 }else{
-                    
-                    /*if (false){
-                        /*TODO() Função de login aqui
-                        loginEmail.text.toString().lowercase()
-                        */
-                    }else{
-                        Snackbar.make(it,"Não há conexão com a internet",Snackbar.LENGTH_LONG)
-                            .setAction("Tentar novamente"){
-                            }
-                            .show()
-                    }*/
+                    //TODO() Função de login aqui
                 }
             }
         }
 
-        val userAgreement = intPreferencesKey("userAgreement")
+        intPreferencesKey("userAgreement")
 
-        val dialogView = LayoutInflater.from(this).inflate(R.layout.user_agreement_dialog, null)
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.eula_dialog, null)
         val a = dialogView.findViewById<Button>(R.id.button3)
         val b = dialogView.findViewById<CheckBox>(R.id.checkBox3)
         val dialog = MaterialAlertDialogBuilder(this)
@@ -118,11 +103,6 @@ class LoginActivity : AppCompatActivity() {
 
         btnOffline.setOnClickListener {
             startActivity(intent)
-            /*if (checkKeep.isChecked){
-                Toast.makeText(this, "Checkbox marcado", Toast.LENGTH_SHORT).show()
-            }else{
-                Toast.makeText(this, "Checkbox não marcado", Toast.LENGTH_SHORT).show()
-            }*/
             finish()
         }
 

@@ -64,4 +64,7 @@
     <string name="exit_app">Sair do app?</string>
     <string name="editor">Editor</string>
     <string name="error">Erro:</string>
+    <string name="mandatory_field">Campo obrigatório</string>
+    <string name="invalid_characters">Contém caracteres inválidos!</string>
+    <string name="share_via">Compartilhar via</string>
 </resources>

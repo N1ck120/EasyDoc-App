@@ -11,7 +11,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:name="com.n1ck120.easydoc.fragments.HomeFragment"
+        android:name="com.n1ck120.easydoc.fragments.MyDocumentsFragment"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp" />

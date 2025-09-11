@@ -2,24 +2,24 @@ package com.n1ck120.easydoc.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.google.android.material.card.MaterialCardView
-import com.n1ck120.easydoc.activities.ConverterActivity
-import com.n1ck120.easydoc.activities.CleanerActivity
-import com.n1ck120.easydoc.activities.ModelsActivity
 import com.n1ck120.easydoc.R
+import com.n1ck120.easydoc.activities.CleanerActivity
+import com.n1ck120.easydoc.activities.ConverterActivity
+import com.n1ck120.easydoc.activities.ModelsActivity
 
-class ToolsFragment : Fragment() {
+class ToolboxFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_tools, container, false)
+        val view = inflater.inflate(R.layout.fragment_toolbox, container, false)
+        //Declaração de variaveis globais
         val models = view.findViewById<MaterialCardView>(R.id.doc_models)
         val converter = view.findViewById<MaterialCardView>(R.id.doc_converter)
         val editor = view.findViewById<MaterialCardView>(R.id.doc_mdeditor)

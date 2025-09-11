@@ -16,9 +16,9 @@ import com.n1ck120.easydoc.R
 import com.n1ck120.easydoc.database.datastore.SettingsDataStore
 import com.n1ck120.easydoc.database.room.AppDatabase
 import com.n1ck120.easydoc.fragments.AccountFragment
-import com.n1ck120.easydoc.fragments.ToolsFragment
-import com.n1ck120.easydoc.fragments.HomeFragment
+import com.n1ck120.easydoc.fragments.MyDocumentsFragment
 import com.n1ck120.easydoc.fragments.SettingsFragment
+import com.n1ck120.easydoc.fragments.ToolboxFragment
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
@@ -43,10 +43,15 @@ class MainActivity : AppCompatActivity() {
             AppDatabase::class.java, "database.db"
         ).build()
 
+        //Declaração de variaveis globais
         val homeBtn = bottomNavigation.menu.findItem(R.id.item_1)
         val docsBtn = bottomNavigation.menu.findItem(R.id.item_2)
         val accountBtn = bottomNavigation.menu.findItem(R.id.item_3)
         val settingsBtn = bottomNavigation.menu.findItem(R.id.item_4)
+        //Declaração de variaveis relacionadas ao dataStore
+        val dataStore = SettingsDataStore.getDataStorePrefs(this)
+        val key = intPreferencesKey("theme")
+        val offlineMode = intPreferencesKey("offlineMode")
 
         bottomNavigation.setOnItemSelectedListener { item ->
             homeBtn.setIcon(R.drawable.outline_insert_drive_file_24)
@@ -59,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.commit {
                         setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                         if (actualFragment(supportFragmentManager.findFragmentByTag("Home"))){
-                            replace(R.id.fragmentContainerView, HomeFragment(), "Home")
+                            replace(R.id.fragmentContainerView, MyDocumentsFragment(), "Home")
                         }
                     }
                     item.setIcon(R.drawable.baseline_insert_drive_file_24)
@@ -69,7 +74,7 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.commit {
                         setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                         if (actualFragment(supportFragmentManager.findFragmentByTag("Docs"))){
-                            replace(R.id.fragmentContainerView, ToolsFragment(), "Docs")
+                            replace(R.id.fragmentContainerView, ToolboxFragment(), "Docs")
                         }
                     }
                     item.setIcon(R.drawable.baseline_build_24)
@@ -100,15 +105,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
         //Verifica o tema salvo no datastore e troca caso necessario
-        val dataStore = SettingsDataStore.getDataStorePrefs(this)
-        val key = intPreferencesKey("theme")
-        val offlineMode = intPreferencesKey("offlineMode")
         lifecycleScope.launch {
             AppCompatDelegate.setDefaultNightMode(dataStore.data.first()[key] ?: AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             accountBtn.isVisible = (dataStore.data.first()[offlineMode] ?: 0) != 1
         }
     }
-
     private fun actualFragment(tag : Fragment?): Boolean {
         return !(tag != null && tag.isVisible)
     }

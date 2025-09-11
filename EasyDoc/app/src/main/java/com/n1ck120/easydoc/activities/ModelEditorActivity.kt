@@ -11,21 +11,19 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.n1ck120.easydoc.R
 import com.n1ck120.easydoc.core.document.DocModel
 import com.n1ck120.easydoc.core.document.DocumentModels
-import com.n1ck120.easydoc.R
-import com.n1ck120.easydoc.utils.DialogBuilder
 import kotlinx.serialization.json.Json
-import java.util.UUID
 import kotlin.random.Random
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.memberProperties
 
-class DocEditorActivity : AppCompatActivity() {
+class ModelEditorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_doc_editor)
+        setContentView(R.layout.activity_model_editor)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -36,12 +34,12 @@ class DocEditorActivity : AppCompatActivity() {
         val jsonString = assets.open("doc_models.json").bufferedReader().use { it.readText() }
         val documentModels = Json.Default.decodeFromString<DocumentModels>(jsonString)
         val docModel = documentModels.documents[intent.getIntExtra("Data", 0)]
-
+        //Declaração de variaveis globais
         val title = findViewById<TextView>(R.id.modelTitle)
         val backBtn = findViewById<Button>(R.id.backButton)
         val save = findViewById<Button>(R.id.save)
         val export = findViewById<Button>(R.id.generatedoc)
-        val format = findViewById<RadioGroup>(R.id.groupType)
+        findViewById<RadioGroup>(R.id.groupType)
 
         title.text = docModel.title
 
@@ -54,18 +52,21 @@ class DocEditorActivity : AppCompatActivity() {
             fieldList.add(prop.name)
         }
 
-        fun iterateModel(classe : Any): MutableList<Int> {
+        fun iterateModel(classe: Any): MutableList<Int> {
             var count = 0
             val ids = mutableListOf<Int>()
             while (count < fieldList.size) {
-                val property = classe::class.memberProperties.find { it.name == fieldList[count] } as? KProperty1<Any, *>
+                val property =
+                    classe::class.memberProperties.find { it.name == fieldList[count] } as? KProperty1<Any, *>
                 val propName = property?.name.toString()
                 val valor = property?.get(classe)
-                if (valor is String && propName != "title" && propName != "type" && propName != "description"){
+                if (valor is String && propName != "title" && propName != "type" && propName != "description") {
                     val textField = EditText(this)
                     textField.id = Random.nextInt()
                     ids.add(textField.id)
-                    textField.hint = propName.replaceFirst(propName.first(), propName.first().uppercaseChar()).replace("_", " ")
+                    textField.hint =
+                        propName.replaceFirst(propName.first(), propName.first().uppercaseChar())
+                            .replace("_", " ")
                     linear.addView(textField)
                 }
                 count++

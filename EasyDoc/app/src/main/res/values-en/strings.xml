@@ -64,4 +64,7 @@
     <string name="exit_app">Exit the app?</string>
     <string name="editor">Editor</string>
     <string name="error">Error:</string>
+    <string name="mandatory_field">Mandatory field</string>
+    <string name="invalid_characters">Contains invalid characters!</string>
+    <string name="share_via">Share via</string>
 </resources>
