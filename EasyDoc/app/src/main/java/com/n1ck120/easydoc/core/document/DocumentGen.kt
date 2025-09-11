@@ -1,6 +1,5 @@
 package com.n1ck120.easydoc.core.document
 
-import android.R
 import android.content.ContentValues
 import android.content.Context
 import android.net.Uri
@@ -11,7 +10,6 @@ import com.itextpdf.kernel.pdf.PdfDocument
 import com.itextpdf.kernel.pdf.PdfWriter
 import com.itextpdf.layout.Document
 import com.itextpdf.layout.element.Paragraph
-import org.apache.poi.xwpf.usermodel.ParagraphAlignment
 import org.apache.poi.xwpf.usermodel.XWPFDocument
 
 object DocumentGen {
@@ -22,7 +20,11 @@ object DocumentGen {
 
         val metaValues = ContentValues().apply {
             put(MediaStore.Files.FileColumns.DISPLAY_NAME, "$docName.$format")
-            put(MediaStore.Files.FileColumns.MIME_TYPE, "application/$format")
+            if (format == "pdf"){
+                put(MediaStore.Files.FileColumns.MIME_TYPE, "application/pdf")
+            }else{
+                put(MediaStore.Files.FileColumns.MIME_TYPE, "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+            }
             put(MediaStore.Files.FileColumns.RELATIVE_PATH, Environment.DIRECTORY_DOCUMENTS)
             put(MediaStore.Files.FileColumns.IS_PENDING, 1)
         }
@@ -64,7 +66,6 @@ object DocumentGen {
                         tmpRun.setText(docTitle)
                     }
 
-
                     if (docContent.contains("\n")){
                         val lines2 = docContent.split("\n")
                         var i2 = 0
@@ -76,7 +77,6 @@ object DocumentGen {
                     }else{
                         tmpRun.setText(docContent)
                     }
-
                     //tmpRun.setFontSize(18)
                     document.write(outputStream)
                     document.close()

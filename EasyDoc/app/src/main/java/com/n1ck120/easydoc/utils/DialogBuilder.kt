@@ -42,43 +42,43 @@ class DialogBuilder(private val context: Context, private val callback1: ((Doc) 
 
         val doc = DocumentGen
 
-        fun getData(): String{
-            var data : String
+        fun getDate(): String{
+            var date : String
             if (LocalDateTime.now().dayOfMonth < 10){
-                data = "0" + LocalDateTime.now().dayOfMonth.toString()
+                date = "0" + LocalDateTime.now().dayOfMonth.toString()
             }else{
-                data = LocalDateTime.now().dayOfMonth.toString()
+                date = LocalDateTime.now().dayOfMonth.toString()
             }
             if (LocalDateTime.now().monthValue < 10){
-                data = data + "/0" + LocalDateTime.now().monthValue.toString() + "/" + LocalDateTime.now().year.toString()
+                date = date + "/0" + LocalDateTime.now().monthValue.toString() + "/" + LocalDateTime.now().year.toString()
             }else{
-                data = data + "/" + LocalDateTime.now().monthValue.toString() + "/" + LocalDateTime.now().year.toString()
+                date = date + "/" + LocalDateTime.now().monthValue.toString() + "/" + LocalDateTime.now().year.toString()
             }
             if (LocalDateTime.now().hour < 10){
-                data = data + " às 0" + LocalDateTime.now().hour.toString()
+                date = date + " às 0" + LocalDateTime.now().hour.toString()
             }else{
-                data = data + " às " + LocalDateTime.now().hour.toString()
+                date = date + " às " + LocalDateTime.now().hour.toString()
             }
             if (LocalDateTime.now().minute < 10){
-                data = data + ":0" + LocalDateTime.now().minute.toString()
+                date = date + ":0" + LocalDateTime.now().minute.toString()
             }else{
-                data = data + ":" + LocalDateTime.now().minute.toString()
+                date = date + ":" + LocalDateTime.now().minute.toString()
             }
-            return data
+            return date
         }
 
         save.setOnClickListener {
             if (titleDoc.text.isNullOrBlank()){
-                titleDoc.error = "Campo obrigatório"
+                titleDoc.error = context.getString(R.string.mandatory_field)
             }else{
                 if (contentDoc.text.isNullOrBlank()){
-                    contentDoc.error = "Campo obrigatório"
+                    contentDoc.error = context.getString(R.string.mandatory_field)
                 }else{
                     val dox = Doc(
                         doc_name = outputDoc.text.toString(),
                         title = titleDoc.text.toString(),
                         content = contentDoc.text.toString(),
-                        date = getData()
+                        date = getDate()
                     )
                     callback1?.invoke(dox)
                     dialog.dismiss()
@@ -98,12 +98,12 @@ class DialogBuilder(private val context: Context, private val callback1: ((Doc) 
                     doc_name = outputDoc.text.toString(),
                     title = titleDoc.text.toString(),
                     content = contentDoc.text.toString(),
-                    date = getData()
+                    date = getDate()
                 )
                 callback3?.invoke(dox)
                 dialog.dismiss()
             }else{
-                outputDoc.error = "O nome contém caracteres inválidos!"
+                outputDoc.error = context.getString(R.string.invalid_characters)
             }
         }
 
@@ -123,11 +123,12 @@ class DialogBuilder(private val context: Context, private val callback1: ((Doc) 
                 }
 
                 // Iniciar o chooser
-                context.startActivity(Intent.createChooser(shareIntent, "Compartilhar via"))
+                context.startActivity(Intent.createChooser(shareIntent,
+                    context.getString(R.string.share_via)))
 
                 dialog.dismiss()
             }else{
-                outputDoc.error = "O nome contém caracteres inválidos!"
+                outputDoc.error = context.getString(R.string.invalid_characters)
             }
         }
         dialog.show()

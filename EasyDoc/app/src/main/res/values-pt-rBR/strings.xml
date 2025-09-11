@@ -62,4 +62,6 @@
     <string name="logout_account">Sair da sua conta?</string>
     <string name="exit">Sair</string>
     <string name="exit_app">Sair do app?</string>
+    <string name="editor">Editor</string>
+    <string name="error">Erro:</string>
 </resources>

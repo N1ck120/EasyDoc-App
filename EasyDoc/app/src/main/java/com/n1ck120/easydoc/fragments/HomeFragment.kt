@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
         try {
             db = (requireActivity() as MainActivity).db
         }catch (e : Exception){
-            Toast.makeText(requireActivity(), "Erro: $e", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireActivity(), getString(R.string.error) + "$e", Toast.LENGTH_SHORT).show()
         }
 
         val dataStore = SettingsDataStore.getDataStorePrefs(requireContext())
