@@ -17,6 +17,7 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.n1ck120.easydoc.R
 import com.n1ck120.easydoc.database.datastore.SettingsDataStore
@@ -35,9 +36,9 @@ class LoginActivity : AppCompatActivity() {
             insets
         }
         //Declaração de variaveis globais
-        val btnLogin = findViewById<Button>(R.id.btnLogin)
-        val btnSignup = findViewById<Button>(R.id.btnSignup)
-        val btnOffline = findViewById<Button>(R.id.btnReturn)
+        val btnLogin = findViewById<MaterialButton>(R.id.btnLogin)
+        val btnSignup = findViewById<MaterialButton>(R.id.btnSignup)
+        val btnOffline = findViewById<MaterialButton>(R.id.btnReturn)
         //val checkKeep = findViewById<CheckBox>(R.id.checkBox)
         val loginEmail = findViewById<EditText>(R.id.loginEmail)
         val loginPass = findViewById<EditText>(R.id.loginPass)
@@ -76,7 +77,7 @@ class LoginActivity : AppCompatActivity() {
         intPreferencesKey("userAgreement")
 
         val dialogView = LayoutInflater.from(this).inflate(R.layout.eula_dialog, null)
-        val a = dialogView.findViewById<Button>(R.id.button3)
+        val a = dialogView.findViewById<MaterialButton>(R.id.button3)
         val b = dialogView.findViewById<CheckBox>(R.id.checkBox3)
         val dialog = MaterialAlertDialogBuilder(this)
             .setView(dialogView)

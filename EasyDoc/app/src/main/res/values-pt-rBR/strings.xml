@@ -67,4 +67,10 @@
     <string name="mandatory_field">Campo obrigatório</string>
     <string name="invalid_characters">Contém caracteres inválidos!</string>
     <string name="share_via">Compartilhar via</string>
+    <string name="delete">Apagar</string>
+    <string name="at">" às "</string>
+    <string name="deletion_warning">Atenção! A exclusão é permanente</string>
+    <string name="deletion_dialog_title">Apagar documento?</string>
+    <string name="asc">CRE</string>
+    <string name="desc">DEC</string>
 </resources>

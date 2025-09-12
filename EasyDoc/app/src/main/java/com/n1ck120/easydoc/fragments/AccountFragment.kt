@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import com.google.android.material.button.MaterialButton
 import com.n1ck120.easydoc.R
 import com.n1ck120.easydoc.activities.LoginActivity
 import com.n1ck120.easydoc.utils.DialogBuilder
@@ -19,17 +20,17 @@ class AccountFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_account, container, false)
         //Declaração de variaveis globais
-        val logout = view.findViewById<Button>(R.id.btnLogout)
-        val login = view.findViewById<Button>(R.id.btnLoginRedirect)
+        val logout = view.findViewById<MaterialButton>(R.id.btnLogout)
+        val login = view.findViewById<MaterialButton>(R.id.btnLoginRedirect)
 
-        val dialog = DialogBuilder(view.context,  callback2 = { a ->
+        val dialog = DialogBuilder(view.context,  genericCallback = { a ->
             if (a) {
                 //TODO() Função apagar token
                 activity?.finish()
             }
         })
 
-        val dialog1 = DialogBuilder(view.context, callback2 = { a ->
+        val dialog1 = DialogBuilder(view.context, genericCallback = { a ->
             if (a) {
                 activity?.finish()
             }

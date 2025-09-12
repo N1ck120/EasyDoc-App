@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.RadioGroup
 import android.widget.TextView
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.n1ck120.easydoc.R
@@ -13,7 +14,7 @@ import com.n1ck120.easydoc.core.document.DocumentGen
 import com.n1ck120.easydoc.database.room.Doc
 import java.time.LocalDateTime
 
-class DialogBuilder(private val context: Context, private val callback1: ((Doc) -> Unit)? = null, private val callback2: ((Boolean) -> Unit)? = null, private val callback3: ((Doc) -> Unit)? = null){
+class DialogBuilder(private val context: Context, private val saveDocCallback: ((Doc) -> Unit)? = null, private val genericCallback: ((Boolean) -> Unit)? = null, private val exportDocCallback: ((Doc) -> Unit)? = null){
 
     fun docDialog(
         title: String,
@@ -31,9 +32,9 @@ class DialogBuilder(private val context: Context, private val callback1: ((Doc) 
         val contentDoc = dialogView.findViewById<TextInputEditText>(R.id.content)
         val outputDoc = dialogView.findViewById<TextInputEditText>(R.id.outputname)
         val typeDoc = dialogView.findViewById<RadioGroup>(R.id.groupType)
-        val generateBtn = dialogView.findViewById<Button>(R.id.generatedoc)
-        val save = dialogView.findViewById<Button>(R.id.save)
-        val share = dialogView.findViewById<Button>(R.id.share)
+        val generateBtn = dialogView.findViewById<MaterialButton>(R.id.generatedoc)
+        val save = dialogView.findViewById<MaterialButton>(R.id.save)
+        val share = dialogView.findViewById<MaterialButton>(R.id.share)
 
         titleDialog.text = title
         titleDoc.setText(docTitle)
@@ -80,7 +81,7 @@ class DialogBuilder(private val context: Context, private val callback1: ((Doc) 
                         content = contentDoc.text.toString(),
                         date = getDate()
                     )
-                    callback1?.invoke(dox)
+                    saveDocCallback?.invoke(dox)
                     dialog.dismiss()
                 }
             }
@@ -100,7 +101,7 @@ class DialogBuilder(private val context: Context, private val callback1: ((Doc) 
                     content = contentDoc.text.toString(),
                     date = getDate()
                 )
-                callback3?.invoke(dox)
+                exportDocCallback?.invoke(dox)
                 dialog.dismiss()
             }else{
                 outputDoc.error = context.getString(R.string.invalid_characters)
@@ -141,11 +142,11 @@ class DialogBuilder(private val context: Context, private val callback1: ((Doc) 
             .setCancelable(cancelable)
             .setNegativeButton(cancel) { dialog, which ->
                 dialog.dismiss()
-                callback2?.invoke(false)
+                genericCallback?.invoke(false)
             }
             .setPositiveButton(confirm) { dialog, which ->
                 dialog.dismiss()
-                callback2?.invoke(true)
+                genericCallback?.invoke(true)
             }
             .show()
     }

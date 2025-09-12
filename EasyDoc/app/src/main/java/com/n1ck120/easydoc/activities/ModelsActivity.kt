@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.android.material.button.MaterialButton
 import com.n1ck120.easydoc.R
 import com.n1ck120.easydoc.adapters.ModelsAdapter
 import com.n1ck120.easydoc.core.document.DocumentModels
@@ -27,8 +28,8 @@ class ModelsActivity : AppCompatActivity() {
             insets
         }
         //Declaração de variaveis globais
-        val backBtn = findViewById<Button>(R.id.backButton)
-        val helpBtn = findViewById<Button>(R.id.helpButton)
+        val backBtn = findViewById<MaterialButton>(R.id.backButton)
+        val helpBtn = findViewById<MaterialButton>(R.id.helpButton)
         //Instanciando DialogBuilder
         val dialog = DialogBuilder(this)
 

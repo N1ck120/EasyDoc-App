@@ -26,4 +26,7 @@ interface DocDao {
 
     @Delete
     suspend fun delete(doc: Doc)
+
+    @Query("DELETE FROM doc")
+    suspend fun deleteAll()
 }

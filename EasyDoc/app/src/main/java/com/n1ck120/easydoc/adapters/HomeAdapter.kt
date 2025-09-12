@@ -5,9 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.content.ContextCompat.getString
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.n1ck120.easydoc.R
+import com.n1ck120.easydoc.activities.MainActivity
 import com.n1ck120.easydoc.database.room.Doc
 import com.n1ck120.easydoc.utils.DialogBuilder
 
@@ -25,10 +27,10 @@ class HomeAdapter(private val dataSet: MutableList<Doc>, private val  callDel: (
             val dialog = DialogBuilder(view.context, { doc ->
                 callbackUpd(dataSet[absoluteAdapterPosition], doc)
             }, { a ->
-                if (a == true) {
+                if (a) {
                     callbackDel(dataSet[absoluteAdapterPosition])
                 }
-            },{})
+            })
 
             // Define click listener for the ViewHolder's View
             card.setOnClickListener {
@@ -36,7 +38,7 @@ class HomeAdapter(private val dataSet: MutableList<Doc>, private val  callDel: (
             }
 
             delete.setOnClickListener {
-                dialog.genericDialog("Apagar documento?", "Atenção! A exclusão é permanente", view.context,"Apagar")
+                dialog.genericDialog(view.context.getString(R.string.deletion_dialog_title), view.context.getString(R.string.deletion_warning), view.context, view.context.getString(R.string.delete))
             }
         }
     }
@@ -59,9 +61,9 @@ class HomeAdapter(private val dataSet: MutableList<Doc>, private val  callDel: (
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.title.text = "Titulo:" + dataSet[position].title
-        viewHolder.content.text = "Conteúdo:" + dataSet[position].content
-        viewHolder.date.text = "Última modificação: " + dataSet[position].date
+        viewHolder.title.text = getString(viewHolder.itemView.context,R.string.card_title) + dataSet[position].title
+        viewHolder.content.text = getString(viewHolder.itemView.context,R.string.card_content) + dataSet[position].content
+        viewHolder.date.text = getString(viewHolder.itemView.context,R.string.last_modified) + dataSet[position].date
     }
 
     // Return the size of your dataset (invoked by the layout manager)

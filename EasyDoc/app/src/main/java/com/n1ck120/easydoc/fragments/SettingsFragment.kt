@@ -19,6 +19,7 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.materialswitch.MaterialSwitch
@@ -40,14 +41,14 @@ class SettingsFragment : Fragment() {
         //Declaração de variaveis globais
         val bottomNav : BottomNavigationView = (requireActivity() as MainActivity).bottomNavigation
         val gitCard = view.findViewById<MaterialCardView>(R.id.githubCard)
-        val theme = view.findViewById<Button>(R.id.btnTheme)
+        val theme = view.findViewById<MaterialButton>(R.id.btnTheme)
         val offlineSwitch = view.findViewById<MaterialSwitch>(R.id.offlineMode)
         val saveSwitch = view.findViewById<MaterialSwitch>(R.id.saveExported)
         val homeBtn = bottomNav.menu.findItem(R.id.item_1)
         val accountBtn = bottomNav.menu.findItem(R.id.item_3)
         val settingBtn = bottomNav.menu.findItem(R.id.item_4)
-        val helpBtn = view.findViewById<Button>(R.id.helpButton)
-        val agreementBtn = view.findViewById<Button>(R.id.agreementButton)
+        val helpBtn = view.findViewById<MaterialButton>(R.id.helpButton)
+        val agreementBtn = view.findViewById<MaterialButton>(R.id.agreementButton)
         //Instanciando DialogBuilder
         val dialog = DialogBuilder(requireContext())
         //Declaração de variaveis relacionadas ao dataStore
@@ -128,8 +129,8 @@ class SettingsFragment : Fragment() {
             val dialog = MaterialAlertDialogBuilder(dialogView.context)
                 .setView(dialogView)
                 .create()
-            val btnOk = dialogView.findViewById<Button>(R.id.ok)
-            val btnCancel = dialogView.findViewById<Button>(R.id.cancel)
+            val btnOk = dialogView.findViewById<MaterialButton>(R.id.ok)
+            val btnCancel = dialogView.findViewById<MaterialButton>(R.id.cancel)
             val grpTheme = dialogView.findViewById<RadioGroup>(R.id.groupTheme)
             val radioSys = dialogView.findViewById<RadioButton>(R.id.radioSystem)
             val radioLht = dialogView.findViewById<RadioButton>(R.id.radioLight)
@@ -199,7 +200,7 @@ class SettingsFragment : Fragment() {
 
         agreementBtn.setOnClickListener {
             val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.eula_dialog, null)
-            val a = dialogView.findViewById<Button>(R.id.button3)
+            val a = dialogView.findViewById<MaterialButton>(R.id.button3)
             val b = dialogView.findViewById<CheckBox>(R.id.checkBox3)
             val dialog = MaterialAlertDialogBuilder(requireContext())
                 .setView(dialogView)

@@ -57,7 +57,7 @@
                         app:layout_constraintVertical_bias="0.153"
                         app:tint="@color/md_theme_inverseSurface" />
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnLoginRedirect"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnLogout"
                         style="?attr/materialIconButtonFilledTonalStyle"
                         android:layout_width="wrap_content"

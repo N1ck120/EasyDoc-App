@@ -67,4 +67,10 @@
     <string name="mandatory_field">Mandatory field</string>
     <string name="invalid_characters">Contains invalid characters!</string>
     <string name="share_via">Share via</string>
+    <string name="delete">Delete</string>
+    <string name="at">" at "</string>
+    <string name="deletion_warning">Attention! The exclusion is permanent.</string>
+    <string name="deletion_dialog_title">Delete document?</string>
+    <string name="asc">ASC</string>
+    <string name="desc">DESC</string>
 </resources>

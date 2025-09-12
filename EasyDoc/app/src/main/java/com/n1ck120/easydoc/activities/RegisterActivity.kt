@@ -15,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.button.MaterialButton
 import com.n1ck120.easydoc.R
 import com.n1ck120.easydoc.database.datastore.SettingsDataStore
 import kotlinx.coroutines.flow.first
@@ -31,8 +32,8 @@ class RegisterActivity : AppCompatActivity() {
             insets
         }
         //Declaração de variaveis globais
-        val btnLogin = findViewById<Button>(R.id.btnLogin)
-        val btnSignup = findViewById<Button>(R.id.btnSignup)
+        val btnLogin = findViewById<MaterialButton>(R.id.btnLogin)
+        val btnSignup = findViewById<MaterialButton>(R.id.btnSignup)
         val signupEmail = findViewById<EditText>(R.id.signupEmail)
         val signupPass1 = findViewById<EditText>(R.id.signupPass1)
         val signupPass2 = findViewById<EditText>(R.id.signupPass2)
