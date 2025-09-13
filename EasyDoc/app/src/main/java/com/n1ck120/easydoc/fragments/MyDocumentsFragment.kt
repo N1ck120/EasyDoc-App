@@ -1,13 +1,16 @@
 package com.n1ck120.easydoc.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -40,6 +43,7 @@ class MyDocumentsFragment : Fragment() {
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
         val deleteAll = view.findViewById<MaterialButton>(R.id.deleteAllButton)
         val sort = view.findViewById<MaterialButton>(R.id.sortButton)
+        val planeIcon = view.findViewById<ImageView>(R.id.planeIcon)
 
         val createDoc = view.findViewById<FloatingActionButton>(R.id.floatingActionButton)
 
@@ -85,9 +89,6 @@ class MyDocumentsFragment : Fragment() {
                     val dataset = mutableListOf<Doc>()
                     val iterator = docs.listIterator()
 
-                    //while (iterator.hasNext()){
-                    //    dataset.asReversed().add(iterator.next())
-                    //}
                     if (isOn){
                         while (iterator.hasNext()){
                             dataset.asReversed().add(iterator.next())
@@ -155,6 +156,13 @@ class MyDocumentsFragment : Fragment() {
                     }else{
                         nothing.visibility = VISIBLE
                     }
+                    if (recyclerView.adapter?.itemCount.toString().toInt() > 1){
+                        sort.visibility = VISIBLE
+                        deleteAll.visibility = VISIBLE
+                    }else{
+                        sort.visibility = GONE
+                        deleteAll.visibility = GONE
+                    }
                 }
             }
         }
@@ -168,11 +176,11 @@ class MyDocumentsFragment : Fragment() {
                         db.userDao().deleteAll()
                     }
                     a.invokeOnCompletion{
-                        Toast.makeText(requireContext(), "Todos os documentos foram apagados!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(),getString(R.string.all_deleted_toast), Toast.LENGTH_SHORT).show()
                     }
                 }
             })
-            dialog.genericDialog("Apagar TODOS os documentos salvos?", "Atenção TODOS os documentos salvos serão apagados de forma PERMANENTE e IRREVERSíVEL", context = requireContext())
+            dialog.genericDialog(getString(R.string.delete_all_warning_title),getString(R.string.delete_all_warning), context = requireContext())
         }
 
         sort.setOnClickListener {
@@ -187,6 +195,16 @@ class MyDocumentsFragment : Fragment() {
             loadSavedDocs()
         }
 
+        var clickCount = 0
+        planeIcon.setOnClickListener {
+            clickCount ++
+            if (clickCount >= 10){
+                val browserIntent = Intent(Intent.ACTION_VIEW, "https://youtu.be/dQw4w9WgXcQ".toUri())
+                startActivity(browserIntent)
+                Toast.makeText(requireContext(), "Never Gonna Give You Up! \uD83D\uDD7A", Toast.LENGTH_SHORT).show()
+                clickCount = 0
+            }
+        }
         return view
     }
 }

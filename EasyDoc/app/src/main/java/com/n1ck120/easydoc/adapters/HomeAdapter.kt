@@ -9,7 +9,6 @@ import androidx.core.content.ContextCompat.getString
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.n1ck120.easydoc.R
-import com.n1ck120.easydoc.activities.MainActivity
 import com.n1ck120.easydoc.database.room.Doc
 import com.n1ck120.easydoc.utils.DialogBuilder
 
@@ -38,7 +37,7 @@ class HomeAdapter(private val dataSet: MutableList<Doc>, private val  callDel: (
             }
 
             delete.setOnClickListener {
-                dialog.genericDialog(view.context.getString(R.string.deletion_dialog_title), view.context.getString(R.string.deletion_warning), view.context, view.context.getString(R.string.delete))
+                dialog.genericDialog(view.context.getString(R.string.delete_dialog_title), view.context.getString(R.string.delete_warning), view.context, view.context.getString(R.string.delete))
             }
         }
     }

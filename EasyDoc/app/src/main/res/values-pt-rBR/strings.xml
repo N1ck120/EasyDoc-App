@@ -69,8 +69,11 @@
     <string name="share_via">Compartilhar via</string>
     <string name="delete">Apagar</string>
     <string name="at">" às "</string>
-    <string name="deletion_warning">Atenção! A exclusão é permanente</string>
-    <string name="deletion_dialog_title">Apagar documento?</string>
+    <string name="delete_warning">Atenção! A exclusão é permanente</string>
+    <string name="delete_dialog_title">Apagar documento?</string>
     <string name="asc">CRE</string>
     <string name="desc">DEC</string>
+    <string name="delete_all_warning_title">Apagar TODOS os documentos salvos?</string>
+    <string name="delete_all_warning">Atenção TODOS os documentos salvos serão apagados de forma PERMANENTE e IRREVERSíVEL</string>
+    <string name="all_deleted_toast">Todos os documentos foram apagados!</string>
 </resources>

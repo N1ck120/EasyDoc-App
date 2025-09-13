@@ -69,8 +69,11 @@
     <string name="share_via">Share via</string>
     <string name="delete">Delete</string>
     <string name="at">" at "</string>
-    <string name="deletion_warning">Attention! The exclusion is permanent.</string>
-    <string name="deletion_dialog_title">Delete document?</string>
+    <string name="delete_warning">Attention! The exclusion is permanent.</string>
+    <string name="delete_dialog_title">Delete document?</string>
     <string name="asc">ASC</string>
     <string name="desc">DESC</string>
+    <string name="delete_all_warning">Attention ALL saved documents will be deleted PERMANENTLY and IRREVERSIBLY</string>
+    <string name="delete_all_warning_title">Delete ALL saved documents?</string>
+    <string name="all_deleted_toast">All documents have been deleted!</string>
 </resources>
