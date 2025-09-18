@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.widget.Button
+import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
 import com.google.android.material.button.MaterialButton
@@ -69,26 +70,20 @@ class DialogBuilder(private val context: Context, private val saveDocCallback: (
         }
 
         save.setOnClickListener {
-            if (titleDoc.text.isNullOrBlank()){
-                titleDoc.error = context.getString(R.string.mandatory_field)
-            }else{
-                if (contentDoc.text.isNullOrBlank()){
-                    contentDoc.error = context.getString(R.string.mandatory_field)
-                }else{
-                    val dox = Doc(
-                        doc_name = outputDoc.text.toString(),
-                        title = titleDoc.text.toString(),
-                        content = contentDoc.text.toString(),
-                        date = getDate()
-                    )
-                    saveDocCallback?.invoke(dox)
-                    dialog.dismiss()
-                }
+            if (validField(titleDoc) && validField(contentDoc) && validField(outputDoc)){
+                val dox = Doc(
+                    doc_name = outputDoc.text.toString(),
+                    title = titleDoc.text.toString(),
+                    content = contentDoc.text.toString(),
+                    date = getDate()
+                )
+                saveDocCallback?.invoke(dox)
+                dialog.dismiss()
             }
         }
 
         generateBtn.setOnClickListener {
-            if (outputDoc.text.toString().contains(Regex("^[A-Za-z0-9._%+-]"))){
+            if (validField(titleDoc) && validField(contentDoc) && validField(outputDoc)){
                 doc.docGenerator(
                     titleDoc.text.toString(),
                     contentDoc.text.toString(),
@@ -103,13 +98,11 @@ class DialogBuilder(private val context: Context, private val saveDocCallback: (
                 )
                 exportDocCallback?.invoke(dox)
                 dialog.dismiss()
-            }else{
-                outputDoc.error = context.getString(R.string.invalid_characters)
             }
         }
 
         share.setOnClickListener {
-            if (outputDoc.text.toString().contains(Regex("^[A-Za-z0-9._%+-]"))){
+            if (validField(titleDoc) && validField(contentDoc) && validField(outputDoc)){
                 val uri = doc.docGenerator(
                     titleDoc.text.toString(),
                     contentDoc.text.toString(),
@@ -128,8 +121,6 @@ class DialogBuilder(private val context: Context, private val saveDocCallback: (
                     context.getString(R.string.share_via)))
 
                 dialog.dismiss()
-            }else{
-                outputDoc.error = context.getString(R.string.invalid_characters)
             }
         }
         dialog.show()
@@ -149,5 +140,18 @@ class DialogBuilder(private val context: Context, private val saveDocCallback: (
                 genericCallback?.invoke(true)
             }
             .show()
+    }
+
+    fun validField(field : EditText): Boolean {
+        if (field.text.isNullOrBlank()){
+            field.error = context.getString(R.string.mandatory_field)
+            return false
+        }else{
+            if (field.text.contains(Regex("[^A-Za-z0-9._%+-]"))){
+                field.error = context.getString(R.string.invalid_characters)
+                return false
+            }
+        }
+        return true
     }
 }

@@ -1,5 +1,6 @@
 package com.n1ck120.easydoc.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -26,6 +27,7 @@ import kotlinx.serialization.json.Json
 import org.apache.poi.hslf.util.SystemTimeUtils.getDate
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.memberProperties
+import kotlin.text.contains
 
 class ModelEditorActivity : AppCompatActivity() {
 
@@ -56,9 +58,23 @@ class ModelEditorActivity : AppCompatActivity() {
         val format = findViewById<RadioGroup>(R.id.groupType)
         val save = findViewById<MaterialButton>(R.id.save)
         val export = findViewById<MaterialButton>(R.id.generatedoc)
+        val share = findViewById<MaterialButton>(R.id.share)
         findViewById<RadioGroup>(R.id.groupType)
 
         title.text = docModel.title
+
+        fun validField(field : EditText): Boolean {
+            if (field.text.isNullOrBlank()){
+                field.error = this.getString(R.string.mandatory_field)
+                return false
+            }else{
+                if (field.text.contains(Regex("[^A-Za-z0-9._%+-]"))){
+                    field.error = this.getString(R.string.invalid_characters)
+                    return false
+                }
+            }
+            return true
+        }
 
         backBtn.setOnClickListener {
             finish()
@@ -95,46 +111,76 @@ class ModelEditorActivity : AppCompatActivity() {
 
         save.setOnClickListener {
             var count = 0
-            var b = ""
+            var paragraphText = ""
             while (count < ids.size) {
                 val id = ids[count]
                 val a = findViewById<EditText>(id)
-                b = b + a.text.toString()
+                if (!validField(a)){
+                    break
+                }
+                paragraphText = paragraphText + a.text.toString()
                 count++
             }
-            val dox = Doc(
-                doc_name = (docModel.title.replace(" ","_")),
-                title = docModel.title,
-                content = b,
-                date = "getDate()"
-            )
+            if (count == ids.size){
+                val dox = Doc(
+                    doc_name = (docModel.title.replace(" ","_")),
+                    title = docModel.title,
+                    content = paragraphText,
+                    date = "getDate()"
+                )
 
-            val a = lifecycleScope.launch {
-                db.userDao().insertAll(dox)
-            }
-            a.invokeOnCompletion {
-                Toast.makeText(this, getString(R.string.saved), Toast.LENGTH_SHORT).show()
+                val a = lifecycleScope.launch {
+                    db.userDao().insertAll(dox)
+                }
+                a.invokeOnCompletion {
+                    Toast.makeText(this, getString(R.string.saved), Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
         export.setOnClickListener {
             var count = 0
-            var b = ""
+            var paragraphText = ""
             while (count < ids.size) {
                 val id = ids[count]
                 val a = findViewById<EditText>(id)
-                if (a.text.isNullOrBlank()){
-                    a.error = "Esse campo não pode ser vazio!"
+                if (!validField(a)){
                     break
                 }
                 a.text.toString()
-                b = b + a.text.toString()
+                paragraphText = paragraphText + a.text.toString()
                 count++
             }
             if (count == ids.size){
-                DocumentGen.docGenerator(docModel.title, b, (docModel.title.replace(" ","_")), findViewById<RadioButton>(format.checkedRadioButtonId).text.toString().lowercase(), this)
+                DocumentGen.docGenerator(docModel.title, paragraphText, (docModel.title.replace(" ","_")), findViewById<RadioButton>(format.checkedRadioButtonId).text.toString().lowercase(), this)
             }
         }
 
+        share.setOnClickListener {
+            var count = 0
+            var paragraphText = ""
+            while (count < ids.size) {
+                val id = ids[count]
+                val a = findViewById<EditText>(id)
+                if (!validField(a)){
+                    break
+                }
+                a.text.toString()
+                paragraphText = paragraphText + a.text.toString()
+                count++
+            }
+            if (count == ids.size){
+                val uri = DocumentGen.docGenerator(docModel.title, paragraphText, (docModel.title.replace(" ","_")), findViewById<RadioButton>(format.checkedRadioButtonId).text.toString().lowercase(), this)
+                val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                    type = "application/pdf"
+                    putExtra(Intent.EXTRA_STREAM, uri)
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                }
+
+                // Iniciar o chooser
+                this.startActivity(Intent.createChooser(shareIntent,
+                    this.getString(R.string.share_via)))
+            }
+        }
     }
 }

@@ -198,10 +198,13 @@ class MyDocumentsFragment : Fragment() {
         var clickCount = 0
         planeIcon.setOnClickListener {
             clickCount ++
+            if (clickCount == 5){
+                Toast.makeText(requireContext(), " \uD83E\uDD14 ", Toast.LENGTH_SHORT).show()
+            }
             if (clickCount >= 10){
                 val browserIntent = Intent(Intent.ACTION_VIEW, "https://youtu.be/dQw4w9WgXcQ".toUri())
                 startActivity(browserIntent)
-                Toast.makeText(requireContext(), "Never Gonna Give You Up! \uD83D\uDD7A", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), " Never Gonna Give You Up! \uD83D\uDD7A ", Toast.LENGTH_SHORT).show()
                 clickCount = 0
             }
         }
