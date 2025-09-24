@@ -2,7 +2,6 @@ package com.n1ck120.easydoc.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.RadioButton
@@ -16,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.textfield.TextInputLayout
 import com.n1ck120.easydoc.R
 import com.n1ck120.easydoc.core.document.DocModel
 import com.n1ck120.easydoc.core.document.DocumentGen
@@ -24,7 +24,6 @@ import com.n1ck120.easydoc.database.room.AppDatabase
 import com.n1ck120.easydoc.database.room.Doc
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
-import org.apache.poi.hslf.util.SystemTimeUtils.getDate
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.memberProperties
 import kotlin.text.contains
@@ -85,9 +84,9 @@ class ModelEditorActivity : AppCompatActivity() {
             fieldList.add(prop.name)
         }
 
-        fun getString(search : String): String {
+        fun getPropString(search : String): String {
             var count = 0
-            var val2 : String = ""
+            var val2 = ""
             while (count < fieldList.size) {
                 val property = docModel::class.memberProperties.find { it.name == fieldList[count] } as? KProperty1<Any, *>
                 val propName = property?.name.toString()
@@ -108,11 +107,14 @@ class ModelEditorActivity : AppCompatActivity() {
                 val propName = property?.name.toString()
                 val valor = property?.get(classe)
                 if (valor is String && valor.isEmpty()) {
+                    val textInputLayout = TextInputLayout(this)
                     val textField = EditText(this)
                     textField.id = count
+                    textField.tag = propName
                     ids.add(textField.id)
-                    textField.hint = propName.replaceFirst(propName.first(), propName.first().uppercaseChar())
-                    linear.addView(textField)
+                    textInputLayout.hint = getString(resources.getIdentifier(propName,"string", packageName))
+                    textInputLayout.addView(textField)
+                    linear.addView(textInputLayout)
                 }
                 count++
             }
@@ -124,15 +126,15 @@ class ModelEditorActivity : AppCompatActivity() {
         save.setOnClickListener {
             var count = 0
             var paragraphText = ""
-            var aaa = getString("content")
+            var aaa = getPropString("content")
             while (count < ids.size) {
                 val id = ids[count]
                 val a = findViewById<EditText>(id)
                 if (!validField(a)){
                     break
                 }
-                while (aaa.contains("{${a.hint.toString().replace(a.hint.first(), a.hint.first().lowercaseChar())}}")){
-                    aaa = aaa.replace("{${a.hint.toString().replace(a.hint.first(), a.hint.first().lowercaseChar())}}", a.text.toString())
+                while (aaa.contains("{${a.tag.toString().replace(a.tag.toString().first(), a.tag.toString().first().lowercaseChar())}}")){
+                    aaa = aaa.replace("{${a.tag.toString().replace(a.tag.toString().first(), a.tag.toString().first().lowercaseChar())}}", a.text.toString())
                 }
                 count++
                 paragraphText = aaa
@@ -140,8 +142,8 @@ class ModelEditorActivity : AppCompatActivity() {
             if (count == ids.size){
                 val dox = Doc(
                     doc_name = (docModel.title.replace(" ","_")),
-                    title = docModel.title,
-                    content = paragraphText,
+                    title = paragraphText.lineSequence().first(),
+                    content = paragraphText.replace(paragraphText.lineSequence().first()+"\n", ""),
                     date = "getDate()"
                 )
 
@@ -157,42 +159,42 @@ class ModelEditorActivity : AppCompatActivity() {
         export.setOnClickListener {
             var count = 0
             var paragraphText = ""
-            var aaa = getString("content")
+            var aaa = getPropString("content")
             while (count < ids.size) {
                 val id = ids[count]
                 val a = findViewById<EditText>(id)
                 if (!validField(a)){
                     break
                 }
-                while (aaa.contains("{${a.hint.toString().replace(a.hint.first(), a.hint.first().lowercaseChar())}}")){
-                    aaa = aaa.replace("{${a.hint.toString().replace(a.hint.first(), a.hint.first().lowercaseChar())}}", a.text.toString())
+                while (aaa.contains("{${a.tag.toString().replace(a.tag.toString().first(), a.tag.toString().first().lowercaseChar())}}")){
+                    aaa = aaa.replace("{${a.tag.toString().replace(a.tag.toString().first(), a.tag.toString().first().lowercaseChar())}}", a.text.toString())
                 }
                 count++
                 paragraphText = aaa
             }
             if (count == ids.size){
-                DocumentGen.docGenerator(docModel.title, paragraphText, (docModel.title.replace(" ","_")), findViewById<RadioButton>(format.checkedRadioButtonId).text.toString().lowercase(), this)
+                DocumentGen.docGenerator(paragraphText.lineSequence().first(), paragraphText.replace(paragraphText.lineSequence().first()+"\n", ""), (docModel.title.replace(" ","_")), findViewById<RadioButton>(format.checkedRadioButtonId).text.toString().lowercase(), this)
             }
         }
 
         share.setOnClickListener {
             var count = 0
             var paragraphText = ""
-            var aaa = getString("content")
+            var aaa = getPropString("content")
             while (count < ids.size) {
                 val id = ids[count]
                 val a = findViewById<EditText>(id)
                 if (!validField(a)){
                     break
                 }
-                while (aaa.contains("{${a.hint.toString().replace(a.hint.first(), a.hint.first().lowercaseChar())}}")){
-                    aaa = aaa.replace("{${a.hint.toString().replace(a.hint.first(), a.hint.first().lowercaseChar())}}", a.text.toString())
+                while (aaa.contains("{${a.tag.toString().replace(a.tag.toString().first(), a.tag.toString().first().lowercaseChar())}}")){
+                    aaa = aaa.replace("{${a.tag.toString().replace(a.tag.toString().first(), a.tag.toString().first().lowercaseChar())}}", a.text.toString())
                 }
                 count++
                 paragraphText = aaa
             }
             if (count == ids.size){
-                val uri = DocumentGen.docGenerator(docModel.title, paragraphText, (docModel.title.replace(" ","_")), findViewById<RadioButton>(format.checkedRadioButtonId).text.toString().lowercase(), this)
+                val uri = DocumentGen.docGenerator(paragraphText.lineSequence().first(), paragraphText.replace(paragraphText.lineSequence().first()+"\n", ""), (docModel.title.replace(" ","_")), findViewById<RadioButton>(format.checkedRadioButtonId).text.toString().lowercase(), this)
                 val shareIntent = Intent(Intent.ACTION_SEND).apply {
                     type = "application/pdf"
                     putExtra(Intent.EXTRA_STREAM, uri)

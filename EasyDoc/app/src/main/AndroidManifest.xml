@@ -13,7 +13,8 @@
         android:theme="@style/Theme.EasyDoc">
         <activity
             android:name=".activities.ModelEditorActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activities.CleanerActivity"
             android:exported="false" />
