@@ -9,48 +9,39 @@ data class DocumentModels(
 
 @Serializable
 data class DocModel(
-    val type: String,
+    //val type: String,
     val title: String,
     val description: String,
+    val content: String,
 
-    // Campos opcionais, substituindo objetos por strings com nomes representativos
-    val clientName: String? = null,
-    val clientTaxId: String? = null,
-    val clientAddress: String? = null,
+    val clientName: String? = null,        // {0}
+    val clientTaxId: String? = null,       // {1}
+    val clientAddress: String? = null,     // {2}
 
-    val providerName: String? = null,
-    val providerTaxId: String? = null,
-    val providerAddress: String? = null,
+    val providerName: String? = null,      // {3}
+    val providerTaxId: String? = null,     // {4}
+    val providerAddress: String? = null,   // {5}
 
-    val serviceDescription: String? = null,
-    val serviceStartDate: String? = null,
-    val serviceEndDate: String? = null,
-    val serviceAmount: String? = null,
-    val servicePaymentTerms: String? = null,
-    val serviceExecutionDate: String? = null,
-    val serviceDuration: String? = null,
-    val servicePaymentMethod: String? = null,
-    val serviceResponsiblePerson: String? = null,
-    val serviceOpenDate: String? = null,
-    val serviceExpectedCompletionDate: String? = null,
+    val serviceDescription: String? = null,   // {6}
+    val serviceStartDate: String? = null,     // {7}
+    val serviceEndDate: String? = null,       // {8}
+    val serviceAmount: String? = null,        // {9}
+    val servicePaymentTerms: String? = null,  // {10}
 
-    val obligations: String? = null,
-    val termination: String? = null,
-    val jurisdiction: String? = null,
-    val signature_date: String? = null,
+    val obligations: String? = null,       // {11}
+    val termination: String? = null,       // {12}
+    val jurisdiction: String? = null,      // {13}
+    val signaturePlaceDate: String? = null,   // {14}
 
-    val payerName: String? = null,
-    val payerTaxId: String? = null,
+    val receiptDate: String? = null,       // {15}
+    val proposalValidity: String? = null,  // {16}
 
-    val location: String? = null,
-    val receipt_date: String? = null,
-    val proposal_valid_until: String? = null,
-    val order_number: String? = null,
-    val party1: String? = null,
-    val party2: String? = null,
-    val confidentiality_terms: String? = null,
-    val valid_until: String? = null,
-    val original_contract_date: String? = null,
-    val termination_reason: String? = null,
-    val pending_settlements: String? = null
+    val serviceOrderNumber: String? = null,   // {17}
+    val serviceOrderNotes: String? = null,    // {18}
+
+    val ndaConfidentialInfo: String? = null,  // {19}
+    val ndaDurationYears: String? = null,     // {20}
+
+    val terminationReason: String? = null    // {21}
+
 )

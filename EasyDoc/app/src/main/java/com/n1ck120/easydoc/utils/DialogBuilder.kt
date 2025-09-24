@@ -147,7 +147,7 @@ class DialogBuilder(private val context: Context, private val saveDocCallback: (
             field.error = context.getString(R.string.mandatory_field)
             return false
         }else{
-            if (field.text.contains(Regex("[^A-Za-z0-9._%+-]"))){
+            if (field.text.contains(Regex("[\\p{So}\\p{Cs}]"))){
                 field.error = context.getString(R.string.invalid_characters)
                 return false
             }

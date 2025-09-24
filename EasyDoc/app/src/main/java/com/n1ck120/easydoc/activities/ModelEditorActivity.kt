@@ -68,7 +68,7 @@ class ModelEditorActivity : AppCompatActivity() {
                 field.error = this.getString(R.string.mandatory_field)
                 return false
             }else{
-                if (field.text.contains(Regex("[^A-Za-z0-9._%+-]"))){
+                if (field.text.contains(Regex("[\\p{So}\\p{Cs}]"))){
                     field.error = this.getString(R.string.invalid_characters)
                     return false
                 }
@@ -85,21 +85,33 @@ class ModelEditorActivity : AppCompatActivity() {
             fieldList.add(prop.name)
         }
 
+        fun getString(search : String): String {
+            var count = 0
+            var val2 : String = ""
+            while (count < fieldList.size) {
+                val property = docModel::class.memberProperties.find { it.name == fieldList[count] } as? KProperty1<Any, *>
+                val propName = property?.name.toString()
+                val valor = property?.get(docModel)
+                if (valor is String && propName == search) {
+                    val2 = valor
+                }
+                count++
+            }
+            return val2
+        }
+
         fun iterateModel(classe: Any): MutableList<Int> {
             var count = 0
             val ids = mutableListOf<Int>()
             while (count < fieldList.size) {
-                val property =
-                    classe::class.memberProperties.find { it.name == fieldList[count] } as? KProperty1<Any, *>
+                val property = classe::class.memberProperties.find { it.name == fieldList[count] } as? KProperty1<Any, *>
                 val propName = property?.name.toString()
                 val valor = property?.get(classe)
-                if (valor is String && propName != "title" && propName != "type" && propName != "description") {
+                if (valor is String && valor.isEmpty()) {
                     val textField = EditText(this)
                     textField.id = count
                     ids.add(textField.id)
-                    textField.hint =
-                        propName.replaceFirst(propName.first(), propName.first().uppercaseChar())
-                            .replace("_", " ")
+                    textField.hint = propName.replaceFirst(propName.first(), propName.first().uppercaseChar())
                     linear.addView(textField)
                 }
                 count++
@@ -112,14 +124,18 @@ class ModelEditorActivity : AppCompatActivity() {
         save.setOnClickListener {
             var count = 0
             var paragraphText = ""
+            var aaa = getString("content")
             while (count < ids.size) {
                 val id = ids[count]
                 val a = findViewById<EditText>(id)
                 if (!validField(a)){
                     break
                 }
-                paragraphText = paragraphText + a.text.toString()
+                while (aaa.contains("{${a.hint.toString().replace(a.hint.first(), a.hint.first().lowercaseChar())}}")){
+                    aaa = aaa.replace("{${a.hint.toString().replace(a.hint.first(), a.hint.first().lowercaseChar())}}", a.text.toString())
+                }
                 count++
+                paragraphText = aaa
             }
             if (count == ids.size){
                 val dox = Doc(
@@ -141,15 +157,18 @@ class ModelEditorActivity : AppCompatActivity() {
         export.setOnClickListener {
             var count = 0
             var paragraphText = ""
+            var aaa = getString("content")
             while (count < ids.size) {
                 val id = ids[count]
                 val a = findViewById<EditText>(id)
                 if (!validField(a)){
                     break
                 }
-                a.text.toString()
-                paragraphText = paragraphText + a.text.toString()
+                while (aaa.contains("{${a.hint.toString().replace(a.hint.first(), a.hint.first().lowercaseChar())}}")){
+                    aaa = aaa.replace("{${a.hint.toString().replace(a.hint.first(), a.hint.first().lowercaseChar())}}", a.text.toString())
+                }
                 count++
+                paragraphText = aaa
             }
             if (count == ids.size){
                 DocumentGen.docGenerator(docModel.title, paragraphText, (docModel.title.replace(" ","_")), findViewById<RadioButton>(format.checkedRadioButtonId).text.toString().lowercase(), this)
@@ -159,15 +178,18 @@ class ModelEditorActivity : AppCompatActivity() {
         share.setOnClickListener {
             var count = 0
             var paragraphText = ""
+            var aaa = getString("content")
             while (count < ids.size) {
                 val id = ids[count]
                 val a = findViewById<EditText>(id)
                 if (!validField(a)){
                     break
                 }
-                a.text.toString()
-                paragraphText = paragraphText + a.text.toString()
+                while (aaa.contains("{${a.hint.toString().replace(a.hint.first(), a.hint.first().lowercaseChar())}}")){
+                    aaa = aaa.replace("{${a.hint.toString().replace(a.hint.first(), a.hint.first().lowercaseChar())}}", a.text.toString())
+                }
                 count++
+                paragraphText = aaa
             }
             if (count == ids.size){
                 val uri = DocumentGen.docGenerator(docModel.title, paragraphText, (docModel.title.replace(" ","_")), findViewById<RadioButton>(format.checkedRadioButtonId).text.toString().lowercase(), this)
