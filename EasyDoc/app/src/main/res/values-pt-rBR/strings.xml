@@ -76,4 +76,5 @@
     <string name="delete_all_warning_title">Apagar TODOS os documentos salvos?</string>
     <string name="delete_all_warning">Atenção TODOS os documentos salvos serão apagados de forma PERMANENTE e IRREVERSíVEL</string>
     <string name="all_deleted_toast">Todos os documentos foram apagados!</string>
+    <string name="field_revision">Um ou mais campos necessitam de revisão!</string>
 </resources>

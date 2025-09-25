@@ -105,4 +105,5 @@
     <string name="ndaConfidentialInfo" translatable="false">Objeto(Assunto de confidencialidade)</string>
     <string name="ndaDurationYears" translatable="false">Prazo de Vigência</string>
     <string name="terminationReason" translatable="false">Motivo da Rescisão</string>
+    <string name="field_revision">One or more fields need revision!</string>
 </resources>

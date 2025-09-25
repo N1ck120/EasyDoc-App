@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
@@ -145,10 +146,12 @@ class DialogBuilder(private val context: Context, private val saveDocCallback: (
     fun validField(field : EditText): Boolean {
         if (field.text.isNullOrBlank()){
             field.error = context.getString(R.string.mandatory_field)
+            Toast.makeText(context, context.getString(R.string.field_revision), Toast.LENGTH_SHORT).show()
             return false
         }else{
             if (field.text.contains(Regex("[\\p{So}\\p{Cs}]"))){
                 field.error = context.getString(R.string.invalid_characters)
+                Toast.makeText(context, context.getString(R.string.field_revision), Toast.LENGTH_SHORT).show()
                 return false
             }
         }

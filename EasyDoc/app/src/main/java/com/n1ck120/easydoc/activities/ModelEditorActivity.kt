@@ -144,6 +144,7 @@ class ModelEditorActivity : AppCompatActivity() {
                 val id = ids[count]
                 val a = findViewById<EditText>(id)
                 if (!validField(a)){
+                    Toast.makeText(this, this.getString(R.string.field_revision), Toast.LENGTH_SHORT).show()
                     break
                 }
                 while (aaa.contains("{${a.tag.toString().replace(a.tag.toString().first(), a.tag.toString().first().lowercaseChar())}}")){
@@ -177,6 +178,7 @@ class ModelEditorActivity : AppCompatActivity() {
                 val id = ids[count]
                 val a = findViewById<EditText>(id)
                 if (!validField(a)){
+                    Toast.makeText(this, this.getString(R.string.field_revision), Toast.LENGTH_SHORT).show()
                     break
                 }
                 while (aaa.contains("{${a.tag.toString().replace(a.tag.toString().first(), a.tag.toString().first().lowercaseChar())}}")){
@@ -198,6 +200,7 @@ class ModelEditorActivity : AppCompatActivity() {
                 val id = ids[count]
                 val a = findViewById<EditText>(id)
                 if (!validField(a)){
+                    Toast.makeText(this, this.getString(R.string.field_revision), Toast.LENGTH_SHORT).show()
                     break
                 }
                 while (aaa.contains("{${a.tag.toString().replace(a.tag.toString().first(), a.tag.toString().first().lowercaseChar())}}")){
