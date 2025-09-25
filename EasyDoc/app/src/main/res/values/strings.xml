@@ -92,7 +92,7 @@
     <string name="serviceDescription" translatable="false">Descrição do serviço</string>
     <string name="serviceStartDate" translatable="false">Data inicio do serviço</string>
     <string name="serviceEndDate" translatable="false">Data final do serviço</string>
-    <string name="serviceAmount" translatable="false">Valor do serviço</string>
+    <string name="serviceAmount" translatable="false">Valor do serviço(R$)</string>
     <string name="servicePaymentTerms" translatable="false">Forma de pagamento</string>
     <string name="obligations" translatable="false">Obrigações das Partes</string>
     <string name="termination" translatable="false">Cláusula de recisão</string>

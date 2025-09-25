@@ -2,6 +2,9 @@ package com.n1ck120.easydoc.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputFilter
+import android.text.InputType
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.RadioButton
@@ -23,7 +26,9 @@ import com.n1ck120.easydoc.core.document.DocumentModels
 import com.n1ck120.easydoc.database.room.AppDatabase
 import com.n1ck120.easydoc.database.room.Doc
 import kotlinx.coroutines.launch
+import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.json.Json
+import org.w3c.dom.Text
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.memberProperties
 import kotlin.text.contains
@@ -106,9 +111,17 @@ class ModelEditorActivity : AppCompatActivity() {
                 val property = classe::class.memberProperties.find { it.name == fieldList[count] } as? KProperty1<Any, *>
                 val propName = property?.name.toString()
                 val valor = property?.get(classe)
-                if (valor is String && valor.isEmpty()) {
+                if (valor != null && propName != "title" && propName != "description" && propName != "content") {
                     val textInputLayout = TextInputLayout(this)
                     val textField = EditText(this)
+                    when(valor::class.simpleName.toString().lowercase()){
+                        "string" -> textField.inputType = InputType.TYPE_CLASS_TEXT
+                        "int" -> {
+                            textField.inputType = InputType.TYPE_CLASS_NUMBER
+                            textField.filters = arrayOf(InputFilter.LengthFilter(14))
+                        }
+                        "float" -> textField.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+                    }
                     textField.id = count
                     textField.tag = propName
                     ids.add(textField.id)
