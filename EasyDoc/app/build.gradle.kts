@@ -86,7 +86,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     //noinspection UseTomlInstead
-    implementation("net.java.dev.jna:jna:5.17.0@aar")
+    implementation("net.java.dev.jna:jna:5.18.0@aar")
     //noinspection UseTomlInstead
     implementation("com.goterl:lazysodium-android:5.2.0@aar")
     //Room

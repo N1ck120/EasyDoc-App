@@ -50,9 +50,11 @@ object DocumentGen {
 
                     val document = XWPFDocument()
                     val tmpParagraph = document.createParagraph()
+                    val tmpParagraph2 = document.createParagraph()
 
                     //tmpParagraph.alignment = ParagraphAlignment.LEFT
                     val tmpRun = tmpParagraph.createRun()
+                    val tmpRun2 = tmpParagraph2.createRun()
 
                     if (docTitle.contains("\n")){
                         val lines = docTitle.split("\n")
@@ -64,18 +66,19 @@ object DocumentGen {
                         }
                     }else{
                         tmpRun.setText(docTitle)
+                        tmpRun2.addBreak()
                     }
 
                     if (docContent.contains("\n")){
                         val lines2 = docContent.split("\n")
                         var i2 = 0
                         while (i2 < lines2.size){
-                            tmpRun.setText(lines2[i2])
-                            tmpRun.addBreak()
+                            tmpRun2.setText(lines2[i2])
+                            tmpRun2.addBreak()
                             i2++
                         }
                     }else{
-                        tmpRun.setText(docContent)
+                        tmpRun2.setText(docContent)
                     }
                     //tmpRun.setFontSize(18)
                     document.write(outputStream)
