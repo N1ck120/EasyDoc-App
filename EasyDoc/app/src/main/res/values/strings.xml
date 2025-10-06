@@ -106,4 +106,6 @@
     <string name="ndaDurationYears" translatable="false">Prazo de Vigência</string>
     <string name="terminationReason" translatable="false">Motivo da Rescisão</string>
     <string name="field_revision">One or more fields need revision!</string>
+    <string name="extracted_content">Extracted content</string>
+    <string name="invalid_file">Invalid or corrupt file</string>
 </resources>

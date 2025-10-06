@@ -1,7 +1,10 @@
 package com.n1ck120.easydoc.fragments
 
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +33,8 @@ import com.n1ck120.easydoc.utils.DialogBuilder
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.io.FileInputStream
+import java.io.FileOutputStream
 
 class SettingsFragment : Fragment() {
 
@@ -49,6 +54,8 @@ class SettingsFragment : Fragment() {
         val settingBtn = bottomNav.menu.findItem(R.id.item_4)
         val helpBtn = view.findViewById<MaterialButton>(R.id.helpButton)
         val agreementBtn = view.findViewById<MaterialButton>(R.id.agreementButton)
+        val btnExport = view.findViewById<MaterialButton>(R.id.exportdb)
+        val btnImport = view.findViewById<MaterialButton>(R.id.importdb)
         //Instanciando DialogBuilder
         val dialog = DialogBuilder(requireContext())
         //Declaração de variaveis relacionadas ao dataStore
@@ -211,6 +218,27 @@ class SettingsFragment : Fragment() {
             b.isEnabled = false
                 dialog.show()
         }
+
+        btnExport.setOnClickListener {
+            val dbfile = requireContext().getDatabasePath("database.db")
+            //FileInputStream(dbfile).use { input ->
+                /*FileOutputStream().use { output ->
+                    input.channel.transferTo(0, input.channel.size(), output.channel)
+                }*/
+            //}
+
+            val resolver = requireContext().contentResolver
+            val collection = MediaStore.Files.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
+            val metaValues = ContentValues().apply {
+                put(MediaStore.Files.FileColumns.DISPLAY_NAME, "backup.db")
+                put(MediaStore.Files.FileColumns.MIME_TYPE, "application/octet-stream")
+                put(MediaStore.Files.FileColumns.RELATIVE_PATH, Environment.DIRECTORY_DOCUMENTS)
+                put(MediaStore.Files.FileColumns.IS_PENDING, 1)
+            }
+
+            val uri = resolver.insert(collection, metaValues)
+        }
+
         return view
     }
 }

@@ -158,6 +158,56 @@
                         android:textSize="16sp" />
 
                     <View
+                        android:id="@+id/divhisefwder3"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textDView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Backup do app"
+                            android:textSize="16sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/exportdb"
+                                style="?attr/materialButtonOutlinedStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:icon="@drawable/round_file_download_24"
+                                android:text="Exportar" />
+
+                            <Space
+                                android:layout_width="10dp"
+                                android:layout_height="wrap_content" />
+
+                            <Button
+                                android:id="@+id/importdb"
+                                style="?attr/materialButtonOutlinedStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:icon="@drawable/round_file_upload_24"
+                                android:text="Importar" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
                         android:id="@+id/divisefwder3"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"

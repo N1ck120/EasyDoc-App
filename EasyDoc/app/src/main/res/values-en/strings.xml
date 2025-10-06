@@ -77,4 +77,6 @@
     <string name="delete_all_warning_title">Delete ALL saved documents?</string>
     <string name="all_deleted_toast">All documents have been deleted!</string>
     <string name="field_revision">One or more fields need revision!</string>
+    <string name="extracted_content">Extracted content</string>
+    <string name="invalid_file">Invalid or corrupt file</string>
 </resources>
