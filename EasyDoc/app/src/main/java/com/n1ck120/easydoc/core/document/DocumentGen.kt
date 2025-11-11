@@ -7,12 +7,63 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.widget.Toast
 import com.itextpdf.kernel.pdf.PdfDocument
+import com.itextpdf.kernel.pdf.PdfDocumentInfo
+import com.itextpdf.kernel.pdf.PdfReader
 import com.itextpdf.kernel.pdf.PdfWriter
 import com.itextpdf.layout.Document
 import com.itextpdf.layout.element.Paragraph
 import org.apache.poi.xwpf.usermodel.XWPFDocument
+import java.io.InputStream
 
 object DocumentGen {
+
+    fun docClean(doc: InputStream, format: String?){
+        if (format == "application/pdf"){
+            val document = PdfDocument(PdfReader(doc))
+            document.documentInfo.creator
+            document.documentInfo.title
+            document.documentInfo.author
+            document.documentInfo.keywords
+            document.documentInfo.producer
+            document.documentInfo.getMoreInfo("CreationDate")
+            document.documentInfo.getMoreInfo("ModDate")
+        }else{
+            val document = XWPFDocument(doc)
+            document.properties.coreProperties.creator
+            document.properties.coreProperties.lastModifiedByUser
+            document.properties.coreProperties.created
+            document.properties.extendedProperties.appVersion
+            document.properties.extendedProperties.application
+            document.properties.extendedProperties.company
+            document.properties.extendedProperties.manager
+            document.properties.extendedProperties.totalTime
+        }
+    }
+
+    fun docInfo(doc: InputStream, format: String?): MutableList<String?> {
+        val infoArray = mutableListOf<String?>()
+        if (format == "application/pdf"){
+            val document = PdfDocument(PdfReader(doc))
+            document.documentInfo.creator.takeIf { it != null }?.let {infoArray.add("Criador: "+it)}
+            document.documentInfo.title.takeIf { it != null }?.let {infoArray.add("Titulo: "+it)}
+            document.documentInfo.author.takeIf { it != null }?.let {infoArray.add("Autor: "+it)}
+            document.documentInfo.keywords.takeIf { it != null }?.let {infoArray.add("Keywords: "+it)}
+            document.documentInfo.producer.takeIf { it != null }?.let {infoArray.add("Gerado por: "+it)}
+            document.documentInfo.getMoreInfo("CreationDate").takeIf { it != null }?.let {infoArray.add("Data de criação: "+it)}
+            document.documentInfo.getMoreInfo("ModDate").takeIf { it != null }?.let {infoArray.add("Última alteração: "+it)}
+        }else{
+            val document = XWPFDocument(doc)
+            document.properties.coreProperties.creator.takeIf { it != null }?.let {infoArray.add("Gerado por: "+it)}
+            document.properties.coreProperties.lastModifiedByUser.takeIf { it != null }?.let {infoArray.add("Última modificação feita por: "+it)}
+            infoArray.add("Data de criação: "+document.properties.coreProperties.created.toString())
+            document.properties.extendedProperties.appVersion.takeIf { it != null }?.let {infoArray.add("Versão do app: "+it)}
+            document.properties.extendedProperties.application.takeIf { it != null }?.let {infoArray.add("Aplicação: "+it)}
+            document.properties.extendedProperties.company.takeIf { it != null }?.let {infoArray.add("Compania: "+it)}
+            document.properties.extendedProperties.manager.takeIf { it != null }?.let {infoArray.add("Gerente: "+it)}
+            infoArray.add("Tempo total de edição: "+document.properties.extendedProperties.totalTime.toString())
+        }
+        return infoArray
+    }
 
     fun docGenerator(docTitle : String, docContent : String, docName : String, format : String, context: Context): Uri? {
         val resolver = context.contentResolver

@@ -78,5 +78,5 @@
     <string name="all_deleted_toast">Todos os documentos foram apagados!</string>
     <string name="field_revision">Um ou mais campos necessitam de revisão!</string>
     <string name="extracted_content">Conteúdo extraido</string>
-    <string name="invalid_file">Arquivo inválido ou corrompido</string>
+    <string name="invalid_file">Arquivo inválido, corrompido ou não suportado</string>
 </resources>

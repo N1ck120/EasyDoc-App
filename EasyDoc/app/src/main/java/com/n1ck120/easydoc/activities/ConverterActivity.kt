@@ -69,7 +69,6 @@ class ConverterActivity : AppCompatActivity() {
                         val textoExtraido = PdfTextExtractor.getTextFromPage(pdfDoc.getPage(1))
                         textpdf = textoExtraido
                         dialog.genericDialog("Converter arquivo" ,"Você converterá $filename1 para DOCX, o arquivo original NÃO será apagado continuar?", this,"Confirmar", "Canacelar", false)
-                        //dialog.docDialog("Conteúdo extraido",textoExtraido.lineSequence().first(),textoExtraido.replace(textoExtraido.lineSequence().first()+"\n", "")+"\n",filename1?.replace(".pdf", "") ?: "")
                         pdfDoc.close()
                     }else{
                         val document = XWPFDocument(stream)
@@ -80,7 +79,6 @@ class ConverterActivity : AppCompatActivity() {
                         }
                         textdocx = texto
                         dialog.genericDialog("Converter arquivo" ,"Você converterá $filename1 para PDF, o arquivo original NÃO será apagado continuar?", this,"Confirmar", "Canacelar", false)
-                        //dialog.docDialog(getString(R.string.extracted_content),texto.lineSequence().first(),texto.replace(texto.lineSequence().first()+"\n", ""), filename1?.replace(".docx", "") ?: "")
                     }
                 }
             }catch (e: Exception){
