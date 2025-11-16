@@ -30,6 +30,8 @@ class CleanerActivity : AppCompatActivity() {
     lateinit var scroll : ScrollView
     lateinit var linearl : LinearLayout
 
+    lateinit var clearBtn : MaterialButton
+
     val doc = DocumentGen
 
     private val pickFile = registerForActivityResult(
@@ -55,12 +57,17 @@ class CleanerActivity : AppCompatActivity() {
                     linearl.visibility = VISIBLE
                     var i = 0
                     var text = ""
+                    //Toast.makeText(this, selectedUri.toString(), Toast.LENGTH_SHORT).show()
                     val list = doc.docInfo(stream, fileMime)
                     while (list.size > i){
                         text += list[i]+"\n\n"
                         i++
                     }
                     findViewById<TextView>(R.id.textView14).text = text
+                }
+                clearBtn.setOnClickListener {
+                    doc.docClean(selectedUri, fileMime, this)
+                    Toast.makeText(this, "aaaaaaaaaaa", Toast.LENGTH_SHORT).show()
                 }
             }catch (e: Exception){
                 file.visibility = VISIBLE
@@ -87,6 +94,7 @@ class CleanerActivity : AppCompatActivity() {
         val helpBtn = findViewById<MaterialButton>(R.id.helpButton)
         file = findViewById<MaterialCardView>(R.id.selectFile)
         val file2 = findViewById<MaterialButton>(R.id.selectFile2)
+        clearBtn = findViewById<MaterialButton>(R.id.clearBtn)
         scroll = findViewById<ScrollView>(R.id.scrollView2)
         linearl = findViewById<LinearLayout>(R.id.layoutBtns)
         //Instanciando DialogBuilder
@@ -99,6 +107,8 @@ class CleanerActivity : AppCompatActivity() {
         file2.setOnClickListener {
             pickFile.launch(arrayOf("application/vnd.openxmlformats-officedocument.wordprocessingml.document", "application/pdf"))
         }
+
+
 
         backBtn.setOnClickListener {
             finish()

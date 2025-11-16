@@ -8,35 +8,48 @@ import android.provider.MediaStore
 import android.widget.Toast
 import com.itextpdf.kernel.pdf.PdfDocument
 import com.itextpdf.kernel.pdf.PdfDocumentInfo
+import com.itextpdf.kernel.pdf.PdfName
+import com.itextpdf.kernel.pdf.PdfName.a
 import com.itextpdf.kernel.pdf.PdfReader
 import com.itextpdf.kernel.pdf.PdfWriter
 import com.itextpdf.layout.Document
 import com.itextpdf.layout.element.Paragraph
 import org.apache.poi.xwpf.usermodel.XWPFDocument
 import java.io.InputStream
+import java.io.OutputStream
 
 object DocumentGen {
 
-    fun docClean(doc: InputStream, format: String?){
+    fun docClean(outuri: Uri, format: String?, context: Context){
+        val resolver = context.contentResolver
         if (format == "application/pdf"){
-            val document = PdfDocument(PdfReader(doc))
-            document.documentInfo.creator
-            document.documentInfo.title
-            document.documentInfo.author
-            document.documentInfo.keywords
-            document.documentInfo.producer
-            document.documentInfo.getMoreInfo("CreationDate")
-            document.documentInfo.getMoreInfo("ModDate")
+            resolver.openOutputStream(outuri).use { outputStream ->
+                val document = PdfDocument(PdfWriter(outputStream))
+                document.documentInfo.creator = ""
+                document.documentInfo.title = ""
+                document.documentInfo.author = ""
+                document.documentInfo.keywords = ""
+                //document.documentInfo.producer = null
+                //ocument.trailer.getAsDictionary(PdfName.Info).
+                document.documentInfo.getMoreInfo("CreationDate")
+                document.documentInfo.getMoreInfo("ModDate")
+
+                document.close()
+            }
         }else{
-            val document = XWPFDocument(doc)
-            document.properties.coreProperties.creator
-            document.properties.coreProperties.lastModifiedByUser
-            document.properties.coreProperties.created
-            document.properties.extendedProperties.appVersion
-            document.properties.extendedProperties.application
-            document.properties.extendedProperties.company
-            document.properties.extendedProperties.manager
-            document.properties.extendedProperties.totalTime
+            resolver.openInputStream(outuri).use { outputStream ->
+                val document = XWPFDocument(outputStream)
+                document.properties.coreProperties.creator = null
+                document.properties.coreProperties.lastModifiedByUser = null
+                //document.properties.coreProperties.created = null
+                document.properties.extendedProperties.appVersion = null
+                document.properties.extendedProperties.application = null
+                document.properties.extendedProperties.company = null
+                document.properties.extendedProperties.manager = null
+                //document.properties.extendedProperties.totalTime = null
+
+                document.write(resolver.openOutputStream(outuri))
+            }
         }
     }
 
