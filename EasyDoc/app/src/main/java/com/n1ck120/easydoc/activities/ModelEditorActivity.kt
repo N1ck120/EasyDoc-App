@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.InputType
-import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.RadioButton
@@ -21,14 +20,12 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
 import com.n1ck120.easydoc.R
 import com.n1ck120.easydoc.core.document.DocModel
-import com.n1ck120.easydoc.core.document.DocumentGen
+import com.n1ck120.easydoc.core.document.DocumentUtils
 import com.n1ck120.easydoc.core.document.DocumentModels
 import com.n1ck120.easydoc.database.room.AppDatabase
 import com.n1ck120.easydoc.database.room.Doc
 import kotlinx.coroutines.launch
-import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.json.Json
-import org.w3c.dom.Text
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.memberProperties
 import kotlin.text.contains
@@ -188,7 +185,7 @@ class ModelEditorActivity : AppCompatActivity() {
                 paragraphText = aaa
             }
             if (count == ids.size){
-                DocumentGen.docGenerator(paragraphText.lineSequence().first(), paragraphText.replace(paragraphText.lineSequence().first()+"\n", ""), (docModel.title.replace(" ","_")), findViewById<RadioButton>(format.checkedRadioButtonId).text.toString().lowercase(), this)
+                DocumentUtils.docGenerator(paragraphText.lineSequence().first(), paragraphText.replace(paragraphText.lineSequence().first()+"\n", ""), (docModel.title.replace(" ","_")), findViewById<RadioButton>(format.checkedRadioButtonId).text.toString().lowercase(), this)
             }
         }
 
@@ -210,7 +207,7 @@ class ModelEditorActivity : AppCompatActivity() {
                 paragraphText = aaa
             }
             if (count == ids.size){
-                val uri = DocumentGen.docGenerator(paragraphText.lineSequence().first(), paragraphText.replace(paragraphText.lineSequence().first()+"\n", ""), (docModel.title.replace(" ","_")), findViewById<RadioButton>(format.checkedRadioButtonId).text.toString().lowercase(), this)
+                val uri = DocumentUtils.docGenerator(paragraphText.lineSequence().first(), paragraphText.replace(paragraphText.lineSequence().first()+"\n", ""), (docModel.title.replace(" ","_")), findViewById<RadioButton>(format.checkedRadioButtonId).text.toString().lowercase(), this)
                 val shareIntent = Intent(Intent.ACTION_SEND).apply {
                     type = "application/pdf"
                     putExtra(Intent.EXTRA_STREAM, uri)

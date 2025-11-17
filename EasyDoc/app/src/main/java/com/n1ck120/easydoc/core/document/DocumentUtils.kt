@@ -5,74 +5,93 @@ import android.content.Context
 import android.net.Uri
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
+import android.util.Log.ERROR
 import android.widget.Toast
 import com.itextpdf.kernel.pdf.PdfDocument
-import com.itextpdf.kernel.pdf.PdfDocumentInfo
-import com.itextpdf.kernel.pdf.PdfName
-import com.itextpdf.kernel.pdf.PdfName.a
 import com.itextpdf.kernel.pdf.PdfReader
 import com.itextpdf.kernel.pdf.PdfWriter
 import com.itextpdf.layout.Document
 import com.itextpdf.layout.element.Paragraph
+import com.n1ck120.easydoc.R
 import org.apache.poi.xwpf.usermodel.XWPFDocument
 import java.io.InputStream
-import java.io.OutputStream
 
-object DocumentGen {
+object DocumentUtils {
 
-    fun docClean(outuri: Uri, format: String?, context: Context){
+    fun docClean(outuri: Uri, format: String?, context: Context): MutableList<String?>? {
         val resolver = context.contentResolver
         if (format == "application/pdf"){
-            resolver.openOutputStream(outuri).use { outputStream ->
-                val document = PdfDocument(PdfWriter(outputStream))
-                document.documentInfo.creator = ""
-                document.documentInfo.title = ""
-                document.documentInfo.author = ""
-                document.documentInfo.keywords = ""
-                //document.documentInfo.producer = null
-                //ocument.trailer.getAsDictionary(PdfName.Info).
-                document.documentInfo.getMoreInfo("CreationDate")
-                document.documentInfo.getMoreInfo("ModDate")
+            try {
+                resolver.openOutputStream(outuri).use { outputStream ->
+                    val document = PdfDocument(PdfWriter(outputStream))
+                    document.documentInfo.creator?.let { document.documentInfo.creator = null}
+                    document.documentInfo.title?.let { document.documentInfo.creator = null }
+                    document.documentInfo.author?.let { document.documentInfo.creator = null }
+                    document.documentInfo.keywords?.let { document.documentInfo.creator = null }
+                    //document.documentInfo.producer = null
+                    document.documentInfo.removeCreationDate()
+                    document.documentInfo.setMoreInfo("ModDate", null)
 
-                document.close()
+                    document.close()
+                }
+                Toast.makeText(context,context.getString(R.string.metadata_removed), Toast.LENGTH_SHORT).show()
+                resolver.openInputStream(outuri)?.use { stream ->
+                    return docInfo(stream, format)
+                }
+            }catch (e: Exception){
+                Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show()
             }
         }else{
-            resolver.openInputStream(outuri).use { outputStream ->
-                val document = XWPFDocument(outputStream)
-                document.properties.coreProperties.creator = null
-                document.properties.coreProperties.lastModifiedByUser = null
-                //document.properties.coreProperties.created = null
-                document.properties.extendedProperties.appVersion = null
-                document.properties.extendedProperties.application = null
-                document.properties.extendedProperties.company = null
-                document.properties.extendedProperties.manager = null
-                //document.properties.extendedProperties.totalTime = null
+            try {
+                resolver.openInputStream(outuri).use { outputStream ->
+                    val document = XWPFDocument(outputStream)
+                    document.properties.coreProperties.modified?.let { document.properties.coreProperties.modified.time = 0 }
+                    document.properties.coreProperties.creator?.let { document.properties.coreProperties.creator = null }
+                    document.properties.coreProperties.lastModifiedByUser?.let { document.properties.coreProperties.lastModifiedByUser = null }
+                    document.properties.coreProperties.created.time = 0
+                    document.properties.extendedProperties.appVersion?.let { document.properties.extendedProperties.appVersion = null }
+                    document.properties.extendedProperties.application?.let { document.properties.extendedProperties.application = null }
+                    document.properties.extendedProperties.company?.let { document.properties.extendedProperties.company = null }
+                    document.properties.extendedProperties.manager?.let { document.properties.extendedProperties.manager = null }
+                    document.properties.extendedProperties.totalTime = 0
 
-                document.write(resolver.openOutputStream(outuri))
+                    document.write(resolver.openOutputStream(outuri))
+                }
+                Toast.makeText(context,context.getString(R.string.metadata_removed), Toast.LENGTH_SHORT).show()
+
+                resolver.openInputStream(outuri)?.use { stream ->
+                    return docInfo(stream, format)
+                }
+            }catch (e: Exception){
+                Log.println(ERROR, null, e.toString())
+                //Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show()
             }
         }
+        return null
     }
 
     fun docInfo(doc: InputStream, format: String?): MutableList<String?> {
         val infoArray = mutableListOf<String?>()
         if (format == "application/pdf"){
             val document = PdfDocument(PdfReader(doc))
-            document.documentInfo.creator.takeIf { it != null }?.let {infoArray.add("Criador: "+it)}
-            document.documentInfo.title.takeIf { it != null }?.let {infoArray.add("Titulo: "+it)}
-            document.documentInfo.author.takeIf { it != null }?.let {infoArray.add("Autor: "+it)}
-            document.documentInfo.keywords.takeIf { it != null }?.let {infoArray.add("Keywords: "+it)}
-            document.documentInfo.producer.takeIf { it != null }?.let {infoArray.add("Gerado por: "+it)}
-            document.documentInfo.getMoreInfo("CreationDate").takeIf { it != null }?.let {infoArray.add("Data de criação: "+it)}
-            document.documentInfo.getMoreInfo("ModDate").takeIf { it != null }?.let {infoArray.add("Última alteração: "+it)}
+            document.documentInfo.creator?.let {infoArray.add("Criador: "+it)}
+            document.documentInfo.title?.let {infoArray.add("Titulo: "+it)}
+            document.documentInfo.author?.let {infoArray.add("Autor: "+it)}
+            document.documentInfo.keywords?.let {infoArray.add("Keywords: "+it)}
+            document.documentInfo.producer?.let {infoArray.add("Gerado por: "+it)}
+            document.documentInfo.getMoreInfo("CreationDate")?.let {infoArray.add("Data de criação: "+it)}
+            document.documentInfo.getMoreInfo("ModDate")?.let {infoArray.add("Última alteração: "+it)}
         }else{
             val document = XWPFDocument(doc)
-            document.properties.coreProperties.creator.takeIf { it != null }?.let {infoArray.add("Gerado por: "+it)}
-            document.properties.coreProperties.lastModifiedByUser.takeIf { it != null }?.let {infoArray.add("Última modificação feita por: "+it)}
+            document.properties.coreProperties.creator?.let {infoArray.add("Gerado por: "+it)}
+            document.properties.coreProperties.lastModifiedByUser?.let {infoArray.add("Última modificação feita por: "+it)}
             infoArray.add("Data de criação: "+document.properties.coreProperties.created.toString())
-            document.properties.extendedProperties.appVersion.takeIf { it != null }?.let {infoArray.add("Versão do app: "+it)}
-            document.properties.extendedProperties.application.takeIf { it != null }?.let {infoArray.add("Aplicação: "+it)}
-            document.properties.extendedProperties.company.takeIf { it != null }?.let {infoArray.add("Compania: "+it)}
-            document.properties.extendedProperties.manager.takeIf { it != null }?.let {infoArray.add("Gerente: "+it)}
+            document.properties.coreProperties.modified?.let {infoArray.add("Última alteração: "+it)}
+            document.properties.extendedProperties.appVersion?.let {infoArray.add("Versão do app: "+it)}
+            document.properties.extendedProperties.application?.let {infoArray.add("Aplicação: "+it)}
+            document.properties.extendedProperties.company?.let {infoArray.add("Compania: "+it)}
+            document.properties.extendedProperties.manager?.let {infoArray.add("Gerente: "+it)}
             infoArray.add("Tempo total de edição: "+document.properties.extendedProperties.totalTime.toString())
         }
         return infoArray

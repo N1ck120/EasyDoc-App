@@ -16,7 +16,7 @@ import com.itextpdf.kernel.pdf.PdfDocument
 import com.itextpdf.kernel.pdf.PdfReader
 import com.itextpdf.kernel.pdf.canvas.parser.PdfTextExtractor
 import com.n1ck120.easydoc.R
-import com.n1ck120.easydoc.core.document.DocumentGen
+import com.n1ck120.easydoc.core.document.DocumentUtils
 import com.n1ck120.easydoc.utils.DialogBuilder
 import org.apache.poi.xwpf.usermodel.XWPFDocument
 import org.apache.poi.xwpf.usermodel.XWPFParagraph
@@ -39,7 +39,7 @@ class ConverterActivity : AppCompatActivity() {
 
     var textdocx = ""
 
-    val doc = DocumentGen
+    val doc = DocumentUtils
 
     /*try {
 

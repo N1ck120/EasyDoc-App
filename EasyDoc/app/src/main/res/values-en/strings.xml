@@ -30,7 +30,7 @@
     <string name="save">Save</string>
     <string name="export">Export</string>
     <string name="create_a_new_document">Create a new document</string>
-    <string name="help_metadata_cleaner">Metadata includes information such as who created the document, when, and with which application. This information can be critical in some contexts. The metadata cleaner removes it to enhance your privacy.</string>
+    <string name="help_metadata_cleaner">Metadata consists of extra information embedded in documents, such as the author who created it, the creation date, and the software used. In certain contexts, this data can compromise your privacy or security. The metadata cleaner removes these details to protect you.\n\nNote: Not all metadata can be completely removed. In such cases, they are replaced with generic values, such as \'Unknown Author\' or \'Date Not Specified\'.</string>
     <string name="help_converter">The file converter allows you to convert documents between DOCX and PDF formats, and vice versa. Note: Depending on the PDF\'s formatting, the conversion to DOCX may not be perfect.</string>
     <string name="title">Title</string>
     <string name="content">Content</string>
@@ -79,4 +79,6 @@
     <string name="field_revision">One or more fields need revision!</string>
     <string name="extracted_content">Extracted content</string>
     <string name="invalid_file">Invalid, corrupted, or unsupported file</string>
+    <string name="found_metadata">Metadata found</string>
+    <string name="metadata_removed">Metadata removed</string>
 </resources>

@@ -3,7 +3,6 @@ package com.n1ck120.easydoc.utils
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
-import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
@@ -12,7 +11,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.n1ck120.easydoc.R
-import com.n1ck120.easydoc.core.document.DocumentGen
+import com.n1ck120.easydoc.core.document.DocumentUtils
 import com.n1ck120.easydoc.database.room.Doc
 import java.time.LocalDateTime
 
@@ -43,7 +42,7 @@ class DialogBuilder(private val context: Context, private val saveDocCallback: (
         contentDoc.setText(docContent)
         outputDoc.setText(docOut)
 
-        val doc = DocumentGen
+        val doc = DocumentUtils
 
         fun getDate(): String{
             var date : String

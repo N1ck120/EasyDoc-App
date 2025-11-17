@@ -20,7 +20,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.n1ck120.easydoc.R
-import com.n1ck120.easydoc.core.document.DocumentGen
+import com.n1ck120.easydoc.core.document.DocumentUtils
 import com.n1ck120.easydoc.utils.DialogBuilder
 
 class CleanerActivity : AppCompatActivity() {
@@ -29,10 +29,11 @@ class CleanerActivity : AppCompatActivity() {
     lateinit var file : MaterialCardView
     lateinit var scroll : ScrollView
     lateinit var linearl : LinearLayout
-
     lateinit var clearBtn : MaterialButton
 
-    val doc = DocumentGen
+    lateinit var title : TextView
+
+    val doc = DocumentUtils
 
     private val pickFile = registerForActivityResult(
         ActivityResultContracts.OpenDocument()
@@ -52,12 +53,12 @@ class CleanerActivity : AppCompatActivity() {
             fileMime = mime
             try {
                 inputStream?.use { stream ->
-                    file.visibility = GONE                                                                 
-                    scroll.visibility = VISIBLE                                                            
+                    file.visibility = GONE
+                    scroll.visibility = VISIBLE
                     linearl.visibility = VISIBLE
+                    title.text = getString(R.string.found_metadata)
                     var i = 0
                     var text = ""
-                    //Toast.makeText(this, selectedUri.toString(), Toast.LENGTH_SHORT).show()
                     val list = doc.docInfo(stream, fileMime)
                     while (list.size > i){
                         text += list[i]+"\n\n"
@@ -66,8 +67,16 @@ class CleanerActivity : AppCompatActivity() {
                     findViewById<TextView>(R.id.textView14).text = text
                 }
                 clearBtn.setOnClickListener {
-                    doc.docClean(selectedUri, fileMime, this)
-                    Toast.makeText(this, "aaaaaaaaaaa", Toast.LENGTH_SHORT).show()
+                    var i = 0
+                    var text = ""
+                    val list = doc.docClean(selectedUri, fileMime, this)
+                    list?.size?.let { it1 ->
+                        while (it1 > i) {
+                            text += list[i] + "\n\n"
+                            i++
+                        }
+                    }
+                    findViewById<TextView>(R.id.textView14).text = text
                 }
             }catch (e: Exception){
                 file.visibility = VISIBLE
@@ -97,6 +106,7 @@ class CleanerActivity : AppCompatActivity() {
         clearBtn = findViewById<MaterialButton>(R.id.clearBtn)
         scroll = findViewById<ScrollView>(R.id.scrollView2)
         linearl = findViewById<LinearLayout>(R.id.layoutBtns)
+        title = findViewById<TextView>(R.id.documentText)
         //Instanciando DialogBuilder
         val dialog = DialogBuilder(this)
 
@@ -107,8 +117,6 @@ class CleanerActivity : AppCompatActivity() {
         file2.setOnClickListener {
             pickFile.launch(arrayOf("application/vnd.openxmlformats-officedocument.wordprocessingml.document", "application/pdf"))
         }
-
-
 
         backBtn.setOnClickListener {
             finish()
