@@ -81,4 +81,5 @@
     <string name="invalid_file">Invalid, corrupted, or unsupported file</string>
     <string name="found_metadata">Metadata found</string>
     <string name="metadata_removed">Metadata removed</string>
+    <string name="m3_colors">Use dynamic colors</string>
 </resources>

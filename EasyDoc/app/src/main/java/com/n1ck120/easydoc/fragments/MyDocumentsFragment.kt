@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.Toast
+import androidx.compose.ui.graphics.asComposeColorFilter
 import androidx.core.net.toUri
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.fragment.app.Fragment
@@ -44,7 +45,7 @@ class MyDocumentsFragment : Fragment() {
         val deleteAll = view.findViewById<MaterialButton>(R.id.deleteAllButton)
         val sort = view.findViewById<MaterialButton>(R.id.sortButton)
         val planeIcon = view.findViewById<ImageView>(R.id.planeIcon)
-
+        
         val createDoc = view.findViewById<FloatingActionButton>(R.id.floatingActionButton)
 
         try {

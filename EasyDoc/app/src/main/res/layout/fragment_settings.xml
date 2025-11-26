@@ -97,6 +97,20 @@
                     </LinearLayout>
 
                     <View
+                        android:id="@+id/divider23"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/m3colors"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@string/m3_colors"
+                        android:textSize="16sp" />
+
+                    <View
                         android:id="@+id/divider"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"

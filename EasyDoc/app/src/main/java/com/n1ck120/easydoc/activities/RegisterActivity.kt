@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doAfterTextChanged
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.button.MaterialButton
@@ -20,9 +21,19 @@ import com.n1ck120.easydoc.R
 import com.n1ck120.easydoc.database.datastore.SettingsDataStore
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        val datdaStore = SettingsDataStore.getDataStorePrefs(this)
+        val m3colors = booleanPreferencesKey("m3colors")
+        lifecycleScope.launch {
+            runBlocking {
+                if (datdaStore.data.first()[m3colors] ?: false){
+                    setTheme(com.google.android.material.R.style.Theme_Material3_DynamicColors_DayNight_NoActionBar)
+                }
+            }
+        }
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_register)

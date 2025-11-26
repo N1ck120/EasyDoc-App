@@ -1,5 +1,7 @@
 package com.n1ck120.easydoc.fragments
 
+import android.app.Activity
+import android.app.UiModeManager
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
@@ -17,6 +19,7 @@ import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.core.net.toUri
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.fragment.app.Fragment
@@ -24,6 +27,8 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.color.DynamicColors
+import com.google.android.material.color.DynamicColorsOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.materialswitch.MaterialSwitch
 import com.n1ck120.easydoc.R
@@ -49,6 +54,7 @@ class SettingsFragment : Fragment() {
         val theme = view.findViewById<MaterialButton>(R.id.btnTheme)
         val offlineSwitch = view.findViewById<MaterialSwitch>(R.id.offlineMode)
         val saveSwitch = view.findViewById<MaterialSwitch>(R.id.saveExported)
+        val m3Switch = view.findViewById<MaterialSwitch>(R.id.m3colors)
         val homeBtn = bottomNav.menu.findItem(R.id.item_1)
         val accountBtn = bottomNav.menu.findItem(R.id.item_3)
         val settingBtn = bottomNav.menu.findItem(R.id.item_4)
@@ -63,6 +69,7 @@ class SettingsFragment : Fragment() {
         val key = intPreferencesKey("theme")
         val offlineMode = intPreferencesKey("offlineMode")
         val saveExported = intPreferencesKey("saveExported")
+        val m3colors = booleanPreferencesKey("m3colors")
 
         homeBtn.setIcon(R.drawable.outline_insert_drive_file_24)
         settingBtn.setIcon(R.drawable.baseline_settings_24)
@@ -75,6 +82,12 @@ class SettingsFragment : Fragment() {
         lifecycleScope.launch {
             if (runBlocking { dataStore.data.first()[saveExported] ?: 1 } == 0){
                 saveSwitch.isChecked = false
+            }
+        }
+
+        lifecycleScope.launch {
+            if (runBlocking { dataStore.data.first()[m3colors] ?: false }){
+                m3Switch.isChecked = true
             }
         }
 
@@ -113,6 +126,24 @@ class SettingsFragment : Fragment() {
                 lifecycleScope.launch {
                     dataStore.edit { settings ->
                         settings[saveExported] = 0
+                    }
+                }
+            }
+        }
+
+        m3Switch.setOnCheckedChangeListener { buttonView, isChecked ->
+            lifecycleScope.launch {
+                runBlocking {
+                    if (isChecked) {
+                        dataStore.edit { settings ->
+                            settings[m3colors] = true
+                            requireActivity().recreate()
+                        }
+                    } else {
+                        dataStore.edit { settings ->
+                            settings[m3colors] = false
+                            requireActivity().recreate()
+                        }
                     }
                 }
             }

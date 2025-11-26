@@ -1,9 +1,12 @@
 package com.n1ck120.easydoc.activities
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.icu.text.IDNA
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
-import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
@@ -18,15 +21,28 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.color.DynamicColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.n1ck120.easydoc.R
 import com.n1ck120.easydoc.database.datastore.SettingsDataStore
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlin.math.log
 
 class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val dataStore = SettingsDataStore.getDataStorePrefs(this)
+        val m3colors = booleanPreferencesKey("m3colors")
+        lifecycleScope.launch {
+            runBlocking {
+                if (dataStore.data.first()[m3colors] ?: false){
+                    setTheme(com.google.android.material.R.style.Theme_Material3_DynamicColors_DayNight_NoActionBar)
+                }
+            }
+        }
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
@@ -43,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
         val loginEmail = findViewById<EditText>(R.id.loginEmail)
         val loginPass = findViewById<EditText>(R.id.loginPass)
         //Declaração de variaveis relacionadas ao dataStore
-        val dataStore = SettingsDataStore.getDataStorePrefs(this)
+
         val key = intPreferencesKey("theme")
         val offlineMode = intPreferencesKey("offlineMode")
         val accepted = booleanPreferencesKey("accepted")

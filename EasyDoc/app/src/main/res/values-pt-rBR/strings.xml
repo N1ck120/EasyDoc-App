@@ -81,4 +81,5 @@
     <string name="invalid_file">Arquivo inválido, corrompido ou não suportado</string>
     <string name="found_metadata">Metadados encontrados</string>
     <string name="metadata_removed">Metadados removidos</string>
+    <string name="m3_colors">Usar cores dinâmicas</string>
 </resources>

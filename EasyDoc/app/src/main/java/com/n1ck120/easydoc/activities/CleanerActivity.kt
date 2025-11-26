@@ -17,11 +17,17 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.n1ck120.easydoc.R
 import com.n1ck120.easydoc.core.document.DocumentUtils
+import com.n1ck120.easydoc.database.datastore.SettingsDataStore
 import com.n1ck120.easydoc.utils.DialogBuilder
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class CleanerActivity : AppCompatActivity() {
     var filename1 : String? = null
@@ -90,6 +96,15 @@ class CleanerActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val datdaStore = SettingsDataStore.getDataStorePrefs(this)
+        val m3colors = booleanPreferencesKey("m3colors")
+        lifecycleScope.launch {
+            runBlocking {
+                if (datdaStore.data.first()[m3colors] ?: false){
+                    setTheme(com.google.android.material.R.style.Theme_Material3_DynamicColors_DayNight_NoActionBar)
+                }
+            }
+        }
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_cleaner)

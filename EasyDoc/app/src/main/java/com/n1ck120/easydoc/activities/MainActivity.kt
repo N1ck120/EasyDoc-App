@@ -6,12 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.color.DynamicColors
 import com.n1ck120.easydoc.R
 import com.n1ck120.easydoc.database.datastore.SettingsDataStore
 import com.n1ck120.easydoc.database.room.AppDatabase
@@ -21,6 +23,7 @@ import com.n1ck120.easydoc.fragments.SettingsFragment
 import com.n1ck120.easydoc.fragments.ToolboxFragment
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,6 +31,15 @@ class MainActivity : AppCompatActivity() {
     lateinit var bottomNavigation : BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val datdaStore = SettingsDataStore.getDataStorePrefs(this)
+        val m3colors = booleanPreferencesKey("m3colors")
+        lifecycleScope.launch {
+            runBlocking {
+                if (datdaStore.data.first()[m3colors] ?: false){
+                    setTheme(com.google.android.material.R.style.Theme_Material3_DynamicColors_DayNight_NoActionBar)
+                }
+            }
+        }
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
