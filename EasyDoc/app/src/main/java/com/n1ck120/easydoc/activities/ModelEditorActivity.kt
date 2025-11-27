@@ -21,8 +21,8 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
 import com.n1ck120.easydoc.R
 import com.n1ck120.easydoc.core.document.DocModel
-import com.n1ck120.easydoc.core.document.DocumentUtils
 import com.n1ck120.easydoc.core.document.DocumentModels
+import com.n1ck120.easydoc.core.document.DocumentUtils
 import com.n1ck120.easydoc.database.datastore.SettingsDataStore
 import com.n1ck120.easydoc.database.room.AppDatabase
 import com.n1ck120.easydoc.database.room.Doc
@@ -32,7 +32,6 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.memberProperties
-import kotlin.text.contains
 
 class ModelEditorActivity : AppCompatActivity() {
 
@@ -64,7 +63,7 @@ class ModelEditorActivity : AppCompatActivity() {
 
         val linear = findViewById<LinearLayout>(R.id.linear)
         val jsonString = assets.open("doc_models.json").bufferedReader().use { it.readText() }
-        val documentModels = Json.Default.decodeFromString<DocumentModels>(jsonString)
+        val documentModels = Json.decodeFromString<DocumentModels>(jsonString)
         val docModel = documentModels.documents[intent.getIntExtra("Data", 0)]
         //Declaração de variaveis globais
         val title = findViewById<TextView>(R.id.modelTitle)

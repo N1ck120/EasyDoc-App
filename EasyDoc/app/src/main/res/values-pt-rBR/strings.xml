@@ -68,7 +68,6 @@
     <string name="invalid_characters">Contém caracteres inválidos!</string>
     <string name="share_via">Compartilhar via</string>
     <string name="delete">Apagar</string>
-    <string name="at">" às "</string>
     <string name="delete_warning">Atenção! A exclusão é permanente</string>
     <string name="delete_dialog_title">Apagar documento?</string>
     <string name="asc">CRE</string>
@@ -77,7 +76,6 @@
     <string name="delete_all_warning">Atenção TODOS os documentos salvos serão apagados de forma PERMANENTE e IRREVERSíVEL</string>
     <string name="all_deleted_toast">Todos os documentos foram apagados!</string>
     <string name="field_revision">Um ou mais campos necessitam de revisão!</string>
-    <string name="extracted_content">Conteúdo extraido</string>
     <string name="invalid_file">Arquivo inválido, corrompido ou não suportado</string>
     <string name="found_metadata">Metadados encontrados</string>
     <string name="metadata_removed">Metadados removidos</string>

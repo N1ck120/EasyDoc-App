@@ -13,7 +13,6 @@ import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.color.DynamicColors
 import com.n1ck120.easydoc.R
 import com.n1ck120.easydoc.database.datastore.SettingsDataStore
 import com.n1ck120.easydoc.database.room.AppDatabase

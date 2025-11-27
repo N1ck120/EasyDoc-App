@@ -59,7 +59,6 @@
             android:layout_height="match_parent">
 
             <ScrollView
-                android:id="@+id/scrollView3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -68,7 +67,6 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
-                    android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -80,7 +78,6 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/textView2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -97,7 +94,6 @@
                     </LinearLayout>
 
                     <View
-                        android:id="@+id/divider23"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="?android:attr/listDivider" />
@@ -111,13 +107,11 @@
                         android:textSize="16sp" />
 
                     <View
-                        android:id="@+id/divider"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="?android:attr/listDivider" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
-                        android:id="@+id/keepLogin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -126,13 +120,11 @@
                         android:textSize="16sp" />
 
                     <View
-                        android:id="@+id/divider2"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="?android:attr/listDivider" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
-                        android:id="@+id/autoSync"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -142,7 +134,6 @@
                         android:textSize="16sp" />
 
                     <View
-                        android:id="@+id/divider3"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="?android:attr/listDivider" />
@@ -157,7 +148,6 @@
                         android:textSize="16sp" />
 
                     <View
-                        android:id="@+id/diviwder3"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="?android:attr/listDivider" />
@@ -172,7 +162,6 @@
                         android:textSize="16sp" />
 
                     <View
-                        android:id="@+id/divhisefwder3"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="?android:attr/listDivider" />
@@ -184,7 +173,6 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/textDView2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -222,7 +210,6 @@
                     </LinearLayout>
 
                     <View
-                        android:id="@+id/divisefwder3"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="?android:attr/listDivider" />
@@ -240,7 +227,6 @@
                         app:cardCornerRadius="20dp">
 
                         <ImageView
-                            android:id="@+id/github"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:layout_margin="10dp"

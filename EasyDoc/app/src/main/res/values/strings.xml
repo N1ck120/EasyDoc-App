@@ -75,7 +75,6 @@
     <string name="invalid_characters">Contains invalid characters!</string>
     <string name="share_via">Share via</string>
     <string name="delete">Delete</string>
-    <string name="at">at</string>
     <string name="delete_warning">Attention! The exclusion is permanent.</string>
     <string name="delete_dialog_title">Delete document?</string>
     <string name="asc">ASC</string>
@@ -83,30 +82,7 @@
     <string name="delete_all_warning_title">Delete ALL saved documents?</string>
     <string name="delete_all_warning">Attention ALL saved documents will be deleted PERMANENTLY and IRREVERSIBLY</string>
     <string name="all_deleted_toast">All documents have been deleted!</string>
-    <string name="clientName" translatable="false">Nome do cliente</string>
-    <string name="clientTaxId" translatable="false">CPF/CNPJ do cliente</string>
-    <string name="clientAddress" translatable="false">Endereço do cliente</string>
-    <string name="providerName" translatable="false">Nome do prestador de serviço</string>
-    <string name="providerTaxId" translatable="false">CPF/CNPJ do prestador de serviço</string>
-    <string name="providerAddress" translatable="false">Endereço do prestador de serviço</string>
-    <string name="serviceDescription" translatable="false">Descrição do serviço</string>
-    <string name="serviceStartDate" translatable="false">Data inicio do serviço</string>
-    <string name="serviceEndDate" translatable="false">Data final do serviço</string>
-    <string name="serviceAmount" translatable="false">Valor do serviço(R$)</string>
-    <string name="servicePaymentTerms" translatable="false">Forma de pagamento</string>
-    <string name="obligations" translatable="false">Obrigações das Partes</string>
-    <string name="termination" translatable="false">Cláusula de recisão</string>
-    <string name="jurisdiction" translatable="false">Cláusula de foro</string>
-    <string name="signaturePlaceDate" translatable="false">Local e Data</string>
-    <string name="receiptDate" translatable="false">Data de recebimento</string>
-    <string name="proposalValidity" translatable="false">Validade desta proposta(Dias)</string>
-    <string name="serviceOrderNumber" translatable="false">Número da OS</string>
-    <string name="serviceOrderNotes" translatable="false">Observações</string>
-    <string name="ndaConfidentialInfo" translatable="false">Objeto(Assunto de confidencialidade)</string>
-    <string name="ndaDurationYears" translatable="false">Prazo de Vigência</string>
-    <string name="terminationReason" translatable="false">Motivo da Rescisão</string>
     <string name="field_revision">One or more fields need revision!</string>
-    <string name="extracted_content">Extracted content</string>
     <string name="invalid_file">Invalid, corrupted, or unsupported file</string>
     <string name="found_metadata">Metadata found</string>
     <string name="metadata_removed">Metadata removed</string>

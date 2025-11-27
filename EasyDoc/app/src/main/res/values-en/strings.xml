@@ -68,7 +68,6 @@
     <string name="invalid_characters">Contains invalid characters!</string>
     <string name="share_via">Share via</string>
     <string name="delete">Delete</string>
-    <string name="at">" at "</string>
     <string name="delete_warning">Attention! The exclusion is permanent.</string>
     <string name="delete_dialog_title">Delete document?</string>
     <string name="asc">ASC</string>
@@ -77,7 +76,6 @@
     <string name="delete_all_warning_title">Delete ALL saved documents?</string>
     <string name="all_deleted_toast">All documents have been deleted!</string>
     <string name="field_revision">One or more fields need revision!</string>
-    <string name="extracted_content">Extracted content</string>
     <string name="invalid_file">Invalid, corrupted, or unsupported file</string>
     <string name="found_metadata">Metadata found</string>
     <string name="metadata_removed">Metadata removed</string>

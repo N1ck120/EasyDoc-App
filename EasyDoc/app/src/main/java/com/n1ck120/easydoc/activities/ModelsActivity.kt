@@ -2,7 +2,6 @@ package com.n1ck120.easydoc.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.GridLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -58,7 +57,7 @@ class ModelsActivity : AppCompatActivity() {
         }
 
         val jsonString = assets.open("doc_models.json").bufferedReader().use { it.readText() }
-        val documentModels = Json.Default.decodeFromString<DocumentModels>(jsonString)
+        val documentModels = Json.decodeFromString<DocumentModels>(jsonString)
         val docModel = documentModels.documents
 
         val dataset1 = docModel

@@ -62,7 +62,6 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -77,14 +76,12 @@
             android:layout_height="match_parent" >
 
             <RadioButton
-                android:id="@+id/pdf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="@string/pdf" />
 
             <RadioButton
-                android:id="@+id/docx"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/docx" />

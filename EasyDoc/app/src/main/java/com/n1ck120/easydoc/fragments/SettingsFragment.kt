@@ -1,7 +1,5 @@
 package com.n1ck120.easydoc.fragments
 
-import android.app.Activity
-import android.app.UiModeManager
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +8,6 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.CheckBox
 import android.widget.RadioButton
 import android.widget.RadioGroup
@@ -27,8 +24,6 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
-import com.google.android.material.color.DynamicColors
-import com.google.android.material.color.DynamicColorsOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.materialswitch.MaterialSwitch
 import com.n1ck120.easydoc.R
@@ -38,8 +33,6 @@ import com.n1ck120.easydoc.utils.DialogBuilder
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import java.io.FileInputStream
-import java.io.FileOutputStream
 
 class SettingsFragment : Fragment() {
 
@@ -61,7 +54,7 @@ class SettingsFragment : Fragment() {
         val helpBtn = view.findViewById<MaterialButton>(R.id.helpButton)
         val agreementBtn = view.findViewById<MaterialButton>(R.id.agreementButton)
         val btnExport = view.findViewById<MaterialButton>(R.id.exportdb)
-        val btnImport = view.findViewById<MaterialButton>(R.id.importdb)
+        view.findViewById<MaterialButton>(R.id.importdb)
         //Instanciando DialogBuilder
         val dialog = DialogBuilder(requireContext())
         //Declaração de variaveis relacionadas ao dataStore
@@ -251,7 +244,7 @@ class SettingsFragment : Fragment() {
         }
 
         btnExport.setOnClickListener {
-            val dbfile = requireContext().getDatabasePath("database.db")
+            requireContext().getDatabasePath("database.db")
             //FileInputStream(dbfile).use { input ->
                 /*FileOutputStream().use { output ->
                     input.channel.transferTo(0, input.channel.size(), output.channel)
@@ -267,7 +260,7 @@ class SettingsFragment : Fragment() {
                 put(MediaStore.Files.FileColumns.IS_PENDING, 1)
             }
 
-            val uri = resolver.insert(collection, metaValues)
+            resolver.insert(collection, metaValues)
         }
 
         return view

@@ -1,11 +1,7 @@
 package com.n1ck120.easydoc.activities
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.icu.text.IDNA
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.CheckBox
 import android.widget.EditText
@@ -21,14 +17,12 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.color.DynamicColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.n1ck120.easydoc.R
 import com.n1ck120.easydoc.database.datastore.SettingsDataStore
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import kotlin.math.log
 
 class LoginActivity : AppCompatActivity() {
 
