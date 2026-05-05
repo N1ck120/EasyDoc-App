@@ -45,14 +45,12 @@ class SettingsFragment : Fragment() {
         val bottomNav : BottomNavigationView = (requireActivity() as MainActivity).bottomNavigation
         val gitCard = view.findViewById<MaterialCardView>(R.id.githubCard)
         val theme = view.findViewById<MaterialButton>(R.id.btnTheme)
-        val offlineSwitch = view.findViewById<MaterialSwitch>(R.id.offlineMode)
         val saveSwitch = view.findViewById<MaterialSwitch>(R.id.saveExported)
         val m3Switch = view.findViewById<MaterialSwitch>(R.id.m3colors)
         val homeBtn = bottomNav.menu.findItem(R.id.item_1)
-        val accountBtn = bottomNav.menu.findItem(R.id.item_3)
-        val settingBtn = bottomNav.menu.findItem(R.id.item_4)
+        val settingBtn = bottomNav.menu.findItem(R.id.item_3)
         val helpBtn = view.findViewById<MaterialButton>(R.id.helpButton)
-        val agreementBtn = view.findViewById<MaterialButton>(R.id.agreementButton)
+        view.findViewById<MaterialButton>(R.id.agreementButton)
         val btnExport = view.findViewById<MaterialButton>(R.id.exportdb)
         view.findViewById<MaterialButton>(R.id.importdb)
         //Instanciando DialogBuilder
@@ -60,7 +58,7 @@ class SettingsFragment : Fragment() {
         //Declaração de variaveis relacionadas ao dataStore
         val dataStore = SettingsDataStore.getDataStorePrefs(requireContext())
         val key = intPreferencesKey("theme")
-        val offlineMode = intPreferencesKey("offlineMode")
+        intPreferencesKey("offlineMode")
         val saveExported = intPreferencesKey("saveExported")
         val m3colors = booleanPreferencesKey("m3colors")
 
@@ -81,30 +79,6 @@ class SettingsFragment : Fragment() {
         lifecycleScope.launch {
             if (runBlocking { dataStore.data.first()[m3colors] ?: false }){
                 m3Switch.isChecked = true
-            }
-        }
-
-        lifecycleScope.launch {
-            if (runBlocking { dataStore.data.first()[offlineMode] ?: 0 } == 1){
-                offlineSwitch.isChecked = true
-            }
-        }
-
-        offlineSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked){
-                lifecycleScope.launch {
-                    dataStore.edit { settings ->
-                        settings[offlineMode] = 1
-                        accountBtn.isVisible = false
-                    }
-                }
-            }else{
-                lifecycleScope.launch {
-                    dataStore.edit { settings ->
-                        settings[offlineMode] = 0
-                        accountBtn.isVisible = true
-                    }
-                }
             }
         }
 
@@ -227,20 +201,6 @@ class SettingsFragment : Fragment() {
         helpBtn.setOnClickListener {
             dialog.genericDialog(getString(R.string.help),
                 getString(R.string.help_info),requireContext(),getString(R.string.understood), null)
-        }
-
-        agreementBtn.setOnClickListener {
-            val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.eula_dialog, null)
-            val a = dialogView.findViewById<MaterialButton>(R.id.button3)
-            val b = dialogView.findViewById<CheckBox>(R.id.checkBox3)
-            val dialog = MaterialAlertDialogBuilder(requireContext())
-                .setView(dialogView)
-                .setTitle(getString(R.string.terms_of_use))
-                .create()
-            a.isEnabled = false
-            b.isChecked = true
-            b.isEnabled = false
-                dialog.show()
         }
 
         btnExport.setOnClickListener {

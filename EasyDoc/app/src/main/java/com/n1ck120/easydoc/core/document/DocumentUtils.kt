@@ -102,7 +102,7 @@ object DocumentUtils {
         val collection = MediaStore.Files.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
 
         val metaValues = ContentValues().apply {
-            put(MediaStore.Files.FileColumns.DISPLAY_NAME, "$docName.$format")
+            put(MediaStore.Files.FileColumns.DISPLAY_NAME, docName)
             if (format == "pdf"){
                 put(MediaStore.Files.FileColumns.MIME_TYPE, "application/pdf")
             }else{

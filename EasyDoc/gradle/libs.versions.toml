@@ -2,7 +2,6 @@
 agp = "9.2.0"
 datastorePreferences = "1.2.1"
 fragmentKtx = "1.8.9"
-jjwtApi = "0.13.0"
 kernel = "9.6.0"
 kotlin = "2.3.21"
 coreKtx = "1.18.0"
@@ -28,8 +27,6 @@ androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref =
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
-jjwt-api = { module = "io.jsonwebtoken:jjwt-api", version.ref = "jjwtApi" }
-jjwt-impl = { module = "io.jsonwebtoken:jjwt-impl", version.ref = "jjwtApi" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

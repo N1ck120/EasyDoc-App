@@ -87,17 +87,9 @@ dependencies {
     implementation(libs.converter.gson)
     //noinspection UseTomlInstead
     implementation("net.java.dev.jna:jna:5.18.1@aar")
-    //noinspection UseTomlInstead
-    implementation("com.goterl:lazysodium-android:5.2.0@aar")
     //Room
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
     //annotationProcessor("androidx.room:room-compiler:$room_version")
     implementation(libs.androidx.room.ktx)
-    //Token JWT
-    api(libs.jjwt.api)
-    runtimeOnly(libs.jjwt.impl)
-    runtimeOnly("io.jsonwebtoken:jjwt-orgjson:0.12.6") {
-        exclude("org.json", "json") //provided by Android natively
-    }
 }

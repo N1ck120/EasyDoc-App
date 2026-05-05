@@ -1,35 +1,18 @@
 <resources>
     <string name="app_name" translatable="false">EasyDoc</string>
-    <string name="login" translatable="false">Login</string>
-    <string name="email" translatable="false">Email</string>
-    <string name="eula" translatable="false">Última atualização: [26/08/2025] 1. Sobre o EasyDoc O EasyDoc é um aplicativo que permite ao usuário criar uma conta, armazenar e gerenciar conteúdos de texto de forma segura em nossos servidores. Nosso compromisso é oferecer praticidade com foco em segurança e privacidade. 2. Criação de Conta - Para utilizar o EasyDoc, o usuário deve criar uma conta com informações verdadeiras e manter suas credenciais em sigilo. - As senhas são protegidas utilizando o algoritmo Argon2. - O usuário é responsável por todas as atividades realizadas em sua conta. 3. Privacidade e Segurança - Todos os dados enviados ao EasyDoc são criptografados localmente no dispositivo do usuário antes de serem transmitidos aos servidores. - Nenhuma informação fornecida pelo usuário será utilizada para propaganda, venda, cessão ou finalidade comercial de terceiros. - Adotamos medidas técnicas e organizacionais adequadas para proteger os dados, mas não podemos garantir segurança absoluta contra incidentes fora do nosso controle. 4. Armazenamento e Conteúdo - O usuário pode salvar conteúdos de texto em nossos servidores. - O conteúdo armazenado é de responsabilidade exclusiva do usuário, que deve garantir que não viole direitos de terceiros ou a legislação vigente. - Reservamo-nos o direito de remover ou suspender contas que violem estes Termos ou a lei. 5. Uso Adequado Ao utilizar o EasyDoc, o usuário concorda em não: - Utilizar o serviço para atividades ilegais ou não autorizadas. - Tentar acessar dados de outros usuários. - Prejudicar, comprometer ou sobrecarregar os servidores e sistemas do EasyDoc. 6. Limitação de Responsabilidade O EasyDoc é fornecido “como está” e “conforme disponível”. Não nos responsabilizamos por: - Perda de dados resultante de falhas técnicas, manutenção ou atualizações. - Interrupções de serviço causadas por fatores externos ao nosso controle. - Danos indiretos, incidentais ou consequenciais decorrentes do uso do Aplicativo. 7. Suporte Em caso de dúvidas ou solicitações, o usuário pode entrar em contato com nosso suporte através do e-mail: 📧 placeholder@placeholder.com 8. Alterações nos Termos Podemos atualizar estes Termos periodicamente. Notificaremos os usuários sobre mudanças relevantes. O uso contínuo do EasyDoc após tais alterações implica na aceitação dos novos Termos. 9. Encerramento de Conta O usuário pode encerrar sua conta a qualquer momento. Também podemos suspender ou excluir contas que violem estes Termos ou apresentem atividades suspeitas. 10. Legislação Aplicável Estes Termos são regidos pelas leis do Brasil. Qualquer disputa será submetida ao foro da comarca do domicílio do usuário, salvo disposição legal em contrário.</string>
     <string name="pdf" translatable="false">PDF</string>
     <string name="docx" translatable="false">DOCX</string>
-    <string name="logout" translatable="false">Logout</string>
     <string name="toolbox" translatable="false">Toolbox</string>
     <string name="help">Help</string>
     <string name="help_models">The Ready-Made Templates category provides various common document templates with predefined fields, allowing for the quick generation of a formatted document.</string>
-    <string name="terms_of_use">Terms of use</string>
-    <string name="email_invalid">Invalid email!</string>
     <string name="confirm">Confirm</string>
-    <string name="eula_agree">I have read and accepted the terms and conditions</string>
-    <string name="use_offline">Want to use it offline only?</string>
-    <string name="register">Register</string>
     <string name="models">Models</string>
-    <string name="stay_signed_in">Stay signed in</string>
-    <string name="offline_login">Offline login</string>
-    <string name="password">Password</string>
     <string name="help_info">App Theme: Sets the color scheme to be used throughout the application.\n\nStay Logged In: Keeps your session active, eliminating the need to log in each time you open the app (this option is only enabled when logged in).\n\nAutomatic Synchronization: Automatically downloads and updates documents saved in the cloud.\n\nOffline Mode: Disables all features that depend on the internet and automatically logs into offline mode.\n\nSave on Export: When exporting a document, it will be saved on the home screen.</string>
     <string name="metadata_cleaner">Metadata cleaner</string>
     <string name="select_file">Select file</string>
-    <string name="successfully_registered">Successfully registered</string>
     <string name="card_title">"Title: "</string>
     <string name="card_content">"Content: "</string>
     <string name="last_modified">"Last modified: "</string>
-    <string name="invalid_password_length">Password must contain at least 8 characters</string>
-    <string name="invalid_password_character">Invalid password the password cannot contain spaces</string>
-    <string name="password_mismatch">Passwords don\'t match!</string>
-    <string name="invalid_email">Invalid email!</string>
     <string name="system">System</string>
     <string name="light">Light</string>
     <string name="dark">Dark</string>
@@ -43,13 +26,10 @@
     <string name="content">Content</string>
     <string name="file_name">Output file name</string>
     <string name="share">Share</string>
-    <string name="account">Account</string>
     <string name="documents">Documents</string>
     <string name="nothing_to_show">Nothing to show yet,\n your documents will appear here.</string>
     <string name="settings">Settings</string>
     <string name="theme">App theme</string>
-    <string name="auto_sync">Automatic sync</string>
-    <string name="offline_mode">Offline mode</string>
     <string name="save_on_export">Save on export</string>
     <string name="file_converter">File converter</string>
     <string name="description">Description</string>
@@ -57,18 +37,10 @@
     <string name="cancel">Cancel</string>
     <string name="apply">Apply</string>
     <string name="understood">I understood</string>
-    <string name="invalid_password">Invalid password!</string>
     <string name="saved">Saved</string>
     <string name="deleted">Deleted</string>
     <string name="undo">Undo</string>
     <string name="updated">Updated</string>
-    <string name="create_password">Create a password</string>
-    <string name="repeat_password">Repeat password</string>
-    <string name="have_account">Already have an account?</string>
-    <string name="logout_warning">You will need to log in again to use document synchronization</string>
-    <string name="logout_account">Log out of your account?</string>
-    <string name="exit">Exit</string>
-    <string name="exit_app">Exit the app?</string>
     <string name="editor">Editor</string>
     <string name="error">Erro:</string>
     <string name="mandatory_field">Mandatory field</string>

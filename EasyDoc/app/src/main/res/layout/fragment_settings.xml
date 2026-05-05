@@ -112,47 +112,6 @@
                         android:background="?android:attr/listDivider" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:enabled="false"
-                        android:text="@string/stay_signed_in"
-                        android:textSize="16sp" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="?android:attr/listDivider" />
-
-                    <com.google.android.material.materialswitch.MaterialSwitch
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:checked="true"
-                        android:enabled="false"
-                        android:text="@string/auto_sync"
-                        android:textSize="16sp" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="?android:attr/listDivider" />
-
-                    <com.google.android.material.materialswitch.MaterialSwitch
-                        android:id="@+id/offlineMode"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:checked="false"
-                        android:text="@string/offline_mode"
-                        android:textSize="16sp" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="?android:attr/listDivider" />
-
-                    <com.google.android.material.materialswitch.MaterialSwitch
                         android:id="@+id/saveExported"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
