@@ -82,13 +82,23 @@ class DialogBuilder(private val context: Context, private val saveDocCallback: (
             }
         }
 
+        fun getFileEx(): String {
+            try {
+                return dialogView.context.resources.getResourceEntryName(typeDoc.checkedRadioButtonId)
+            }catch (_: Exception){
+                Toast.makeText(context, "Não foi possiver definir o formato desejado, assumindo PDF", Toast.LENGTH_SHORT).show()
+                return "pdf"
+            }
+        }
+
         generateBtn.setOnClickListener {
             if (validField(titleDoc) && validField(contentDoc) && validField(outputDoc)){
                 doc.docGenerator(
                     titleDoc.text.toString(),
                     contentDoc.text.toString(),
                     outputDoc.text.toString(),
-                    dialogView.resources.getResourceEntryName(typeDoc.checkedRadioButtonId),//Busca o nome do ID da opção selecionada
+                    getFileEx(),
+                    //Busca o nome do ID da opção selecionada
                     context)
                 val dox = Doc(
                     doc_name = outputDoc.text.toString(),
@@ -107,7 +117,7 @@ class DialogBuilder(private val context: Context, private val saveDocCallback: (
                     titleDoc.text.toString(),
                     contentDoc.text.toString(),
                     outputDoc.text.toString(),
-                    dialogView.resources.getResourceEntryName(typeDoc.checkedRadioButtonId),//Busca o nome do ID da opção selecionada
+                    dialogView.context.resources.getResourceEntryName(typeDoc.checkedRadioButtonId),//Busca o nome do ID da opção selecionada
                     context)
 
                 val shareIntent = Intent(Intent.ACTION_SEND).apply {

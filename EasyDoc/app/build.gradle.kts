@@ -9,13 +9,13 @@ plugins {
 
 kotlin{
     compilerOptions{
-        jvmTarget.set(JvmTarget.JVM_23)
+        jvmTarget.set(JvmTarget.JVM_25)
     }
 }
 
 android {
     namespace = "com.n1ck120.easydoc"
-    compileSdk = 36
+    compileSdk = 37
 
     packaging {
         resources.excludes.add("META-INF/**")
@@ -24,7 +24,7 @@ android {
     defaultConfig {
         applicationId = "com.n1ck120.easydoc"
         minSdk = 29
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 
@@ -42,8 +42,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_23
-        targetCompatibility = JavaVersion.VERSION_23
+        sourceCompatibility = JavaVersion.VERSION_25
+        targetCompatibility = JavaVersion.VERSION_25
     }
 
     buildFeatures {

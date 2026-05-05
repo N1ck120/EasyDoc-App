@@ -38,11 +38,11 @@ class ModelEditorActivity : AppCompatActivity() {
     lateinit var db : AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val datdaStore = SettingsDataStore.getDataStorePrefs(this)
+        val dataStore = SettingsDataStore.getDataStorePrefs(this)
         val m3colors = booleanPreferencesKey("m3colors")
         lifecycleScope.launch {
             runBlocking {
-                if (datdaStore.data.first()[m3colors] ?: false){
+                if (dataStore.data.first()[m3colors] ?: false){
                     setTheme(com.google.android.material.R.style.Theme_Material3_DynamicColors_DayNight_NoActionBar)
                 }
             }
